@@ -1,0 +1,98 @@
+body {
+    /*Fuente*/
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+
+    /*Imágen de fondo*/
+    background-image: url('fondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.fig{
+    background-color: #83C5BE;
+    text-align: center;
+    font-size: 10px; /* Ajusta el tamaño de la fuente de manera responsiva */
+    height: 10vh; /*30% de la altura de la pantalla*/
+    width: 98vw; /*100% del ancho de la pantalla*/
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    color: black;
+}
+
+.header {
+    background-color: #83C5BE;
+    text-align: center;
+    font-size: 10vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    height: 30vh; /*30% de la altura de la pantalla*/
+    width: 98vw; /*100% del ancho de la pantalla*/
+    border-radius: 0 0 500px 500px; /* Redondea solo las esquinas inferiores */
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    color: #004A51;
+    border-bottom: 1px;
+}
+
+.form-container{
+    text-align: center;
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    height: 60vh; /*30% de la altura de la pantalla*/
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
+    color: #004A51;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+input {
+    flex: 1;
+    padding: 20px 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #FFDDD2;
+    font-size: 16px;
+    align-items: center;
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    font-family: 'Louis George Cafe', sans-serif; /* Fuente específica */
+    color: #004A51; /* Color específico */
+}
+
+.login-button {
+    background-color: #E98D6F;
+    color: #EDF6F9;
+    padding: 7px 45px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 2vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+}
+.login-button:hover {
+    background-color: #D9785F;
+}
+.login-button:active {
+    background-color: #D9785F;
+    transform: translateY(2px);
+}
+.fondo {
+    position: fixed; /* Fija la imagen al fondo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Envía la imagen al fondo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}

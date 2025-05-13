@@ -1,0 +1,170 @@
+body {
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+}
+
+.header {
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('/IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.fig {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
+}
+
+.Titu {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
+}
+
+
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
+
+    .navbar-toggler {
+        border: none; /* Quita el borde del botón */
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
+
+    .menu-icon {
+        width: 30px; /* Ajusta el tamaño según tu imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+    }
+    
+
+/*Datos para agendar*/
+    .form-container {
+        font-family: Louis George Cafe, sans-serif;
+        color: #004A51;
+        font-size: 1.75vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+        height: 60vh; /* 30% de la altura de la pantalla */
+        display: flex;
+        flex-direction: column; /* Alinea los elementos en columna */
+        justify-content: center; /* Centra los elementos horizontalmente */
+        align-items: center; /* Alinea los elementos al centro */
+        padding-right: 20px; /* Añade un poco de espacio a la derecha */
+        padding-left: 20vh; /* Añade un poco de espacio a la izquierda */
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+        margin-top: 20px; /* Mueve el texto hacia arriba */
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
+
+    input, select {
+        background: #f9eae4;
+        font-size: 16px;
+        align-items: center;
+        font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+        font-family: 'Louis George Cafe', sans-serif; /* Fuente específica */
+        color: #004A51; /* Color específico */
+        border-radius: 500px; /* Redondea todas las esquinas */
+        border: none; /* Quita el borde del input */
+        padding: 10px 20px; /* Añade espacio interno */
+    }
+
+/*Botón de agendar*/
+.agendar{
+    font-family: Louis George Cafe, sans-serif;
+    background-color: #E98D6F;
+    color: #EDF6F9;
+    padding: 7px 45px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 2vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    display: block;
+    margin-left: auto;
+    margin-right: 250px; /* Alinea el botón a la derecha */
+    margin-top: 0px; /* Mueve el texto hacia arriba */
+}
+
+.agendar :hover{
+    background-color: #83C5BE;
+}
+
+/*Imágen de snoopy*/
+.snoopypsi {
+    transform: scale(0.7); /* Escala la imagen al 50% de su tamaño original */
+    width: 3%; /* Ajusta el ancho al 15% del contenedor para hacerla más pequeña */
+    height: auto; /* Mantiene la proporción de la imagen */
+    position: absolute;
+    top: 100px; /* Ajusta la posición vertical para colocarla más abajo */
+    right: 10px; /* Ajusta la posición horizontal para colocarla a la derecha */
+    z-index: -1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 150px; /* Añade un poco de espacio a la derecha */
+}
+
+/*El precio que cambiará dependendo de la sucursal elegida*/
+.precio{
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    font-size: 1vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Alinea los elementos al centro */
+    padding-left: 600px; /* Añade un poco de espacio a la izquierda */
+    margin-top: -60px; /* Mueve el texto hacia arriba */
+}
+
+/*Mensaje de fecha y hora*/
+.mensaje{
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    font-size: 1.5vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Alinea los elementos al centro */
+    padding-left: 600px; /* Añade un poco de espacio a la izquierda */
+}
