@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Días laborables – PsicoDomat</title>
+
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="DiasLaborales.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="hdr">
+    <div class="hdr-container">
+      <h1 class="hdr-title">Días laborables</h1>
+      <div class="dropdown">
+        <button
+          class="btn-menu"
+          id="dropdownMenuButton"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img src="../IMÁGENES/menu-icon.png" alt="Menú" />
+        </button>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="dropdownMenuButton"
+        >
+        <li><a class="dropdown-item" href="../PSICOLOGA/AgregarPacientes.html">Agregar pacientes</a></li>
+        <li><a class="dropdown-item" href="../PSICOLOGA/DiasLaborales.html">Dias laborales</a></li>
+        <li><a class="dropdown-item" href="../PSICOLOGA/ReportePacientes.html">Reporte de pacientes</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-content">
+    <div class="calendar-section">
+      <!-- Calendario -->
+      <div class="calendar-wrap">
+        <div class="calendar-header">
+          <button class="btn-cal-nav">
+            <img src="../IMÁGENES/icon-prev.png" alt="Anterior" />
+          </button>
+          <span>Octubre</span>
+          <button class="btn-cal-nav">
+            <img src="../IMÁGENES/icon-next.png" alt="Siguiente" />
+          </button>
+        </div>
+        <div class="calendar-grid">
+          <div class="day-heading">L</div><div class="day-heading">M</div>
+          <div class="day-heading">X</div><div class="day-heading">J</div>
+          <div class="day-heading">V</div>
+          <!-- Números 1–31 -->
+          <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
+          <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div>
+          <div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div>
+          <div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div>
+          <div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div>
+          <div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
+          <div class="day">31</div>
+        </div>
+      </div>
+
+      <!-- Botones de acción -->
+      <div class="actions-section">
+        <button
+          class="btn-action"
+          data-bs-toggle="modal"
+          data-bs-target="#noLaborablesModal"
+        >Definir días no laborables</button>
+
+        <button
+          class="btn-action"
+          data-bs-toggle="modal"
+          data-bs-target="#assignBranchModal"
+        >Asignar sucursal de trabajo</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL: DÍAS NO LABORABLES -->
+  <div
+    class="modal fade"
+    id="noLaborablesModal"
+    tabindex="-1"
+    aria-labelledby="noLaborablesLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content modal-no-labor">
+        <div class="modal-body">
+          <!-- Calendario reiterado -->
+          <div class="calendar-wrap">
+            <div class="calendar-header">
+              <button class="btn-cal-nav">
+                <img src="../IMÁGENES/icon-prev.png" alt="Anterior" />
+              </button>
+              <span>Octubre</span>
+              <button class="btn-cal-nav">
+                <img src="../IMÁGENES/icon-next.png" alt="Siguiente" />
+              </button>
+            </div>
+            <div class="calendar-grid">
+              <div class="day-heading">L</div><div class="day-heading">M</div>
+              <div class="day-heading">X</div><div class="day-heading">J</div>
+              <div class="day-heading">V</div>
+              <!-- Números 1–31 idénticos al calendario principal -->
+              <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
+          <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div>
+          <div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div>
+          <div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div>
+          <div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div>
+          <div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
+          <div class="day">31</div>
+            </div>
+          </div>
+
+          <p class="modal-text">
+            Seleccione los días no laborables en el calendario
+          </p>
+
+          <div class="modal-actions">
+            <button type="button" class="btn-save">Guardar cambios</button>
+            <button type="button" class="btn-cancel" data-bs-dismiss="modal">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: ASIGNAR SUCURSAL DE TRABAJO -->
+  <div
+    class="modal fade"
+    id="assignBranchModal"
+    tabindex="-1"
+    aria-labelledby="assignBranchModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content modal-assign-branch">
+        <!-- Título interno -->
+        <div class="assign-header">Asignar sucursal de trabajo</div>
+
+        <div class="modal-body">
+          <form id="formAssignBranch" class="form-assign-branch" action="#" method="post">
+            <div class="form-group">
+              <label for="branch-select">Sucursal:</label>
+              <select id="branch-select" name="branch">
+                <option value="">-- Seleccione sucursal --</option>
+                <!-- ... -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="months-count">Cantidad de meses:</label>
+              <select id="months-count" name="months-count">
+                <option value="">-- Meses --</option>
+                <!-- 1–12 -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="year-select">Año a agregar:</label>
+              <select id="year-select" name="year">
+                <option value="">-- Año --</option>
+                <!-- Ej. 2024, 2025… -->
+              </select>
+            </div>
+
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="months" value="Enero"> Enero</label>
+              <label><input type="checkbox" name="months" value="Febrero"> Febrero</label>
+              <label><input type="checkbox" name="months" value="Marzo"> Marzo</label>
+              <label><input type="checkbox" name="months" value="Abril"> Abril</label>
+              <label><input type="checkbox" name="months" value="Mayo"> Mayo</label>
+              <label><input type="checkbox" name="months" value="Junio"> Junio</label>
+              <label><input type="checkbox" name="months" value="Julio"> Julio</label>
+              <label><input type="checkbox" name="months" value="Agosto"> Agosto</label>
+              <label><input type="checkbox" name="months" value="Septiembre"> Septiembre</label>
+              <label><input type="checkbox" name="months" value="Octubre"> Octubre</label>
+              <label><input type="checkbox" name="months" value="Noviembre"> Noviembre</label>
+              <label><input type="checkbox" name="months" value="Diciembre"> Diciembre</label>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button
+            type="submit"
+            form="formAssignBranch"
+            class="btn-save"
+          >
+            Guardar
+          </button>
+          <button
+            type="button"
+            class="btn-cancel"
+            data-bs-dismiss="modal"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle (JS + Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

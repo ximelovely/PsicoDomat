@@ -1,0 +1,132 @@
+/* RESET BÁSICO */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* VARIABLES DE COLOR */
+  :root {
+    --bg-light: #EAF2F2;
+    --primary: #7FCFD7;
+    --text-dark: #004A51;
+    --filter-bg: #FFEFE8;
+    --btn-view-bg: #E98D6F;
+    --btn-view-text: #FFFFFF;
+    --pill-bg: #7FCFD7;
+    --pill-text: #FFFFFF;
+  }
+  
+  /* BODY */
+  body {
+    font-family: 'Louis George Café', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    min-height: 100vh;
+  }
+  
+  /* HEADER */
+  .hdr {
+    background-color: var(--primary);
+    height: 80px;
+    display: flex;
+    align-items: center;
+  }
+  .hdr-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 100px 100px;
+  }
+  .hdr-title {
+    font-size: 1.5rem;
+  }
+  .btn-menu {
+    background-color: var(--filter-bg);
+    border: none;
+    border-radius: 12px;
+    padding: 8px;
+    cursor: pointer;
+  }
+  .btn-menu img {
+    width: 24px;
+    height: 24px;
+  }
+  .dropdown-menu {
+    min-width: 200px;
+    font-size: 0.95rem;
+  }
+  
+  /* MAIN CONTENT */
+  .main-content {
+    max-width: 960px;
+    margin: 40px auto;
+    padding: 0 16px;
+  }
+  
+  /* FILTROS */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .filter-group label {
+    margin-right: 8px;
+  }
+  .filter-group select {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 40px;
+    background-color: var(--filter-bg);
+    font-size: 1rem;
+    outline: none;
+  }
+  .btn-view {
+    background-color: var(--btn-view-bg);
+    color: var(--btn-view-text);
+    border: none;
+    border-radius: 40px;
+    padding: 12px 32px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .btn-view:hover {
+    opacity: 0.85;
+  }
+  
+  /* DATOS RÁPIDOS */
+  .quick-data {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .data-pill {
+    background-color: var(--pill-bg);
+    color: var(--pill-text);
+    padding: 8px 16px;
+    border-radius: 40px;
+    font-weight: bold;
+  }
+  
+  /* SECCIÓN DE GRÁFICAS */
+  .charts-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+  }
+  .chart-container {
+    flex: 1 1 300px;
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  

@@ -1,0 +1,250 @@
+/* RESET BÁSICO */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* VARIABLES DE COLOR */
+:root {
+  --bg-light: #EAF2F2;
+  --primary: #7FCFD7;
+  --text-dark: #004A51;
+  --item-bg: #FFEFE8;
+  --btn-bg: #E98D6F;
+  --btn-text: #FFFFFF;
+  --border-light: #CEE0E0;
+}
+
+/* BODY */
+body {
+  font-family: 'Louis George Café', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}
+
+/* HEADER */
+.hdr {
+  background-color: var(--primary);
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+.hdr-container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 100px 100px;
+}
+.hdr-title {
+  font-size: 1.5rem;
+}
+.btn-menu {
+  background-color: var(--item-bg);
+  border: none;
+  border-radius: 12px;
+  padding: 8px;
+  cursor: pointer;
+}
+.btn-menu img {
+  width: 24px;
+  height: 24px;
+}
+.dropdown-menu {
+  min-width: 200px;
+  font-size: 0.95rem;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 16px;
+}
+
+/* CALENDARIO */
+.calendar-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
+}
+.calendar-wrap {
+  background-color: var(--item-bg);
+  border-radius: 16px;
+  padding: 16px;
+}
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--item-bg);
+  border-radius: 40px;
+  padding: 8px 16px;
+  margin-bottom: 16px;
+}
+.btn-cal-nav {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-cal-nav img {
+  width: 20px;
+  height: 20px;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+.day-heading {
+  font-weight: bold;
+  text-align: center;
+}
+.day {
+  text-align: center;
+  padding: 4px;
+  line-height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.day:hover {
+  background-color: rgba(0,0,0,0.05);
+}
+
+/* BOTONES FUERA DE MODAL */
+.actions-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 200px;
+}
+.btn-action {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 40px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-action:hover {
+  opacity: 0.9;
+}
+
+/* —— MODAL “Días no laborables” —— */
+.modal-no-labor .modal-content {
+  background-color: var(--bg-light);
+  border-radius: 16px;
+}
+.modal-no-labor .modal-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 24px;
+  justify-content: center;
+  align-items: center;
+}
+.modal-text {
+  flex: 1 1 100%;
+  text-align: center;
+  margin: 16px 0;
+}
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+  min-width: 200px;
+  align-items: center;
+}
+.btn-save {
+  background-color: var(--primary);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 40px;
+  padding: 8px 24px;
+  cursor: pointer;
+}
+.btn-save:hover {
+  opacity: 0.85;
+}
+.btn-cancel {
+  background: none;
+  border: none;
+  color: var(--text-dark);
+  cursor: pointer;
+}
+
+/* —— MODAL “Asignar sucursal de trabajo” —— */
+.modal-assign-branch .modal-content {
+  border-radius: 16px;
+}
+.assign-header {
+  background-color: var(--primary);
+  color: var(--text-dark);
+  text-align: center;
+  padding: 16px;
+  border-radius: 0 0 100px 100px;
+  font-size: 1.25rem;
+}
+.form-assign-branch {
+  padding: 24px;
+}
+.form-assign-branch .form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.form-assign-branch label {
+  flex: 0 0 150px;
+}
+.form-assign-branch select {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 40px;
+  background-color: var(--item-bg);
+  font-size: 1rem;
+  outline: none;
+}
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 16px 0;
+}
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.checkbox-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  accent-color: var(--text-dark);
+}
+.modal-assign-branch .modal-footer {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+.modal-assign-branch .btn-save {
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  border-radius: 40px;
+  padding: 12px 32px;
+  cursor: pointer;
+}
+.modal-assign-branch .btn-save:hover {
+  opacity: 0.85;
+}
