@@ -1,159 +1,346 @@
 body {
-    /* Fuente */
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
-    margin: 0;
-    padding: 0;
-    background-color: #EDF6F9;
+  font-family: 'Louis George Cafe', sans-serif;
+  color: #004A51;
+  margin: 0;
+  padding: 0;
+  background-color: #EDF6F9;
 }
 
+/* Encabezado */
 .header {
-    /* Imagen de fondo */
-    background-color: #EDF6F9;
-    background-image: url('nofondo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 20vh; /* 30% de la altura de la pantalla */
-    width: 100vw; /* 100% del ancho de la pantalla */
-    
-    /* Flexbox para centrar verticalmente */
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+  background-color: #EDF6F9;
+  background-image: url('../IMÁGENES/nofondo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 20vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .fig {
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
-    background-color: #83C5BE;
-    text-align: center;
-    height: 10vh; /* 30% de la altura de la pantalla */
-    width: 95vw; /* 100% del ancho de la pantalla */
-    border-radius: 1000px; /* Redondea todas las esquinas */
-    display: flex; /* Flexbox para centrar verticalmente */
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
+  background-color: #83C5BE;
+  text-align: center;
+  height: 8vh; 
+  width: 65vw;
+  border-radius: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 }
 
 .Titu {
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
-    text-align: center; /* Alinea el texto al centro */
-    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
-    width: 100%; /* Ocupa todo el ancho de .fig */
+  font-size: 2.1vw;
+  color: #004A51;
+  width: 92%;
+  margin-left: 100px;
 }
 
-/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+/* Navegación */
 .navbar {
-    background-color: #EDF6F9; /* Color de fondo*/
-    border-radius: 500px; /* Redondea todas las esquinas */
+  border-radius: 500px;
 }
 
 .navbar-toggler {
-    border: none; /* Quita el borde del botón */
+  border: none;
 }
 
 .navbar-toggler:focus {
-    box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+  box-shadow: none;
 }
 
 .navbar-nav .nav-link {
-    font-size: 18px; /* Ajusta el tamaño de la fuente */
-    color: #004A51; /* Color específico */
-    padding: 10px 15px; /* Añade espacio interno */
-    transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+  font-size: 18px;
+  color: #004A51;
+  padding: 10px 15px;
+  transition: background 0.3s ease-in-out;
 }
 
-.navbar-nav .nav-link:hover {
-    background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
-    color: white !important; /* Cambia el color del texto al pasar por encima */
-    border-radius: 500px; /* Redondea las esquinas */
-}
 
 .menu-icon {
-    width: 30px; /* Ajusta el tamaño según tu imagen */
-    height: auto; /* Mantiene la proporción de la imagen */
-    cursor: pointer; /* Cambia el cursor al pasar por encima */
+  width: 45px;
+  height: auto;
+  cursor: pointer;
 }
 
 .dropdown-item:hover {
-    background-color: #E98D6F;
+  background-color: #E98D6F;
 }
 
-/* Estilos para el calendario */
-#calendar-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+/* Calendario */
+#calendar-details {
+  width: 70%;
 }
+
+
+#calendar-body {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+#calendar-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+#calendar-left {
+  justify-content: center;
+  width: 50%;
+  margin-top: 20px;
+  background-color: #ffddd2;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+
+#calendar-right {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+  margin-top: 20px;
+}
+
+
 
 .calendar-box {
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
-    background-color: #ffeee8;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    text-align: center;
-    width: 60%;
+  background-color: #ffeee8;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 55%;
+  color: #004a51;
 }
 
 .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    background-color: #FFDDD2;
-    border-radius: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: #FFDDD2;
+  border-radius: 50px;
 }
 
 .calendar-header button {
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    color: #004A51;
-    background-color: #E98D6F;
-    border-radius: 500px;
-    width: 50px;
-    height: 50px;
+  background: #E98D6F;
+  border: none;
+  font-size: 18px;
+  color: #004A51;
+  border-radius: 500px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
 }
 
 .calendar-days, .calendar-dates {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin: 10px;
 }
 
 .day {
-    font-weight: bold;
-    padding: 5px;
-    color: #004A51;
+  font-weight: bold;
+  color: #004A51;
 }
 
 .date {
-    background: #fff;
-    padding: 10px;
-    background-color: #ffeee8;
-    cursor: pointer;
-    text-align: center;
-    border: 1px solid #E98D6F;
-    transition: background 0.3s ease;
+  background-color: #ffeee8;
+  border: 1px solid #E98D6F;
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.date:hover {
+  background-color: #ffe1d6;
 }
 
 .date.selected {
-    background: #c5e4d1;
-    border: 1px solid #004A51;
+  background-color: #c5e4d1;
+  border: 2px solid #004A51;
 }
 
 .date.star {
-    background: #ffdcc7;
+  background-color: #ffdcc7;
 }
 
 .info-box {
-    margin-top: 15px;
-    font-size: 16px;
-    color: #004A51;
+  margin-top: 15px;
+  font-size: 16px;
+  color: #004A51;
 }
+
+/* Modales */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: #CCF3F7;
+  border: 3px solid #E98D6F;
+  border-radius: 25px !important;
+  padding: 20px 30px;
+  width: 25% !important;
+  text-align: center;
+  color: #004a51 !important;;
+  border-color: #E98D6F !important;
+  border-width: 5px !important;
+  padding-top: 50px;
+  padding-bottom: 30px;
+}
+
+.modal-content.wide {
+  width: 500px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: whitesmoke;
+  cursor: pointer;
+  background-color: #E98D6F;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 25px;
+}
+
+.modal-time {
+  background-color: #E98D6F;
+  color: white;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  width: 35%;
+}
+
+.modal-date {
+  background-color: #C7EDE7;
+  color: #004A51;
+  padding: 6px;
+  border-radius: 20px;
+  margin-bottom: 15px;
+  width: 50%;
+}
+
+.modal-buttons button {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 8px;
+  border: none;
+  border-radius: 1000px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Louis George Cafe', sans-serif;
+}
+
+.btn-modificar {
+  background-color: #FADCD9;
+  color: #004a51;;
+  width: 60% !important;
+}
+
+.btn-cancelar {
+  background-color: #FADCD9;
+  color: #004A51;
+  width: 60% !important;
+}
+
+.titulo-form {
+  background-color: #E98D6F;
+  color: white;
+  padding: 10px;
+  border-radius: 25px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 25px;
+  background-color: #FADCD9;
+  font-family: 'Louis George Cafe', sans-serif;
+}
+
+.mensaje-snoopy {
+  display: flex;
+  align-items: center;
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.img-snoopy {
+  width: 80px;
+  margin-right: 10px;
+}
+
+.confirmacion {
+  width: 400px;
+  text-align: center;
+}
+
+.exito-titulo {
+  background-color: #E98D6F;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-volver {
+  background-color: #FADCD9;
+  color: #004A51;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.option-cita{
+  background-color: #004a51;
+  border-radius: 20px;
+  padding: 3px;
+}
+
+
