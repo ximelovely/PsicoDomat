@@ -1,26 +1,7 @@
-/* RESET BÁSICO */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* VARIABLES DE COLOR */
-  :root {
-    --bg-light: #EAF2F2;
-    --primary: #7FCFD7;
-    --text-dark: #004A51;
-    --filter-bg: #FFEFE8;
-    --btn-view-bg: #E98D6F;
-    --btn-view-text: #FFFFFF;
-    --pill-bg: #7FCFD7;
-    --pill-text: #FFFFFF;
-  }
-  
 body {
     /* Fuente */
     font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
+    color: #004A51; /* Color específico */
 }
 
 .header {
@@ -94,67 +75,81 @@ body {
         height: auto; /* Mantiene la proporción de la imagen */
         cursor: pointer; /* Cambia el cursor al pasar por encima */
     }
-  
-  /* FILTROS */
-  .filters {
+
+/*Sigue la cita*/
+.appointment-container {
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.appointment-header {
+    background-color: #E98D6F;
+    color: #EDF6F9;
+    font-size: 25px;
+    padding: 20px;
+    border-radius: 0px 0px 40px 40px;
+    margin-bottom: 15px;
+    width: 30%;  /* Ajusta este valor para hacerla más corta */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* Centra el texto */
+    
+}
+
+.appointment-details {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
-  }
-  .filter-group label {
-    margin-right: 8px;
-  }
-  .filter-group select {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 40px;
-    background-color: var(--filter-bg);
-    font-size: 1rem;
-    outline: none;
-  }
-  .btn-view {
-    background-color: var(--btn-view-bg);
-    color: var(--btn-view-text);
-    border: none;
-    border-radius: 40px;
-    padding: 12px 32px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  .btn-view:hover {
-    opacity: 0.85;
-  }
-  
-  /* DATOS RÁPIDOS */
-  .quick-data {
+}
+
+.appointment-info p,
+.appointment-cost p {
+    background-color: #FEE7E2;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 20px;
+    margin: 5px 15px;
+}
+
+.appointment-cost {
+    text-align: center;
+}
+
+.appointment-cost img {
+    width: 120px; /* Ajusta el tamaño según sea necesario */
+    margin-top: 10px;
+}
+
+.responsibility-message {
+    font-size: 12px;
+    color: #004A51;
+    margin-top: 5px;
+    background-color: white;
+}
+
+.appointment-buttons {
     display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-  .data-pill {
-    background-color: var(--pill-bg);
-    color: var(--pill-text);
-    padding: 8px 16px;
-    border-radius: 40px;
-    font-weight: bold;
-  }
-  
-  /* SECCIÓN DE GRÁFICAS */
-  .charts-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
     justify-content: center;
-  }
-  .chart-container {
-    flex: 1 1 300px;
-    background-color: #fff;
-    padding: 16px;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-  
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.modify-button,
+.cancel-button {
+    background-color: #77B2A6;
+    color: #EDF6F9;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.modify-button:hover,
+.cancel-button:hover {
+    background-color: #E98D6F;
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario-PsicoDomar</title>
+    <link rel="stylesheet" href="Calendario.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="fig">
+            <div class="Titu">Calendario</div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+                <div class="container-fluid">
+                    <!-- Botón hamburguesa (imagen personalizada) -->
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <img src="menu-icon.png" alt="Menú" class="menu-icon">
+                    </button>
+            
+                    <!-- Menú desplegable alineado a la izquierda -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
+                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
+        </div>
+    </div>
+
+    <!-- Calendario -->
+    <div id="calendar-container"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const calendarContainer = document.getElementById("calendar-container");
+
+            // Contenedor del calendario
+            calendarContainer.innerHTML = `
+                <div class="calendar-box">
+                    <div class="calendar-header">
+                        <button id="prev-month">❮</button>
+                        <h2 id="month-name"></h2>
+                        <button id="next-month">❯</button>
+                    </div>
+                    <div class="calendar-days">
+                        <div class="day">L</div>
+                        <div class="day">M</div>
+                        <div class="day">X</div>
+                        <div class="day">J</div>
+                        <div class="day">V</div>
+                    </div>
+                    <div id="calendar-dates" class="calendar-dates"></div>
+                    <div id="info-box" class="info-box">Selecciona una fecha para ver detalles.</div>
+                </div>
+            `;
+
+            const monthNames = [
+                "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+            ];
+
+            // Ejemplo de citas: { '2024-09-12': true, ... }
+            const appointments = {
+                "2024-09-09": true,
+                "2024-09-12": true,
+                "2024-09-23": true,
+                "2024-09-25": true,
+                "2024-09-30": true
+            };
+
+            let currentDate = new Date();
+
+            const infoBox = document.getElementById("info-box");
+            const datesContainer = document.getElementById("calendar-dates");
+            const monthNameEl = document.getElementById("month-name");
+            const prevBtn = document.getElementById("prev-month");
+            const nextBtn = document.getElementById("next-month");
+
+            function renderCalendar() {
+                datesContainer.innerHTML = "";
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth();
+
+                // Primer día del mes (0=Domingo, 1=Lunes, ..., 6=Sábado)
+                const firstDay = new Date(year, month, 1).getDay();
+                // Ajustar para que la semana empiece en lunes (0=Lunes, 4=Viernes)
+                const startDay = firstDay === 0 ? 6 : firstDay - 1;
+
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+                monthNameEl.textContent = `${monthNames[month]} ${year}`;
+
+                // Espacios vacíos antes del primer día (solo lunes a viernes)
+                for (let i = 0; i < Math.min(startDay, 5); i++) {
+                    const empty = document.createElement("div");
+                    empty.classList.add("date", "empty");
+                    datesContainer.appendChild(empty);
+                }
+
+                // Días del mes (solo lunes a viernes)
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateObj = new Date(year, month, day);
+                    const weekDay = dateObj.getDay(); // 0=Domingo, 1=Lunes, ..., 6=Sábado
+
+                    if (weekDay === 0 || weekDay === 6) {
+                        // Saltar domingos y sábados
+                        continue;
+                    }
+
+                    const dateEl = document.createElement("div");
+                    dateEl.classList.add("date");
+                    dateEl.textContent = day;
+
+                    const dateStr = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                    if (appointments[dateStr]) {
+                        dateEl.classList.add("star");
+                    }
+
+                    dateEl.addEventListener("click", () => selectDate(day, dateEl, dateStr));
+                    datesContainer.appendChild(dateEl);
+                }
+            }
+
+            function selectDate(day, element, dateStr) {
+                const allDates = document.querySelectorAll(".date");
+                allDates.forEach((el) => el.classList.remove("selected"));
+                if (!element.classList.contains("empty")) {
+                    element.classList.add("selected");
+                    if (appointments[dateStr]) {
+                        infoBox.innerHTML = `📅 Tienes una cita el <strong>${day}</strong>.`;
+                    } else {
+                        infoBox.innerHTML = `✅ Tu agenda está libre el <strong>${day}</strong>.`;
+                    }
+                }
+            }
+
+            prevBtn.addEventListener("click", () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
+                infoBox.innerHTML = "Selecciona una fecha para ver detalles.";
+            });
+
+            nextBtn.addEventListener("click", () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+                infoBox.innerHTML = "Selecciona una fecha para ver detalles.";
+            });
+
+            renderCalendar();
+        });
+    </script>
+
+    <!-- Bootstrap JS NO BORRAR -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

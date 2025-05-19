@@ -1,0 +1,159 @@
+body {
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    margin: 0;
+    padding: 0;
+    background-color: #EDF6F9;
+}
+
+.header {
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.fig {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
+}
+
+.Titu {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
+}
+
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+.navbar {
+    background-color: #EDF6F9; /* Color de fondo*/
+    border-radius: 500px; /* Redondea todas las esquinas */
+}
+
+.navbar-toggler {
+    border: none; /* Quita el borde del botón */
+}
+
+.navbar-toggler:focus {
+    box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+}
+
+.navbar-nav .nav-link {
+    font-size: 18px; /* Ajusta el tamaño de la fuente */
+    color: #004A51; /* Color específico */
+    padding: 10px 15px; /* Añade espacio interno */
+    transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+    color: white !important; /* Cambia el color del texto al pasar por encima */
+    border-radius: 500px; /* Redondea las esquinas */
+}
+
+.menu-icon {
+    width: 30px; /* Ajusta el tamaño según tu imagen */
+    height: auto; /* Mantiene la proporción de la imagen */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+.dropdown-item:hover {
+    background-color: #E98D6F;
+}
+
+/* Estilos para el calendario */
+#calendar-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.calendar-box {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    background-color: #ffeee8;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 60%;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: #FFDDD2;
+    border-radius: 50px;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #004A51;
+    background-color: #E98D6F;
+    border-radius: 500px;
+    width: 50px;
+    height: 50px;
+}
+
+.calendar-days, .calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+}
+
+.day {
+    font-weight: bold;
+    padding: 5px;
+    color: #004A51;
+}
+
+.date {
+    background: #fff;
+    padding: 10px;
+    background-color: #ffeee8;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #E98D6F;
+    transition: background 0.3s ease;
+}
+
+.date.selected {
+    background: #c5e4d1;
+    border: 1px solid #004A51;
+}
+
+.date.star {
+    background: #ffdcc7;
+}
+
+.info-box {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #004A51;
+}

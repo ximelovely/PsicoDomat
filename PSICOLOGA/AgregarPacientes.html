@@ -16,29 +16,36 @@
 <body>
 
   <!-- HEADER -->
-  <header class="hdr">
-    <div class="hdr-container">
-      <h1 class="hdr-title">Agregar pacientes</h1>
-      <div class="dropdown">
-        <button
-          class="btn-menu"
-          id="dropdownMenuButton"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img src="../IMÁGENES/menu-icon.png" alt="Menú" />
-        </button>
-        <ul
-          class="dropdown-menu dropdown-menu-end"
-          aria-labelledby="dropdownMenuButton"
-        >
-        <li><a class="dropdown-item" href="../PSICOLOGA/AgregarPacientes.html">Agregar pacientes</a></li>
-        <li><a class="dropdown-item" href="../PSICOLOGA/DiasLaborales.html">Dias laborales</a></li>
-        <li><a class="dropdown-item" href="../PSICOLOGA/ReportePacientes.html">Reporte de pacientes</a></li>
-        </ul>
-      </div>
+  <div class="header">
+        <div class="fig">
+            <div class="Titu">Agregar pacientes</div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+            
+                    <!-- Menú desplegable alineado a la izquierda -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
+        </div>
     </div>
-  </header>
 
   <!-- CONTROLES: Crear y Buscar -->
   <main class="main-content">

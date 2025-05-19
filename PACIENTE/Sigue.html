@@ -3,22 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conoce a tu Doctora-PsicoDomat</title>
+    <title>Sigue tu cita-PsicoDomat</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!Link del CSS>
-    <link rel="stylesheet" href="conoce.css">
+    <link rel="stylesheet" href="sigue.css">
 </head>
-
-
-
-
 <body>
+    <!-- Barra de navegación y título de página -->
     <div class="header">
         <div class="fig">
-            <div class="Titu">Conoce a tu doctora</div>
+            <div class="Titu">Sigue tu cita</div>
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
                 <div class="container-fluid">
                     <!-- Botón hamburguesa (imagen personalizada) -->
@@ -49,42 +46,34 @@
         </div>
     </div>
 
-    <div class="doctor-info">
-        <div class="doctor-image">
-            <img src="/IMÁGENES/marcela.png" alt="Lic. Marcela Ibarra">
-            <h3 class="doctor-name">Lic. Marcela Ibarra</h3>
-            <p class="doctor-cedula">No. de Cédula: <strong>3921767</strong></p>
+
+
+
+    <!Sigue tu cita>
+    <div class="appointment-header">¡Tienes una cita!</div>
+    <div class="appointment-container">
+        
+        
+        <div class="appointment-details">
+            <div class="appointment-info">
+                <p><strong>Dia de la cita:</strong> <span>28/10/2025</span></p>
+                <p><strong>Hora de la cita:</strong> <span>16:00</span></p>
+                <p><strong>Sucursal:</strong> <span>Houston, Tx.</span></p>
+                <p><strong>Motivo:</strong> <span>Psicoterapia individual</span></p>
+            </div>
+    
+            <div class="appointment-cost">
+                <p><strong>Costo:</strong> <span>$599MXN</span></p>
+                <img src="/IMÁGENES/snoopy.png" alt="Psicólogo Snoopy">
+                <p class="responsibility-message">Es tu responsabilidad la puntualidad, ¡no llegues tarde!</p>
+            </div>
         </div>
-        <div class="doctor-details">
-            <h3>Descripción:</h3>
-            <p>
-                Soy la Lic. Marcela Ibarra y cuento con más de 13 años de experiencia ofreciendo terapia psicológica con enfoque cognitivo conductual a adultos y parejas tanto en instituciones públicas como privadas.
-            </p>
-            <p>
-                Te invito a aprender a vivir con calidad desarrollando nuevas habilidades de uso personal, siendo tú mismo.
-            </p>
-            <h3>Servicios proporcionados:</h3>
-            <ul class="services-list">
-                <li>
-                    <img src="/IMÁGENES/MaterialSymbolsPerson.png" alt="Psicoterapia individual">
-                    Psicoterapia individual
-                </li>
-                <li>
-                    <img src="/IMÁGENES/GameIconsLovers.png"Psicoterapia de pareja">
-                    Psicoterapia de pareja
-                </li>
-                <li>
-                    <img src="/IMÁGENES/IconParkSolidFamily.png" alt="Terapia familiar">
-                    Terapia familiar
-                </li>
-            </ul>
+    
+        <div class="appointment-buttons">
+            <a href="modifica.html" class="btn btn-primary modify-button">¿Quieres modificar tu cita?</a>
+            <a href="cancelar.html" class="btn btn-primary modify-button">¿Desea cancelar la cita?</a>
         </div>
     </div>
-    
-    
-
-
-
 
 
     <!-- Bootstrap JS NO BORRAR -->

@@ -7,7 +7,7 @@ body {
 .header {
     /* Imagen de fondo */
     background-color: #EDF6F9;
-    background-image: url('nofondo.png');
+    background-image: url('/IMÁGENES/nofondo.png'); /* Cambia la ruta a la imagen de fondo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -90,7 +90,10 @@ body {
     background-color: #E98D6F;
     padding: 30px;
     text-align: center; /* Alinea el contenido al centro */
-    border-radius: 20%; /* Redondea todas las esquinas */
+    border-radius: 10%; /* Redondea todas las esquinas */
+    height: 350px; /* Incrementa la altura del objeto */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .doctor-image img {
@@ -111,6 +114,7 @@ body {
     padding: 5px;
     font-size: 16px;
     color: #004A51;
+    border-radius: 20px;
 }
 
 .doctor-details {

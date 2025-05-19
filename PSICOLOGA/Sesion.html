@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PsicoDomat</title>
+        <link rel="stylesheet" href="Sesion.css">
+    </head>
+    <body>
+        <div class="login-container">
+            <div class="fig"></div>
+            <div class="header">PsicoDomat</div>
+            <div class="form-container">
+                <form onsubmit="return verificarLogin(event)">
+                    <div class="input-group">
+                        <label for="telefono">Teléfono:</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="login-button">Iniciar sesión</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            function verificarLogin(event) {
+                event.preventDefault(); // Evita que el formulario se envíe automáticamente
+            
+                var telefono = document.getElementById("telefono").value;
+                var password = document.getElementById("password").value;
+
+                // Simulación de credenciales correctas (puedes cambiar esto según necesites)
+                if (telefono === "8119762169" && password === "ximena") {
+                    window.location.href = "calendario.html"; // Redirigir a la página de Agenda
+                } else {
+                    alert("Teléfono o contraseña incorrectos. Inténtalo de nuevo.");
+                }
+            }
+        </script>
+    </body>
+</html>

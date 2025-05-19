@@ -16,47 +16,83 @@
   --border-light: #CEE0E0;
 }
 
-/* BODY */
 body {
-  font-family: 'Louis George Café', sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
 }
 
-/* HEADER */
-.hdr {
-  background-color: var(--primary);
-  height: 80px;
-  display: flex;
-  align-items: center;
+.header {
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('/IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
-.hdr-container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 0 0 100px 100px;
+
+.fig {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
 }
-.hdr-title {
-  font-size: 1.5rem;
+
+.Titu {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
-.btn-menu {
-  background-color: var(--item-bg);
-  border: none;
-  border-radius: 12px;
-  padding: 8px;
-  cursor: pointer;
-}
-.btn-menu img {
-  width: 24px;
-  height: 24px;
-}
-.dropdown-menu {
-  min-width: 200px;
-  font-size: 0.95rem;
-}
+
+
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
+
+    .navbar-toggler {
+        border: none; /* Quita el borde del botón */
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
+
+    .menu-icon {
+        width: 30px; /* Ajusta el tamaño según tu imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+    }
 
 /* MAIN CONTENT */
 .main-content {
