@@ -187,3 +187,48 @@ body {
   font-size: 16px;
   color: #004A51;
 }
+
+/* Estilo personalizado para los modales */
+.modal-content {
+    background-color: #ffeee8;
+    color: #004A51;
+    border-radius: 25px;
+    border: 2px solid #E98D6F;
+    font-family: Louis George Cafe, sans-serif;
+}
+
+.modal-header {
+    background-color: #FFDDD2;
+    border-bottom: 2px solid #E98D6F;
+    border-radius: 25px 25px 0 0;
+}
+
+.modal-title {
+    color: #004A51;
+    font-weight: bold;
+}
+
+.btn-close {
+    filter: invert(50%) sepia(20%) saturate(500%) hue-rotate(140deg);
+}
+
+.modal-footer, .modal-body {
+    background-color: #ffeee8;
+    border-radius: 0 0 25px 25px;
+}
+
+.form-label {
+    color: #004A51;
+    font-weight: bold;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #E98D6F;
+    background-color: #fff;
+    color: #004A51;
+}
+
+#modalAgregarCita .modal-body {
+    background-color: #ffeee8;
+}
