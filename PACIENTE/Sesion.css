@@ -96,3 +96,8 @@ input {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.error {
+    color: red;
+    margin-top: 10px;
+}

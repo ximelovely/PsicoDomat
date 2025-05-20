@@ -26,22 +26,29 @@
                     <button type="submit" class="login-button">Iniciar sesión</button>
                 </form>
             </div>
+            <div class="alert"></div>
         </div>
-
         <script>
             function verificarLogin(event) {
-                event.preventDefault(); // Evita que el formulario se envíe automáticamente
+                event.preventDefault();
+                const telefono = document.getElementById('telefono').value.trim();
+                const password = document.getElementById('password').value.trim();
+                const alertDiv = document.querySelector('.alert');
                 
-                var telefono = document.getElementById("telefono").value;
-                var password = document.getElementById("password").value;
-
-                // Simulación de credenciales correctas (puedes cambiar esto según necesites)
-                if (telefono === "8119762169" && password === "ximena") {
-                    window.location.href = "Agenda.html"; // Redirigir a la página de Agenda
+                // Ejemplo simple de validación (reemplaza con tu lógica real)
+                if (telefono === "8112394678" && password === "Xime2005") {
+                    alertDiv.textContent = "Inicio de sesión exitoso.";
+                    alertDiv.style.color = "green";
+                    // Redirigir a agenda.html después de un breve retraso
+                    setTimeout(() => {
+                        window.location.href = 'agenda.html';
+                    }, 1000);
                 } else {
-                    alert("Teléfono o contraseña incorrectos. Inténtalo de nuevo.");
+                    alertDiv.textContent = "Teléfono o contraseña incorrectos.";
+                    alertDiv.style.color = "red";
                 }
+                return false;
             }
-        </script>>
+        </script>
     </body>
 </html>

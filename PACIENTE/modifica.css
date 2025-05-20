@@ -1,0 +1,153 @@
+body {
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+}
+
+.header {
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('/IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+}
+
+.fig {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
+}
+
+.Titu {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
+}
+
+
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
+
+    .menu-icon {
+        width: 30px; /* Ajusta el tamaño según tu imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+    }
+
+
+/*Modificar cita*/
+
+.appointment-header {
+    background-color: #E98D6F;
+    color: #EDF6F9;
+    font-size: 25px;
+    padding: 20px;
+    border-radius: 0px 0px 40px 40px;
+    margin-bottom: 15px;
+    width: 30%;  /* Ajusta este valor para hacerla más corta */
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; /* Centra el texto */
+}
+
+    .modifica-cita {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: auto;
+        width: 50%;
+    }
+
+.modifica-cita label{
+    color: #004A51;
+    font-size: 23px;
+}
+
+    
+    form {
+        display: flex; /* Alinea los elementos en fila */
+        flex-direction: column; /* Alinea los elementos en columna */
+        gap: 10px; /* Añade espacio entre los elementos */
+    }
+    
+    input, select {
+        background: #f9eae4;
+        font-size: 16px; /* Ajusta el tamaño de la fuente de manera responsiva */
+        font-family: 'Louis George Cafe', sans-serif; /* Fuente específica */
+        color: #004A51; /* Color específico */
+        border-radius: 500px; /* Redondea todas las esquinas */
+        border: none; /* Quita el borde del input */
+        padding: 10px 20px; /* Añade espacio interno */
+    }
+    
+    .btn-modificar {
+        background-color: #E98D6F;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 20px;
+        text-align: center; /* Centra el texto */
+        display: block;
+        margin: 0 auto; /* Centra el botón horizontalmente */
+        width: 50%;  /* Ajusta este valor para hacerla más corta */
+    }
+    
+    .btn-modificar:hover {
+        background-color: #83C5BE;
+    }
+    
+    .imagen-derecha {
+        text-align: center;
+    }
+    
+    .imagen-derecha img {
+        width: 350px;
+        height: auto;
+    }
+    
+    .imagen-derecha p {
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    
