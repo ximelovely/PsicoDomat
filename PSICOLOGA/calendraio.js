@@ -121,8 +121,54 @@ document.addEventListener("DOMContentLoaded",() => {
 
 
          document.getElementById("btnAbrirModificar").addEventListener("click", () => {
-           console.log("✔️ Modificación confirmada");
            document.getElementById("modificar-container").style.display = "flex";
+           document.getElementById("calendar-container").style.display = "none";
+           document.getElementById("modal").style.display = "none";
+
+           document.getElementById("nuevoDia").value = cita.date;
+
+           document.getElementById("nuevaHora").value = cita.time;
+         });
+
+
+
+        document.getElementById("btnAbrirModificarInputs").addEventListener("click", () => {
+           document.getElementById("exitoModal").style.display = "flex";
+         });
+
+
+        document.getElementById("goCalendar").addEventListener("click", () => {
+          window.location.href = "Calendario.html";
+         });
+
+          document.getElementById("goCalendarCancelacion").addEventListener("click", () => {
+          window.location.href = "Calendario.html";
+         });
+
+
+           document.getElementById("goAgregarEditar").addEventListener("click", () => {
+          window.location.href = "Agregar.html";
+         });
+
+
+
+         document.getElementById("cancelarCita").addEventListener("click", () => {
+           document.getElementById("modalConfirmacionCancelar").style.display = "flex";
+           document.getElementById("modal").style.display = "none";
+
+         });
+
+          document.getElementById("submitCancelar").addEventListener("click", () => {
+           document.getElementById("modalCitaCancelada").style.display = "flex";
+           document.getElementById("modalConfirmacionCancelar").style.display = "none";
+
+         });
+
+
+          document.getElementById("btnAbrirModificarCancelar").addEventListener("click", () => {
+           document.getElementById("modificar-container").style.display = "flex";
+           document.getElementById("modalConfirmacionCancelar").style.display = "none";
+
            document.getElementById("calendar-container").style.display = "none";
            document.getElementById("modal").style.display = "none";
 
@@ -208,17 +254,4 @@ document.addEventListener("DOMContentLoaded",() => {
 
   renderCalendar(currentYear, currentMonth);
 
-});
-
-// Mostrar el modal de cancelación al hacer clic en "Cancelar cita"
-document.getElementById('btnAbrirCancelar').addEventListener('click', function() {
-  document.getElementById('cancelarModal').classList.remove('hidden');
-});
-
-// Cerrar el modal de cancelación al hacer clic fuera del contenido
-window.addEventListener('click', function(event) {
-  const modal = document.getElementById('cancelarModal');
-  if (event.target === modal) {
-    modal.classList.add('hidden');
-  }
 });

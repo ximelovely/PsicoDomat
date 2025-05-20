@@ -1,0 +1,120 @@
+body {
+  font-family: 'Louis George Cafe', sans-serif;
+  background-color: #EDF6F9;
+  margin: 0;
+  padding: 0;
+  color: #004A51;
+}
+
+/* Encabezado */
+.header {
+  background-color: #EDF6F9;
+  background-image: url('../IMÁGENES/nofondo.png');
+  background-size: cover;
+  background-position: center;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.fig {
+  background-color: #83C5BE;
+  height: 8vh;
+  width: 95vw;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  position: relative;
+}
+
+.Titu {
+  flex: 1;
+  font-size: 2vw;
+  color: #004A51;
+  font-weight: bold;
+  text-align: center;
+}
+
+.menu-icon {
+  width: 35px;
+  height: auto;
+  cursor: pointer;
+}
+
+/* Contenido principal */
+.perfil-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  gap: 40px;
+}
+
+.perfil-info {
+  background-color: #FADCD9;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.foto-perfil {
+  width: 140px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 15px;
+  border: 4px solid #E98D6F;
+}
+
+.nombre {
+  margin-top: 10px;
+  background-color: #E98D6F;
+  color: white;
+  padding: 6px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.cedula {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+/* Formulario */
+.perfil-form {
+  flex: 1;
+  background-color: #FADCD9;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.perfil-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+textarea {
+  width: 100%;
+  height: 160px;
+  border: none;
+  resize: none;
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #E6F5F8;
+  font-family: 'Louis George Cafe', sans-serif;
+  font-size: 14px;
+  color: #004A51;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+#contador {
+  margin-top: 8px;
+  text-align: right;
+  font-size: 14px;
+  color: #004A51;
+}

@@ -73,12 +73,12 @@
     <div id="modificar-body" class="d-flex justify-content-center">
       <div id="modificar-left" class="justify-content-center align-self-center">
       <div id="inputs-modificar" class="d-flex justify-content-center flex-column">
-        <div id="day-input" class="d-flex justify-content-center mb-5">
+        <div id="day-input" class="d-flex justify-content-end mb-5">
           <label><h3>Dia de la cita:</h3></label>
           <input type="date" id="nuevoDia">
         </div>
-        <div id="hour-input" class="d-flex justify-content-center">
-          <label><h3>Hora de la cita:</h3></label>
+        <div id="hour-input" class="d-flex justify-content-end">
+          <label id="labelHora"><h3>Hora de la cita:</h3></label>
           <input type="time" id="nuevaHora">
         </div>
       </div>
@@ -107,10 +107,42 @@
       </div>
       <div class="modal-buttons d-flex flex-column">
         <button class="btn-modificar justify-content-center align-self-center" id="btnAbrirModificar">Modificar cita</button>
-        <button class="btn-cancelar justify-content-center align-self-center" id="ntnAbrirCancelar">Cancelar cita</button>
+        <button class="btn-cancelar justify-content-center align-self-center" id="cancelarCita">Cancelar cita</button>
       </div>
     </div>
   </div>
+
+
+
+  <!-- Modal Detalles de la cita -->
+  <div id="modalConfirmacionCancelar" class="modal justify-content-center align-self-center">
+    <div class="modal-content">
+      <div class="modal-cancelar justify-content-center align-self-center" id="modalTime"><h4>Cancelar cita</h4></div>
+      <div class="modal-info justify-content-center align-self-center" id="modalInfo">
+        <p><strong><h5>Necesitas cancelar esta cita? Se notificara automaticamente al paciente. Si lo desas, puedes ofrecer una nueva fecha para reprogramar.</h5></strong></p>
+      </div>
+      <div class="modal-buttons d-flex flex-column">
+        <button class="btn-modificar justify-content-center align-self-center" id="btnAbrirModificarCancelar"><h5>Modificar cita</h5></button>
+        <button class="btn-cancelar justify-content-center align-self-center" id="submitCancelar"><h5>Cancelar cita</h5></button>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Modal Detalles de la cita -->
+  <div id="modalCitaCancelada" class="modal justify-content-center align-self-center">
+    <div class="modal-content">
+      <div class="modal-cancelar justify-content-center align-self-center" id="modalTime"><h4>Cita cancelada</h4></div>
+      <div class="modal-info justify-content-center align-self-center" id="modalInfo">
+        <p><strong><h5>Cancelacion realizada con exito. Se ha informado al paciente. Por favor, considera ofrecer una nueva fecha si es necesario.</h5></strong></p>
+      </div>
+      <div class="modal-buttons d-flex flex-column">
+        <button class="btn-modificar justify-content-center align-self-center" id="goCalendarCancelacion"><h5>Ir Calendario</h5></button>
+        <button class="btn-cancelar justify-content-center align-self-center" id="goAgregarEditar"><h5>Agregar/Editar cita</h5></button>
+      </div>
+    </div>
+  </div>
+
 
   <!-- Modal Modificar Cita 
   <div id="modificarModal" class="modal hidden">
@@ -133,8 +165,7 @@
   </div>
 -->
 
-  <!-- Modal Confirmación Exitosa -->
-  <div id="exitoModal" class="modal hidden">
+  <!-- Modal Confirmación Exitosa   <div id="exitoModal" class="modal hidden">
     <div class="modal-content confirmacion">
       <h4 class="exito-titulo">¡Cambio exitoso!</h4>
       <p>La cita ha sido reprogramada exitosamente. El paciente ha sido notificado.</p>
@@ -142,17 +173,28 @@
       <a href="calendario.html" class="btn-volver">Ir a Calendario</a>
     </div>
   </div>
+  -->
 
-  <!-- Modal Cancelación Exitosa -->
-  <div id="cancelarModal" class="modal hidden">
-    <div class="modal-content confirmacion">
-      <h4 class="exito-titulo">¡Cita cancelada!</h4>
-      <p>La cita ha sido cancelada exitosamente. El paciente ha sido notificado.</p>
-      <a href="calendario.html" class="btn-volver">Ir a Calendario</a>
+
+  <!-- Modal Detalles de la cita -->
+  <div id="exitoModal" class="modal justify-content-center align-self-center">
+    <div class="modal-content">
+      <div class="modal-modificar justify-content-center align-self-center" id="modalTime"><h4>Cambio exitoso!</h4></div>
+      <div class="modal-info justify-content-center align-self-center" id="modalInfo">
+        <p><strong><h5>La cita ha sido reprogramada exitosamente. El paciente ha sido notificado.</h5></strong></p>
+        <p><strong><h5> Revisa tu agenda para confirmar los cambios</h5></strong></p>
+      </div>
+      <div class="modal-buttons d-flex flex-column">
+        <button class="btn-cancelar justify-content-center align-self-center" id="goCalendar"><h5>Ir a calendario</h5></button>
+      </div>
     </div>
   </div>
 
+
+  <script src="../BACK/Conexion.js"></script>
+  <script src="../BACK/Psicologa.js"></script>
   <script src="calendraio.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

@@ -251,6 +251,28 @@ body {
   width: 35%;
 }
 
+.modal-modificar {
+  background-color: #E98D6F;
+  color: white;
+  font-weight: bold;
+  padding: 4px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+  width: 75%;
+}
+
+.modal-cancelar {
+  background-color: #E98D6F;
+  color: white;
+  font-weight: bold;
+  padding: 4px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+  width: 50%;
+}
+
+
+
 .modal-date {
   background-color: #C7EDE7;
   color: #004A51;
@@ -379,17 +401,10 @@ body {
 }
 
 #modificar-left{
-  width: 30%;
+  width: 70vh;
   color: #004A51;
 }
 
-#hour-input{
-  width: 77%;
-}
-
-#day-input{
-  width: 80%;
-}
 
 
 #nuevoDia{
@@ -410,6 +425,10 @@ body {
   margin-left: 15px;
 }
 
-#inputs-modificar{
-  width: 86%;
+#modificar-right{
+  width: 100vh;
+}
+
+#labelHora{
+  margin-right: 13px;
 }
