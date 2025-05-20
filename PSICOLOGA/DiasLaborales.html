@@ -3,226 +3,189 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Días laborables – PsicoDomat</title>
+  <title>Días Laborales – PsicoDomat</title>
 
-  <!-- Bootstrap CSS -->
+  <!-- Bootstrap CSS & Icons -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+
   <!-- Estilos personalizados -->
   <link rel="stylesheet" href="DiasLaborales.css" />
 </head>
 <body>
+
   <!-- HEADER -->
   <div class="header">
-        <div class="fig">
-            <div class="Titu">Días laborales</div>
-            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
-                <div class="container-fluid">
-                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    </button>
-            
-                    <!-- Menú desplegable alineado a la izquierda -->
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="/IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
-                                    <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
-                                    <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
-                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
-                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
-                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
-                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
-                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>            
+    <div class="fig">
+      <div class="Titu">Días Laborales</div>
+      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+        <div class="container-fluid">
+          <button class="navbar-toggler border-0" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                  aria-controls="navbarNav" aria-expanded="false"
+                  aria-label="Toggle navigation"></button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-list menu-icon"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
+                  <li><a class="dropdown-item" href="editarperfil.html">Editar perfil</a></li>
+                  <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
+                  <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
+                  <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios</a></li>
+                  <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                  <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                  <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>            
     </div>
+  </div>
 
-  <!-- CONTENIDO PRINCIPAL -->
+  <!-- ALERTAS -->
+  <div id="alertPlaceholder" class="container mt-3"></div>
+
+  <!-- CALENDARIO Y ACCIONES -->
   <main class="main-content">
-    <div class="calendar-section">
-      <!-- Calendario -->
-      <div class="calendar-wrap">
-        <div class="calendar-header">
-          <button class="btn-cal-nav">
-            <img src="../IMÁGENES/icon-prev.png" alt="Anterior" />
-          </button>
-          <span>Octubre</span>
-          <button class="btn-cal-nav">
-            <img src="../IMÁGENES/icon-next.png" alt="Siguiente" />
-          </button>
-        </div>
-        <div class="calendar-grid">
-          <div class="day-heading">L</div><div class="day-heading">M</div>
-          <div class="day-heading">X</div><div class="day-heading">J</div>
-          <div class="day-heading">V</div>
-          <!-- Números 1–31 -->
-          <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
-          <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div>
-          <div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div>
-          <div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div>
-          <div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div>
-          <div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
-          <div class="day">31</div>
-        </div>
+    <div class="calendar-wrap mx-auto">
+      <!-- Header del calendario -->
+      <div class="calendar-header d-flex justify-content-between align-items-center mb-3">
+        <button class="btn-prev btn btn-light"><i class="bi bi-chevron-left"></i></button>
+        <h2 class="current-month mb-0"></h2>
+        <button class="btn-next btn btn-light"><i class="bi bi-chevron-right"></i></button>
       </div>
 
-      <!-- Botones de acción -->
-      <div class="actions-section">
-        <button
-          class="btn-action"
-          data-bs-toggle="modal"
-          data-bs-target="#noLaborablesModal"
-        >Definir días no laborables</button>
+      <!-- GRID DE 7 COLUMNAS -->
+      <div class="calendar-grid"></div>
 
-        <button
-          class="btn-action"
-          data-bs-toggle="modal"
-          data-bs-target="#assignBranchModal"
-        >Asignar sucursal de trabajo</button>
+      <!-- Botones de acción -->
+      <div class="mt-4 d-flex justify-content-center gap-3">
+        <button id="btnSetOff" class="btn-action">
+          <i class="bi bi-calendar-x"></i> Definir días no laborables
+        </button>
+        <button id="btnAssignBranch" class="btn-action">
+          <i class="bi bi-geo-alt"></i> Asignar sucursal de trabajo
+        </button>
+      </div>
+    </div>
+
+    <!-- TABLA DE ASIGNACIONES -->
+    <div class="assignments-wrap mt-5">
+      <h3>Asignaciones de sucursales</h3>
+      <div class="table-responsive">
+        <table id="assignTable" class="table assignments-table">
+          <thead>
+            <tr>
+              <th>Sucursal</th>
+              <th>Periodo</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody><!-- Se llena con JS --></tbody>
+        </table>
       </div>
     </div>
   </main>
 
   <!-- MODAL: DÍAS NO LABORABLES -->
-  <div
-    class="modal fade"
-    id="noLaborablesModal"
-    tabindex="-1"
-    aria-labelledby="noLaborablesLabel"
-    aria-hidden="true"
-  >
+  <div class="modal fade" id="offdaysModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content modal-no-labor">
-        <div class="modal-body">
-          <!-- Calendario reiterado -->
-          <div class="calendar-wrap">
-            <div class="calendar-header">
-              <button class="btn-cal-nav">
-                <img src="../IMÁGENES/icon-prev.png" alt="Anterior" />
-              </button>
-              <span>Octubre</span>
-              <button class="btn-cal-nav">
-                <img src="../IMÁGENES/icon-next.png" alt="Siguiente" />
-              </button>
-            </div>
-            <div class="calendar-grid">
-              <div class="day-heading">L</div><div class="day-heading">M</div>
-              <div class="day-heading">X</div><div class="day-heading">J</div>
-              <div class="day-heading">V</div>
-              <!-- Números 1–31 idénticos al calendario principal -->
-              <div class="day">1</div><div class="day">2</div><div class="day">3</div><div class="day">4</div><div class="day">5</div>
-          <div class="day">6</div><div class="day">7</div><div class="day">8</div><div class="day">9</div><div class="day">10</div>
-          <div class="day">11</div><div class="day">12</div><div class="day">13</div><div class="day">14</div><div class="day">15</div>
-          <div class="day">16</div><div class="day">17</div><div class="day">18</div><div class="day">19</div><div class="day">20</div>
-          <div class="day">21</div><div class="day">22</div><div class="day">23</div><div class="day">24</div><div class="day">25</div>
-          <div class="day">26</div><div class="day">27</div><div class="day">28</div><div class="day">29</div><div class="day">30</div>
-          <div class="day">31</div>
-            </div>
-          </div>
+      <div class="modal-content">
 
-          <p class="modal-text">
+        <div class="modal-header border-0">
+          <h5 class="modal-title ps-3">
+            <i class="bi bi-calendar-x-fill me-2"></i> Días no laborables
+          </h5>
+        </div>
+
+        <div class="modal-body">
+          <p class="text-center mb-3">
             Seleccione los días no laborables en el calendario
           </p>
-
-          <div class="modal-actions">
-            <button type="button" class="btn-save">Guardar cambios</button>
-            <button type="button" class="btn-cancel" data-bs-dismiss="modal">
-              Cancelar
-            </button>
-          </div>
+          <div class="calendar-grid offcalendar"></div>
         </div>
+
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn-cancel" data-bs-dismiss="modal">
+            Cancelar
+          </button>
+          <button type="button" id="btnSaveOff" class="btn-save">
+            <i class="bi bi-save me-2"></i> Guardar cambios
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- MODAL: ASIGNAR SUCURSAL DE TRABAJO -->
-  <div
-    class="modal fade"
-    id="assignBranchModal"
-    tabindex="-1"
-    aria-labelledby="assignBranchModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content modal-assign-branch">
-        <!-- Título interno -->
-        <div class="assign-header">Asignar sucursal de trabajo</div>
+  <!-- MODAL: ASIGNAR SUCURSAL -->
+  <div class="modal fade" id="assignModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header border-0">
+          <h5 class="modal-title ps-3">
+            <i class="bi bi-geo-alt-fill me-2"></i> Asignar sucursal de trabajo
+          </h5>
+        </div>
 
         <div class="modal-body">
-          <form id="formAssignBranch" class="form-assign-branch" action="#" method="post">
+          <form id="formAssign" class="form-add-serv">
             <div class="form-group">
               <label for="branch-select">Sucursal:</label>
-              <select id="branch-select" name="branch">
-                <option value="">-- Seleccione sucursal --</option>
-                <!-- ... -->
+              <select id="branch-select" class="form-control" required>
+                <option value="">Seleccione...</option>
+                <option>Monterrey, N.L.</option>
+                <option>Houston, Tx.</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="months-count">Cantidad de meses:</label>
-              <select id="months-count" name="months-count">
-                <option value="">-- Meses --</option>
-                <!-- 1–12 -->
+              <label for="assign-months">Cantidad de meses:</label>
+              <select id="assign-months" class="form-control" required>
+                <option value="1">1 mes</option>
+                <option value="3">3 meses</option>
+                <option value="6">6 meses</option>
+                <option value="12">12 meses</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="year-select">Año a agregar:</label>
-              <select id="year-select" name="year">
-                <option value="">-- Año --</option>
-                <!-- Ej. 2024, 2025… -->
-              </select>
+              <label for="assign-year">Año a agregar:</label>
+              <select id="assign-year" class="form-control select-date" required></select>
             </div>
-
-            <div class="checkbox-group">
-              <label><input type="checkbox" name="months" value="Enero"> Enero</label>
-              <label><input type="checkbox" name="months" value="Febrero"> Febrero</label>
-              <label><input type="checkbox" name="months" value="Marzo"> Marzo</label>
-              <label><input type="checkbox" name="months" value="Abril"> Abril</label>
-              <label><input type="checkbox" name="months" value="Mayo"> Mayo</label>
-              <label><input type="checkbox" name="months" value="Junio"> Junio</label>
-              <label><input type="checkbox" name="months" value="Julio"> Julio</label>
-              <label><input type="checkbox" name="months" value="Agosto"> Agosto</label>
-              <label><input type="checkbox" name="months" value="Septiembre"> Septiembre</label>
-              <label><input type="checkbox" name="months" value="Octubre"> Octubre</label>
-              <label><input type="checkbox" name="months" value="Noviembre"> Noviembre</label>
-              <label><input type="checkbox" name="months" value="Diciembre"> Diciembre</label>
+            <div class="form-group months-grid">
+              <!-- Checkboxes generados por JS en 4 columnas -->
             </div>
           </form>
         </div>
 
-        <div class="modal-footer">
-          <button
-            type="submit"
-            form="formAssignBranch"
-            class="btn-save"
-          >
-            Guardar
-          </button>
-          <button
-            type="button"
-            class="btn-cancel"
-            data-bs-dismiss="modal"
-          >
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn-cancel" data-bs-dismiss="modal">
             Cancelar
           </button>
+          <button type="button" id="btnSaveAssign" class="btn-save">
+            <i class="bi bi-save me-2"></i> Guardar
+          </button>
         </div>
+
       </div>
     </div>
   </div>
 
-  <!-- Bootstrap Bundle (JS + Popper) -->
+  <!-- Bootstrap + JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="DiasLaborales.js"></script>
 </body>
 </html>

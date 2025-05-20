@@ -1,160 +1,179 @@
-/* RESET BÁSICO */
+:root {
+  --bg-light:  #EAF2F2;
+  --primary:   #7FCFD7;
+  --accent:    #E98D6F;
+  --text-dark: #004A51;
+  --item-bg:   #FFEFE8;
+}
+
+/* RESET */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* VARIABLES DE COLOR */
-  :root {
-    --bg-light: #EAF2F2;
-    --primary: #7FCFD7;
-    --text-dark: #004A51;
-    --filter-bg: #FFEFE8;
-    --btn-view-bg: #E98D6F;
-    --btn-view-text: #FFFFFF;
-    --pill-bg: #7FCFD7;
-    --pill-text: #FFFFFF;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
 body {
-    /* Fuente */
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
+  font-family: 'Louis George Café', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  min-height: 100vh;
 }
 
 .header {
-    /* Imagen de fondo */
-    background-color: #EDF6F9;
-    background-image: url('/IMÁGENES/nofondo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 20vh; /* 30% de la altura de la pantalla */
-    width: 100vw; /* 100% del ancho de la pantalla */
-    
-    /* Flexbox para centrar verticalmente */
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
+  /* Imagen de fondo */
+  background-color: #EDF6F9;
+  background-image: url('/IMÁGENES/nofondo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Tamaño total de la zona */
+  height: 20vh;    /* 20% de la altura de la ventana */
+  width: 100vw;    /* 100% del ancho de la ventana */
+
+  /* Flex para centrar la “pill” horizontalmente y situarla en el centro vertical */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .fig {
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
-    background-color: #83C5BE;
-    text-align: center;
-    height: 10vh; /* 30% de la altura de la pantalla */
-    width: 95vw; /* 100% del ancho de la pantalla */
-    border-radius: 1000px; /* Redondea todas las esquinas */
-    display: flex; /* Flexbox para centrar verticalmente */
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center; /* Centra el contenido verticalmente */
-    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
+  font-family: 'Louis George Café', sans-serif;
+  color: #004A51;
+  background-color: #83C5BE;
+  text-align: center;
+
+  /* Tamaño de la “pill” */
+  height: 10vh;    /* 10% de la altura de la ventana */
+  width: 95vw;     /* 95% del ancho de la ventana */
+
+  /* Cápsula total */
+  border-radius: 1000px;
+
+  /* Centrar su contenido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Para posicionar o superponer el dropdown si hace falta */
+  position: relative;
 }
 
 .Titu {
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
-    text-align: center; /* Alinea el texto al centro */
-    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
-    width: 100%; /* Ocupa todo el ancho de .fig */
+  font-family: 'Louis George Café', sans-serif;
+  color: #004A51;
+  text-align: center;
+  font-size: 3vw;  /* responsivo */
+  width: 100%;     /* ocupa todo el ancho de .fig */
 }
 
+/* Estilos del menú desplegable (igual a Calendario.css) */
+.navbar {
+  background-color: #EDF6F9;  /* mismo color del fondo claro */
+  border-radius: 500px;       /* totalmente redondeado */
+}
 
-/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
-    .navbar{
-        background-color: #EDF6F9; /* Color de fondo*/
-        border-radius: 500px; /* Redondea todas las esquinas */
-    }
+.navbar-toggler {
+  border: none;               /* Quita el botón default que no usas */
+}
 
-    .navbar-toggler {
-        border: none; /* Quita el borde del botón */
-    }
+.navbar-toggler:focus {
+  box-shadow: none;           /* Quita el outline al clic */
+}
 
-    .navbar-toggler:focus {
-        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
-    }
+.navbar-nav .nav-link {
+  font-size: 18px;
+  color: #004A51;
+  padding: 10px 15px;
+  transition: background 0.3s ease-in-out;
+}
 
-    .navbar-nav .nav-link {
-        font-size: 18px; /* Ajusta el tamaño de la fuente */
-        color: #004A51; /* Color específico */
-        padding: 10px 15px; /* Añade espacio interno */
-        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
-    }
+.navbar-nav .nav-link:hover {
+  background-color: #E98D6F;
+  color: #fff !important;
+  border-radius: 500px;
+}
 
-    .navbar-nav .nav-link:hover {
-        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
-        color: white !important; /* Cambia el color del texto al pasar por encima */
-        border-radius: 500px; /* Redondea las esquinas */
-    }
+/* ALERTAS */
+#alertPlaceholder {
+  max-width: 960px;
+  margin: 1rem auto;
+  padding: 0 1rem;
+}
 
-    .menu-icon {
-        width: 30px; /* Ajusta el tamaño según tu imagen */
-        height: auto; /* Mantiene la proporción de la imagen */
-        cursor: pointer; /* Cambia el cursor al pasar por encima */
-    }
-  
-  /* FILTROS */
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    align-items: center;
-    margin-bottom: 24px;
+/* MAIN CONTENT */
+.main-content {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* FILTROS */
+.report-filters .form-group {
+  display: flex;
+  flex-direction: column;
+}
+.select-filter {
+  border-radius: 40px;
+  background-color: var(--item-bg);
+  border: none;
+  padding: .5rem 1rem;
+  min-width: 120px;
+}
+.btn-action {
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  padding: .5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.btn-action i {
+  margin-right: .5rem;
+}
+.btn-action:hover {
+  opacity: .85;
+}
+
+/* STATUS BOX */
+.status-box {
+  background-color: var(--item-bg);
+  border-radius: 16px;
+  padding: 1rem;
+}
+.status-label {
+  font-size: 1rem;
+  margin-bottom: .5rem;
+}
+.status-count {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* CHART CARDS */
+.chart-card {
+  background-color: var(--item-bg);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.chart-card .card-body {
+  padding: 1rem;
+}
+.chart-card .card-title {
+  font-size: 1.1rem;
+  margin-bottom: .75rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .report-filters {
+    flex-direction: column;
+    gap: 1rem;
   }
-  .filter-group label {
-    margin-right: 8px;
-  }
-  .filter-group select {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 40px;
-    background-color: var(--filter-bg);
-    font-size: 1rem;
-    outline: none;
-  }
-  .btn-view {
-    background-color: var(--btn-view-bg);
-    color: var(--btn-view-text);
-    border: none;
-    border-radius: 40px;
-    padding: 12px 32px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  .btn-view:hover {
-    opacity: 0.85;
-  }
-  
-  /* DATOS RÁPIDOS */
-  .quick-data {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-  .data-pill {
-    background-color: var(--pill-bg);
-    color: var(--pill-text);
-    padding: 8px 16px;
-    border-radius: 40px;
-    font-weight: bold;
-  }
-  
-  /* SECCIÓN DE GRÁFICAS */
-  .charts-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    justify-content: center;
-  }
-  .chart-container {
-    flex: 1 1 300px;
-    background-color: #fff;
-    padding: 16px;
-    border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-  
+}
