@@ -1,52 +1,86 @@
 body {
-  font-family: 'Louis George Cafe', sans-serif;
-  background-color: #EDF6F9;
-  margin: 0;
-  padding: 0;
-  color: #004A51;
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
 }
 
-/* Encabezado */
 .header {
-  background-color: #EDF6F9;
-  background-image: url('../IMÁGENES/nofondo.png');
-  background-size: cover;
-  background-position: center;
-  height: 20vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('/IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .fig {
-  background-color: #83C5BE;
-  height: 8vh;
-  width: 95vw;
-  border-radius: 1000px;
-  display: flex;
-  align-items: center;
-  padding: 0 30px;
-  position: relative;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
 }
 
 .Titu {
-  flex: 1;
-  font-size: 2vw;
-  color: #004A51;
-  font-weight: bold;
-  text-align: center;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
 
-/* Menú desplegable */
-.menu-icon {
-  width: 35px;
-  height: auto;
-  cursor: pointer;
-}
+
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
+
+    .navbar-toggler {
+        border: none; /* Quita el borde del botón */
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
+
+    .menu-icon {
+        width: 30px; /* Ajusta el tamaño según tu imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+    }
 
 /* Formulario principal */
 .form-container {
+  /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
   max-width: 950px;
   background-color: #fff;
   margin: 30px auto;
