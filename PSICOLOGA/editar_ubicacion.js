@@ -58,13 +58,9 @@ window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("count-direccion").textContent = `${ubicacion.direccion.length}/100`;
 });
 
-  btnEliminar.addEventListener("click", () => {
-    const confirmar = confirm("¿Estás seguro que deseas eliminar esta ubicación?");
-    if (confirmar) {
-      localStorage.setItem("ubicacionEliminada", ubicacion.id);
-      alert("Ubicación eliminada");
-      window.location.href = "ubis.html";
-    }
-  });
+
 });
 
+        document.getElementById("btn-eliminar").addEventListener("click", () => {
+          window.location.href = "ubis.html";
+         });
