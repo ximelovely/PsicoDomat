@@ -1,0 +1,309 @@
+body {
+  font-family: 'Louis George Cafe', sans-serif;
+  background-color: #EDF6F9;
+  margin: 0;
+  padding: 0;
+  color: #004A51;
+}
+
+/* Encabezado */
+.header {
+  background-color: #EDF6F9;
+  background-image: url('../IMÁGENES/nofondo.png');
+  background-size: cover;
+  background-position: center;
+  height: 20vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.fig {
+  background-color: #83C5BE;
+  height: 8vh;
+  width: 95vw;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  padding: 0 30px;
+  position: relative;
+}
+
+.Titu {
+  flex: 1;
+  font-size: 2vw;
+  color: #004A51;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Menú desplegable */
+.menu-icon {
+  width: 35px;
+  height: auto;
+  cursor: pointer;
+}
+
+/* Formulario principal */
+.form-container {
+  max-width: 950px;
+  background-color: #fff;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.img-preview img {
+  width: 100%;
+  max-width: 240px;
+  height: 240px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border: 5px solid #E98D6F;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.form-group.horizontal {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.input-with-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-with-count input {
+  flex: 1;
+}
+
+input, select {
+  padding: 10px;
+  border-radius: 100px;
+  border: none;
+  background-color: #FADCD9;
+  font-family: 'Louis George Cafe', sans-serif;
+  color: #004A51;
+  font-size: 14px;
+  width: 100%;
+}
+
+/* Grupos especiales */
+.costo-group select,
+.costo-group input {
+  max-width: 120px;
+}
+
+.horario-group input {
+  max-width: 150px;
+}
+
+.botones {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.btn-editar, .btn-eliminar {
+  padding: 12px 50px;
+  font-weight: bold;
+  border: none;
+  border-radius: 100px;
+  font-family: 'Louis George Cafe', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-editar {
+  background-color: #E98D6F;
+  color: white;
+}
+
+.btn-editar:hover {
+  background-color: #d87b5c;
+}
+
+.btn-eliminar {
+  background-color: #004A51;
+  color: white;
+}
+
+.btn-eliminar:hover {
+  background-color: #003840;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content.confirmacion {
+  background-color: #E6F5F8;
+  border: 3px solid #E98D6F;
+  border-radius: 25px;
+  padding: 30px;
+  width: 400px;
+  text-align: center;
+  color: #004A51;
+}
+
+.exito-titulo {
+  background-color: #E98D6F;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+.btn-volver {
+  background-color: #FADCD9;
+  color: #004A51;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 20px;
+  display: block;
+  margin: 10px auto;
+  border: none;
+  width: 70%;
+}
+
+/* ESTILOS PARA MODAL DE CONFIRMACIÓN */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content.confirmacion {
+  background-color: #E6F5F8;
+  border: 3px solid #E98D6F;
+  border-radius: 25px;
+  padding: 30px 40px;
+  width: 400px;
+  text-align: center;
+  color: #004A51;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-family: 'Louis George Cafe', sans-serif;
+}
+
+.exito-titulo {
+  background-color: #E98D6F;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 100px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.modal-content p {
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.modal-content .btn-volver {
+  background-color: #FADCD9;
+  color: #004A51;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 100px;
+  border: none;
+  width: 80%;
+  margin: 10px auto;
+  font-size: 14px;
+  display: block;
+  font-family: 'Louis George Cafe', sans-serif;
+  transition: background 0.3s;
+}
+
+.modal-content .btn-volver:hover {
+  background-color: #f8c1b9;
+}
+
+/* Modal de eliminación personalizado */
+.modal-content.confirmacion {
+  background-color: #E6F5F8;
+  border: 3px solid #E98D6F;
+  border-radius: 25px;
+  padding: 30px;
+  width: 400px;
+  text-align: center;
+  color: #004A51;
+}
+
+.exito-titulo {
+  background-color: #E98D6F;
+  color: white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+#modalEliminar p {
+  font-size: 15px;
+  color: #004A51;
+  margin-bottom: 20px;
+}
+
+#modalEliminar .btn-volver {
+  background-color: #FADCD9;
+  color: #004A51;
+  font-size: 14px;
+  padding: 10px 25px;
+  border-radius: 100px;
+  width: 80%;
+  margin: 8px auto;
+  display: block;
+  font-family: 'Louis George Cafe', sans-serif;
+  border: none;
+}

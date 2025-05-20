@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded",() => {
       reason: "Terapia individual",
       dob: "12/05/1990",
       branch: "Monterrey",
+      date: "2025-09-09",
       id: "1"
     },
     "2025-09-12": {
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded",() => {
       reason: "Terapia de pareja",
       dob: "21/08/1985",
       branch: "Houston",
+      date: "2025-09-12",
       id: "2"
     },
     "2025-09-23": {
@@ -28,6 +30,7 @@ document.addEventListener("DOMContentLoaded",() => {
       reason: "Evaluación psicológica",
       dob: "03/03/1979",
       branch: "Monterrey",
+      date:"2025-09-23",
       id: "3"
     }
   };
@@ -116,6 +119,18 @@ document.addEventListener("DOMContentLoaded",() => {
           <p><strong>Sucursal:</strong> ${cita.branch}</p>
         `;
 
+
+         document.getElementById("btnAbrirModificar").addEventListener("click", () => {
+           console.log("✔️ Modificación confirmada");
+           document.getElementById("modificar-container").style.display = "flex";
+           document.getElementById("calendar-container").style.display = "none";
+           document.getElementById("modal").style.display = "none";
+
+           document.getElementById("nuevoDia").value = cita.date;
+
+           document.getElementById("nuevaHora").value = cita.time;
+         });
+
        });
 
     } else {
@@ -159,11 +174,7 @@ document.addEventListener("DOMContentLoaded",() => {
     generarFechasValidas();
   });
 
-  document.getElementById("btnConfirmarModificacion").addEventListener("click", () => {
-    console.log("✔️ Modificación confirmada");
-    document.getElementById("modificarModal").classList.add("hidden");
-    document.getElementById("exitoModal").classList.remove("hidden");
-  });
+ 
 
   function generarFechasValidas() {
     const fechaInput = document.getElementById("nuevoDia");

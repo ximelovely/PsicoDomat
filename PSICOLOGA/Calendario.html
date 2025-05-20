@@ -23,11 +23,11 @@
                   <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
                   <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
                   <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
-                  <li><a class="dropdown-item" href="Ubica.html">Editar ubicaciones y precios</a></li>
-                  <li><a class="dropdown-item" href="Servicios.html">Editar servicios proporcionados</a></li>
-                  <li><a class="dropdown-item" href="Pacientes.html">Agregar pacientes</a></li>
-                  <li><a class="dropdown-item" href="Días.html">Días laborales</a></li>
-                  <li><a class="dropdown-item" href="Reporte.html">Reporte de pacientes</a></li>
+                  <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
+                  <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                  <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                  <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                  <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
                 </ul>
               </li>
             </ul>
@@ -60,6 +60,30 @@
     </div>
   </div>
   
+  <div id="modificar-container" class="d-flex flex-column" style="display: none !important;">
+    <div id="modificar-header" class="d-flex justify-content-center">
+      <div id="header-modifica"><h3>Modifica la cita</h3></div>
+    </div>
+    <div id="modificar-body" class="d-flex justify-content-center">
+      <div id="modificar-left" class="justify-content-center align-self-center">
+      <div id="inputs-modificar" class="d-flex justify-content-center flex-column">
+        <div id="day-input" class="d-flex justify-content-center mb-5">
+          <label><h3>Dia de la cita:</h3></label>
+          <input type="date" id="nuevoDia">
+        </div>
+        <div id="hour-input" class="d-flex justify-content-center">
+          <label><h3>Hora de la cita:</h3></label>
+          <input type="time" id="nuevaHora">
+        </div>
+      </div>
+    </div>
+     <div id="modificar-right" class="d-flex justify-content-center flex-column modal-buttons">
+      <div id="img-snoopy" class="d-flex justify-content-center"><img src="../Imágenes/snoopy.png" alt="snoopy psicólogo" class="img-snoopy"></div>
+      <div id="text-snoopy" class="text-center"><h5><strong>Una vez modificada la cita, el paciente recibira una notificacion automatica con los nuevos detalles.</strong></h5></div>
+      <button class="btn-modificar-submit justify-content-center align-self-center" id="btnAbrirModificarInputs"><h5><strong>Modificar cita</strong></h5></button>
+    </div>
+    </div>  
+  </div>
 
 
 
@@ -82,7 +106,7 @@
     </div>
   </div>
 
-  <!-- Modal Modificar Cita -->
+  <!-- Modal Modificar Cita 
   <div id="modificarModal" class="modal hidden">
     <div class="modal-content wide">
       <h4 class="titulo-form">Modifica la cita</h4>
@@ -101,6 +125,7 @@
       <button id="btnConfirmarModificacion" class="btn-modificar">Modificar cita</button>
     </div>
   </div>
+-->
 
   <!-- Modal Confirmación Exitosa -->
   <div id="exitoModal" class="modal hidden">

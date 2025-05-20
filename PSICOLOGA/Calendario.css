@@ -9,7 +9,7 @@ body {
 /* Encabezado */
 .header {
   background-color: #EDF6F9;
-  background-image: url('../IMÁGENES/nofondo.png');
+  background-image: url('../Imágenes/nofondo.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -269,6 +269,14 @@ body {
   width: 60% !important;
 }
 
+.btn-modificar-submit {
+  background-color: #FADCD9;
+  color: #004a51;;
+  width: 25% !important;
+  padding: 15px !important;
+}
+
+
 .btn-cancelar {
   background-color: #FADCD9;
   color: #004A51;
@@ -310,7 +318,7 @@ body {
 }
 
 .img-snoopy {
-  width: 80px;
+  width: 50vh;
   margin-right: 10px;
 }
 
@@ -344,3 +352,54 @@ body {
 }
 
 
+#header-modifica{
+  background-color:#E98D6F;
+  border-bottom-left-radius: 35px;
+  border-bottom-right-radius: 35px;
+  color: white;
+  padding: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#text-snoopy{
+  width: 40%;
+  margin-left: 30%;
+  color: #004A51;
+}
+
+#modificar-left{
+  width: 30%;
+  color: #004A51;
+}
+
+#hour-input{
+  width: 77%;
+}
+
+#day-input{
+  width: 80%;
+}
+
+
+#nuevoDia{
+  background-color: #FADCD9;
+  border: none;
+  border-radius: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-left: 15px;
+}
+
+#nuevaHora{
+  background-color: #FADCD9;
+  border: none;
+  border-radius: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-left: 15px;
+}
+
+#inputs-modificar{
+  width: 86%;
+}
