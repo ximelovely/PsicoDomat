@@ -7,7 +7,7 @@ body {
 .header {
     /* Imagen de fondo */
     background-color: #EDF6F9;
-    background-image: url('/IMÁGENES/nofondo.png');
+    background-image: url('../IMÁGENES/nofondo.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
