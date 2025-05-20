@@ -209,3 +209,16 @@ document.addEventListener("DOMContentLoaded",() => {
   renderCalendar(currentYear, currentMonth);
 
 });
+
+// Mostrar el modal de cancelación al hacer clic en "Cancelar cita"
+document.getElementById('btnAbrirCancelar').addEventListener('click', function() {
+  document.getElementById('cancelarModal').classList.remove('hidden');
+});
+
+// Cerrar el modal de cancelación al hacer clic fuera del contenido
+window.addEventListener('click', function(event) {
+  const modal = document.getElementById('cancelarModal');
+  if (event.target === modal) {
+    modal.classList.add('hidden');
+  }
+});

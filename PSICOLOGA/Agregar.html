@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agregar-editar cita</title>
+  <link rel="stylesheet" href="Agregar.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+        <div class="fig">
+            <div class="Titu">Agregar/editar cita</div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+            
+                    <!-- Menú desplegable alineado a la izquierda -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="/IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
+                                    <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
+                                    <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
+                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
+                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
+        </div>
+    </div>
+
+      <div id="calendar-container">
+      <div class="calendar-box">
+      <div class="calendar-header">
+        <button id="prevBtn">❮</button>
+        <h2 id="month-name"></h2>
+        <button id="nextBtn">❯</button>
+      </div>
+      <div id="calendar-body">
+        <div id="calendar-left">
+          <div class="calendar-days">
+          <div class="day">L</div><div class="day">M</div><div class="day">M</div><div class="day">J</div><div class="day">V</div>
+          </div>
+          <div id="calendar-dates" class="calendar-dates"></div>
+          <div id="info-box" class="info-box">Selecciona una fecha para ver detalles.</div>
+        </div>      
+        <div id="calendar-right">
+           <div id="calendar-details" class="justify-content-center align-self-center">
+           </div>
+        </div>   
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Agregar Cita -->
+    <div class="modal fade" id="modalAgregarCita" tabindex="-1" aria-labelledby="modalAgregarCitaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalAgregarCitaLabel">Agregar Cita</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+            <form id="formAgregarCita">
+            <div class="mb-3">
+                <label for="fechaAgregar" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="fechaAgregar" required>
+            </div>
+            <div class="mb-3">
+                <label for="horaAgregar" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="horaAgregar" required>
+            </div>
+            <div class="mb-3">
+                <label for="pacienteAgregar" class="form-label">Paciente</label>
+                <input type="text" class="form-control" id="pacienteAgregar" required>
+            </div>
+            <div class="mb-3">
+                <label for="notasAgregar" class="form-label">Notas</label>
+                <textarea class="form-control" id="notasAgregar"></textarea>
+            </div>
+            <button type="submit" class="btn btn-success">Agregar</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Modal para Modificar Cita -->
+    <div class="modal fade" id="modalModificarCita" tabindex="-1" aria-labelledby="modalModificarCitaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalModificarCitaLabel">Modificar Cita</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+            <form id="formModificarCita">
+            <div class="mb-3">
+                <label for="fechaModificar" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="fechaModificar" required>
+            </div>
+            <div class="mb-3">
+                <label for="horaModificar" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="horaModificar" required>
+            </div>
+            <div class="mb-3">
+                <label for="pacienteModificar" class="form-label">Paciente</label>
+                <input type="text" class="form-control" id="pacienteModificar" required>
+            </div>
+            <div class="mb-3">
+                <label for="notasModificar" class="form-label">Notas</label>
+                <textarea class="form-control" id="notasModificar"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </form>
+        </div>
+        </div>
+    </div>
+    </div>    <!-- ...existing code... -->
+    <div class="d-flex justify-content-center my-3">
+      <button class="btn btn-dark me-2" data-bs-toggle="modal" data-bs-target="#modalAgregarCita">
+        Agregar cita
+      </button>
+      <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalModificarCita">
+        Modificar cita
+      </button>
+    </div>
+    <!-- ...existing code... -->
+        <!-- Bootstrap JS (asegúrate de tenerlo al final del body) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    // Variables
+    let currentDate = new Date();
+    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+                       "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    
+    // Elementos del DOM
+    const monthNameElement = document.getElementById('month-name');
+    const calendarDatesElement = document.getElementById('calendar-dates');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const infoBox = document.getElementById('info-box');
+    const calendarDetails = document.getElementById('calendar-details');
+    
+    // Inicializar calendario
+    renderCalendar();
+    
+    // Event listeners
+    prevBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+    });
+    
+    nextBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    });
+    
+    // Función para renderizar el calendario
+    function renderCalendar() {
+        // Obtener año y mes actual
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+        
+        // Actualizar el nombre del mes
+        monthNameElement.textContent = `${monthNames[month]} ${year}`;
+        
+        // Limpiar fechas anteriores
+        calendarDatesElement.innerHTML = '';
+        
+        // Obtener primer y último día del mes
+        const firstDay = new Date(year, month, 1);
+        const lastDay = new Date(year, month + 1, 0);
+        
+        // Obtener el día de la semana del primer día (0=Domingo, 1=Lunes, etc.)
+        let firstDayOfWeek = firstDay.getDay();
+        // Ajustar para que el lunes sea el primer día (1)
+        firstDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
+        
+        // Calcular total de días a mostrar (solo L-V)
+        let totalDays = 0;
+        for (let i = 1; i <= lastDay.getDate(); i++) {
+            const dayOfWeek = new Date(year, month, i).getDay();
+            if (dayOfWeek >= 1 && dayOfWeek <= 5) { // 1=Lunes, 5=Viernes
+                totalDays++;
+            }
+        }
+        
+        // Calcular espacios vacíos al inicio (solo para días laborables)
+        let emptyDays = 0;
+        if (firstDayOfWeek > 0) {
+            emptyDays = firstDayOfWeek > 5 ? 0 : firstDayOfWeek;
+        }
+        
+        // Crear días vacíos si es necesario (solo para alinear el primer día)
+        for (let i = 0; i < emptyDays; i++) {
+            const emptyDay = document.createElement('div');
+            emptyDay.classList.add('date', 'empty');
+            calendarDatesElement.appendChild(emptyDay);
+        }
+        
+        // Crear elementos de fecha para cada día del mes (solo L-V)
+        for (let i = 1; i <= lastDay.getDate(); i++) {
+            const dayOfWeek = new Date(year, month, i).getDay();
+            
+            // Solo agregar días de lunes a viernes (1-5)
+            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                const dateElement = document.createElement('div');
+                dateElement.classList.add('date');
+                dateElement.textContent = i;
+                
+                // Resaltar el día actual
+                const today = new Date();
+                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+                    dateElement.classList.add('today');
+                }
+                
+                // Manejar clic en la fecha
+                dateElement.addEventListener('click', () => {
+                    // Quitar selección de otras fechas
+                    document.querySelectorAll('.date.selected').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    
+                    // Seleccionar esta fecha
+                    dateElement.classList.add('selected');
+                    
+                    // Mostrar detalles de la fecha
+                    const selectedDate = new Date(year, month, i);
+                    showDateDetails(selectedDate);
+                });
+                
+                calendarDatesElement.appendChild(dateElement);
+            }
+        }
+    }
+});
+  </script>
+
+</body>
+</html>
