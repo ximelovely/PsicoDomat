@@ -1,74 +1,80 @@
 body {
-  font-family: 'Louis George Cafe', sans-serif;
-  color: #004A51;
-  margin: 0;
-  padding: 0;
-  background-color: #EDF6F9;
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
 }
 
-/* Encabezado */
 .header {
-  background-color: #EDF6F9;
-  background-image: url('../Imágenes/nofondo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 20vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('/IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .fig {
-  background-color: #83C5BE;
-  text-align: center;
-  height: 8vh; 
-  width: 65vw;
-  border-radius: 1000px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
 }
 
 .Titu {
-  font-size: 2.1vw;
-  color: #004A51;
-  width: 92%;
-  margin-left: 100px;
-}
-
-/* Navegación */
-.navbar {
-  border-radius: 500px;
-}
-
-.navbar-toggler {
-  border: none;
-}
-
-.navbar-toggler:focus {
-  box-shadow: none;
-}
-
-.navbar-nav .nav-link {
-  font-size: 18px;
-  color: #004A51;
-  padding: 10px 15px;
-  transition: background 0.3s ease-in-out;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
 
 
-.menu-icon {
-  width: 45px;
-  height: auto;
-  cursor: pointer;
-}
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
 
-.dropdown-item:hover {
-  background-color: #E98D6F;
-}
+    .navbar-toggler {
+        border: none; /* Quita el borde del botón */
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
+
+    .menu-icon {
+        width: 30px; /* Ajusta el tamaño según tu imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+    }
 
 /* Calendario */
 #calendar-details {
@@ -85,6 +91,8 @@ body {
 
 
 #calendar-container {
+  font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -182,6 +190,8 @@ body {
 
 /* Modales */
 .modal {
+  font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
   position: fixed;
   top: 0;
   left: 0;
