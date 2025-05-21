@@ -1,9 +1,7 @@
 body {
-  font-family: 'Louis George Cafe', sans-serif;
-  background-color: #EDF6F9;
-  margin: 0;
-  padding: 0;
-  color: #004A51;
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
 }
 
 /* Encabezado */
