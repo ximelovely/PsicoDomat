@@ -15,10 +15,9 @@
 
 /* BODY */
 body {
-  font-family: 'Louis George Café', sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
-  min-height: 100vh;
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
 }
 
 .header {
@@ -62,11 +61,11 @@ body {
 }
 
 .Titu {
-  font-family: 'Louis George Café', sans-serif;
+  flex: 1;
+  font-size: 2vw;
   color: #004A51;
+  font-weight: bold;
   text-align: center;
-  font-size: 3vw;  /* responsivo */
-  width: 100%;     /* ocupa todo el ancho de .fig */
 }
 
 /* Estilos del menú desplegable (igual a Calendario.css) */

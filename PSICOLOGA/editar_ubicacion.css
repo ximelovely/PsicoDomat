@@ -35,11 +35,11 @@ body {
 }
 
 .Titu {
-    font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
-    text-align: center; /* Alinea el texto al centro */
-    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
-    width: 100%; /* Ocupa todo el ancho de .fig */
+  flex: 1;
+  font-size: 2vw;
+  color: #004A51;
+  font-weight: bold;
+  text-align: center;
 }
 
 

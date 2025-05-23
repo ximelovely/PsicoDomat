@@ -72,11 +72,11 @@ body {
 }
 
 .Titu {
-  font-family: 'Louis George Café', sans-serif;
+  flex: 1;
+  font-size: 2vw;
   color: #004A51;
+  font-weight: bold;
   text-align: center;
-  font-size: 3vw;  /* responsivo */
-  width: 100%;     /* ocupa todo el ancho de .fig */
 }
 
 /* Estilos del menú desplegable (igual a Calendario.css) */
