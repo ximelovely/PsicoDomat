@@ -1,0 +1,26 @@
+{
+  "name": "psicodomat",
+  "version": "1.0.0",
+  "description": "Nuestro proyecto nace de una **necesidad real**. La psicóloga, amiga de mi mamá, actualmente gestiona sus citas de manera manual, utilizando un teléfono fijo y una libreta para anotar toda la información.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ximelovely/PsicoDomat.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ximelovely/PsicoDomat/issues"
+  },
+  "homepage": "https://github.com/ximelovely/PsicoDomat#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "mssql": "^11.0.1"
+  }
+}

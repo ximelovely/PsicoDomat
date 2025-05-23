@@ -1,34 +1,23 @@
-const express = require('express');
 const sql = require('mssql');
-const cors = require('cors');
 
-const app = express();
-app.use(express.json());
-app.use(cors()); // Permite peticiones desde tu HTML
-
-// Configura los datos de tu servidor SQL Server
-const config = {
-    user: 'xime_compu\cruza',
-    server: 'XIME_COMPU', // o IP o nombre de host
+const dbConfig = {
+    server: 'XIME_COMPU',
     database: 'PSICODOMAT_BASEDATOS',
     options: {
-        encrypt: false,
+        encrypt: true,
         trustServerCertificate: true,
+        integratedSecurity: true  // ¡Clave aquí! Usará tu usuario Windows.
     }
 };
 
-// Ruta de prueba para obtener datos
-app.get('/datos', async (req, res) => {
+// Ejemplo de conexión
+async function connectToSQL() {
     try {
-        await sql.connect(config);
-        const result = await sql.query('SELECT * FROM Usuarios'); // Cambia 'Usuarios' por tu tabla
-        res.json(result.recordset);
+        await sql.connect(dbConfig);
+        console.log("¡Conexión exitosa a SQL Server!");
     } catch (err) {
-        console.error(err);
-        res.status(500).send('Error en la conexión o consulta');
+        console.error("Error de conexión:", err);
     }
-});
+}
 
-app.listen(3000, () => {
-    console.log('Servidor corriendo en http://localhost:3000');
-});
+connectToSQL();
