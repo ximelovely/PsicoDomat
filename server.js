@@ -1,23 +1,31 @@
 const sql = require('mssql');
+const { use } = require('react');
 
-const dbConfig = {
-    server: 'XIME_COMPU',
+const config = {
+    server: 'xime_compu',
+    port: 1433,
     database: 'PSICODOMAT_BASEDATOS',
+    user: 'XIME_COMPU\cruza',
     options: {
-        encrypt: true,
+        trustedConnection: true, // Esto es clave para Windows Auth
         trustServerCertificate: true,
-        integratedSecurity: true  // ¡Clave aquí! Usará tu usuario Windows.
+        driver: 'ODBC Driver 17 for SQL Server'
     }
 };
 
-// Ejemplo de conexión
-async function connectToSQL() {
+async function connect() {
     try {
-        await sql.connect(dbConfig);
-        console.log("¡Conexión exitosa a SQL Server!");
+        await sql.connect(config);
+        console.log('✅ Conexión exitosa!');
+        
+        const result = await sql.query`SELECT @@VERSION AS version`;
+        console.log(result.recordset);
+        
     } catch (err) {
-        console.error("Error de conexión:", err);
+        console.error('❌ Error:', err.message);
+    } finally {
+        sql.close();
     }
 }
 
-connectToSQL();
+connect();
