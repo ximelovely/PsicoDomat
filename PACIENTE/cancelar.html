@@ -53,12 +53,16 @@
         <div class="appointment-header">Cancela tu cita</div>
         <p>Lamentamos que no puedas asistir a tu cita.<br>
            Entendemos que pueden surgir imprevistos y agradecemos que nos avises con anticipación.</p>
-        <p>Por favor, confirma que deseas cancelar tu cita programada para el <strong>[fecha]</strong> a las <strong>[hora]</strong>.</p>
+        <p>Por favor, confirma que deseas cancelar tu cita programada para el 
+            <strong id="fecha-cita">[fecha]</strong> a las 
+            <strong id="hora-cita">[hora]</strong>.
+            </p>
+
         <p>Si cambias de opinión o necesitas reprogramar, puedes hacerlo desde este sitio en el apartado “Agendar Cita”.</p>
         <p>Gracias por tu comprensión.</p>
         <div class="botones">
             <a href="modifica.html" class="btn-cancelar">Modificar</a>
-            <button class="btn-cancelar">Cancelar</button>
+            <button id="btn-cancelar" class="btn-cancelar">Cancelar</button>
         </div>
     </div>
 
@@ -88,6 +92,61 @@
                 sigueLink.href = "Sesion.html";
             }
         }
+        const fechaSpan = document.getElementById('fecha-cita');
+const horaSpan = document.getElementById('hora-cita');
+const cancelarBtn = document.getElementById('btn-cancelar');  // <- aquí el cambio
+
+try {
+    const res = await fetch('http://localhost:3000/proxima-cita', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ telefono })
+    });
+
+    if (res.status === 404) {
+        window.location.href = "nocita.html";
+        return;
+    }
+
+    const cita = await res.json();
+    const fechaLimpia = cita.Fecha.split('T')[0]; // "2025-05-30"
+    const [yyyy, mm, dd] = fechaLimpia.split('-');
+    const fechaFormateada = `${dd}/${mm}/${yyyy}`;
+
+
+    fechaSpan.textContent = fechaFormateada;
+    horaSpan.textContent = cita.Hora;
+
+    cancelarBtn.addEventListener('click', async () => {
+        const confirmacion = confirm("¿Estás seguro de que deseas cancelar la cita?");
+        if (!confirmacion) return;
+
+        try {
+            const cancelRes = await fetch('http://localhost:3000/cancelar-cita', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ telefono })
+            });
+
+            const cancelData = await cancelRes.json();
+            if (cancelData.success) {
+                alert("✅ Tu cita fue cancelada exitosamente.");
+                window.location.href = "nocita.html";
+            } else {
+                alert("❌ No se pudo cancelar la cita: " + cancelData.message);
+            }
+        } catch (err) {
+            alert("❌ Error de conexión al cancelar cita.");
+            console.error(err);
+        }
+    });
+
+} catch (err) {
+    console.error("❌ Error al cargar cita:", err);
+    window.location.href = "nocita.html";
+}
+
+
     });
 </script>
 

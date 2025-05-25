@@ -35,11 +35,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Ruta de login para pacientes
-
-app.listen(3000, () => {
-    console.log('Servidor corriendo en http://localhost:3000');
-});
-
 app.post('/login', async (req, res) => {
     const { telefono, password } = req.body;
     try {
@@ -85,7 +80,8 @@ app.post('/tiene-cita', async (req, res) => {
             FROM Citas 
             INNER JOIN Usuarios ON Citas.ID_UsuarioPaciente = Usuarios.ID_Usuario
             WHERE Usuarios.Telefono = ${telefono}
-            AND Citas.EstadoCita = 1
+              AND Citas.EstadoCita = 1
+              AND Citas.Fecha >= CAST(GETDATE() AS DATE)
         `;
 
         const tieneCita = result.recordset[0].total > 0;
@@ -97,6 +93,7 @@ app.post('/tiene-cita', async (req, res) => {
         await sql.close();
     }
 });
+
 
 
 app.get('/sucursales', async (req, res) => {
@@ -259,6 +256,107 @@ app.post('/proxima-cita', async (req, res) => {
     }
 });
 
+app.post('/validar-fecha-sucursal', async (req, res) => {
+    const { idSucursal, fecha } = req.body;
+    try {
+        await sql.connect(config);
 
+        const fechaObj = new Date(fecha);
+        const mes = fechaObj.getMonth() + 1;
+        const año = fechaObj.getFullYear();
+
+        // 1. Validar si esa sucursal está activa en ese mes
+        const asignacion = await sql.query`
+            SELECT * FROM SucursalMensual
+            WHERE ID_Sucursal = ${idSucursal} AND Mes = ${mes} AND Año = ${año}
+        `;
+        if (asignacion.recordset.length === 0) {
+            return res.status(400).json({ error: 'La sucursal no está activa este mes' });
+        }
+
+        // 2. Verificar si es día no laborable
+        const diaNo = await sql.query`
+            SELECT * FROM DiasNoLaborables
+            WHERE Fecha = ${fecha} OR (Recurrente = 1 AND MONTH(Fecha) = ${mes} AND DAY(Fecha) = ${fechaObj.getDate()})
+        `;
+        if (diaNo.recordset.length > 0) {
+            return res.status(400).json({ error: 'La fecha es un día no laborable' });
+        }
+
+        res.json({ valida: true });
+    } catch (err) {
+        console.error('❌ Error al validar fecha:', err);
+        res.status(500).json({ error: 'Error del servidor al validar fecha' });
+    } finally {
+        await sql.close();
+    }
+});
+
+app.post('/cancelar-cita', async (req, res) => {
+    const { telefono } = req.body;
+    try {
+        await sql.connect(config);
+
+        const result = await sql.query`
+            UPDATE Citas SET EstadoCita = 0
+            WHERE ID_UsuarioPaciente = (
+                SELECT ID_Usuario FROM Usuarios WHERE Telefono = ${telefono}
+            )
+            AND Fecha >= CAST(GETDATE() AS DATE)
+            AND EstadoCita = 1
+        `;
+
+        res.json({ success: true, message: 'Cita cancelada correctamente' });
+    } catch (err) {
+        console.error('❌ Error al cancelar cita:', err);
+        res.status(500).json({ success: false, message: 'Error al cancelar cita' });
+    } finally {
+        await sql.close();
+    }
+});
+
+app.post('/modificar-cita', async (req, res) => {
+    const { telefono, fecha, idHora, idSucursal, idServicio } = req.body;
+    try {
+        await sql.connect(config);
+
+        const userResult = await sql.query`
+            SELECT ID_Usuario FROM Usuarios WHERE Telefono = ${telefono}
+        `;
+        const idPaciente = userResult.recordset[0]?.ID_Usuario;
+        if (!idPaciente) {
+            return res.status(404).json({ success: false, message: 'Paciente no encontrado' });
+        }
+
+        // 1. Cancelar la cita anterior
+        await sql.query`
+            UPDATE Citas
+            SET EstadoCita = 0
+            WHERE ID_UsuarioPaciente = ${idPaciente}
+            AND EstadoCita = 1
+            AND Fecha >= CAST(GETDATE() AS DATE)
+        `;
+
+        // 2. Crear nueva cita (psicóloga siempre ID 1)
+        await sql.query`
+            INSERT INTO Citas (Fecha, Hora, ID_Servicio, ID_UsuarioPaciente, ID_UsuarioPsicologo, ID_Sucursal, EstadoCita)
+            VALUES (${fecha}, ${idHora}, ${idServicio}, ${idPaciente}, 1, ${idSucursal}, 1)
+        `;
+
+        res.json({ success: true, message: 'Cita modificada exitosamente' });
+    } catch (err) {
+        console.error("❌ Error al modificar cita:", err);
+        res.status(500).json({ success: false, message: 'Error del servidor' });
+    } finally {
+        await sql.close();
+    }
+});
+
+
+
+
+app.listen(3000, () => {
+    console.log('Servidor corriendo en http://localhost:3000');
+});
 
 testConnection();

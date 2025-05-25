@@ -149,6 +149,41 @@ VALUES
     ('2024-07-03', (SELECT ID_Hora FROM CatalogoHoras WHERE ID_Sucursal = 2 AND Hora = '12:00'), 1, 10, 1, 2, 1),
     ('2024-07-05', (SELECT ID_Hora FROM CatalogoHoras WHERE ID_Sucursal = 2 AND Hora = '13:00'), 2, 11, 1, 2, 1);
 
+--Sucursal mensual
+INSERT INTO SucursalMensual (ID_Sucursal, Mes, Año)
+VALUES
+    (1, 1, 2025),
+    (2, 2, 2025),
+    (1, 3, 2025),
+    (2, 4, 2025),
+    (1, 5, 2025),
+    (2, 6, 2025),
+    (1, 7, 2025),
+    (2, 8, 2025),
+    (1, 9, 2025),
+    (2, 10, 2025),
+    (1, 11, 2025),
+    (2, 12, 2025);
+
+--Días no laborables
+-- Días festivos nacionales (recurrentes)
+INSERT INTO DiasNoLaborables (Fecha, Descripcion, Recurrente)
+VALUES 
+    ('2025-01-01', 'Año Nuevo', 1),
+    ('2025-03-17', 'Natalicio de Benito Juárez (lunes festivo)', 1),
+    ('2025-05-01', 'Día del Trabajo', 1),
+    ('2025-09-16', 'Día de la Independencia', 1),
+    ('2025-11-02', 'Día de Muertos', 1),
+    ('2025-12-25', 'Navidad', 1);
+
+-- Días administrativos internos (no recurrentes)
+INSERT INTO DiasNoLaborables (Fecha, Descripcion, Recurrente)
+VALUES 
+    ('2025-06-14', 'Capacitación interna en Monterrey', 0),
+    ('2025-07-19', 'Feria de salud Houston', 0),
+    ('2025-08-15', 'Suspensión por mantenimiento eléctrico', 0);
+
+
 SELECT 
     c.ID_Cita,
     c.Fecha,

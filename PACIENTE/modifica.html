@@ -15,7 +15,7 @@
     <!-- Barra de navegación y título de página -->
     <div class="header">
         <div class="fig">
-            <div class="Titu">Sigue tu cita</div>
+            <div class="Titu">Modifica tu cita</div>
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
                 <div class="container-fluid">
                     <!-- Botón hamburguesa (imagen personalizada) -->
@@ -54,21 +54,22 @@
             <input type="date" id="fecha" name="fecha" required>
             
             <label for="hora">Hora de la cita:</label>
-            <input type="time" id="hora" name="hora" required>
+            <select id="hora" name="hora" required>
+                <option disabled selected>Selecciona una hora</option>
+            </select>
+
             
             <label for="sucursal">Sucursal elegida:</label>
                     <select id="sucursal" name="sucursal" required>
-                        <option value="" disabled selected>Elija una sucursal</option>
-                        <option value="sucursal1">Monterrey, N.L.</option>
-                        <option value="sucursal2">Houston, Tx.</option>
+                        <option value="1">Monterrey, N.L.</option>
+                        <option value="2">Houston, Tx.</option>
                     </select>
             
             <label for="motivo">Motivo de consulta:</label>
                     <select id="motivo" name="motivo" required>
-                        <option value="" disabled selected>Elija un motivo</option>
-                        <option value="motivo">Psicoterapia individual</option>
-                        <option value="motivo">Psicoterapia de pareja</option>
-                        <option value="motivo">Terapia familiar</option>
+                        <option value="1">Psicoterapia individual</option>
+                        <option value="2">Psicoterapia de pareja</option>
+                        <option value="3">Terapia familiar</option>
                     </select>
         </form>
         <div class="imagen-derecha">
@@ -105,6 +106,74 @@
             }
         }
     });
+
+    document.querySelector('.btn-modificar').addEventListener('click', async () => {
+    const telefono = localStorage.getItem('telefono');
+    const fecha = document.getElementById('fecha').value;
+    const idHora = parseInt(document.getElementById('hora').value);
+    const idSucursal = document.getElementById('sucursal').value;
+    const idServicio = document.getElementById('motivo').value;
+
+    if (!telefono || !fecha || !idHora || !idSucursal || !idServicio) {
+        alert("⚠️ Todos los campos son obligatorios");
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/modificar-cita', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ telefono, fecha, idHora, idSucursal, idServicio })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            alert("✅ Cita modificada correctamente");
+            window.location.href = "Sigue.html";
+        } else {
+            alert("❌ Error: " + data.message);
+        }
+    } catch (err) {
+        console.error("❌ Error al modificar cita:", err);
+        alert("❌ No se pudo conectar al servidor");
+    }
+});
+
+const sucursalSelect = document.getElementById('sucursal');
+const fechaInput = document.getElementById('fecha');
+const horaSelect = document.getElementById('hora');
+
+sucursalSelect.addEventListener('change', cargarHorasDisponibles);
+fechaInput.addEventListener('change', cargarHorasDisponibles);
+
+async function cargarHorasDisponibles() {
+    const idSucursal = parseInt(sucursalSelect.value);
+    const fecha = fechaInput.value;
+
+    if (!idSucursal || !fecha) return;
+
+    try {
+        const res = await fetch('http://localhost:3000/horarios', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idSucursal, fecha })
+        });
+
+        const horas = await res.json();
+        horaSelect.innerHTML = '<option disabled selected>Selecciona una hora</option>';
+
+        horas.forEach(h => {
+            const opt = document.createElement('option');
+            opt.value = h.ID_Hora;
+            opt.textContent = h.Hora;
+            horaSelect.appendChild(opt);
+        });
+    } catch (err) {
+        console.error("❌ Error al cargar horarios:", err);
+        horaSelect.innerHTML = '<option disabled selected>Error al cargar</option>';
+    }
+}
+
 </script>
 
 </body>

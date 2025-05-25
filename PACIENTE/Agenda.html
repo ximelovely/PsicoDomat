@@ -115,29 +115,67 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sucursalSelect = document.getElementById('sucursal');
     const motivoSelect = document.getElementById('motivo');
     const horaSelect = document.getElementById('hora');
+    const fechaInput = document.getElementById('fecha');
 
-    // Cargar sucursales
-    console.log("🌐 Cargando sucursales...");
+    // 🌐 Cargar sucursales
     try {
         const sucursalRes = await fetch('http://localhost:3000/sucursales');
         const sucursales = await sucursalRes.json();
-        console.log("📍 Sucursales recibidas:", sucursales);
         sucursales.forEach(s => {
             const opt = document.createElement('option');
             opt.value = s.ID_Sucursal;
             opt.textContent = s.Nombre;
             sucursalSelect.appendChild(opt);
         });
+
+        // ⏳ Al seleccionar una sucursal, configurar fechas válidas
+        sucursalSelect.addEventListener('change', async () => {
+            const idSucursal = sucursalSelect.value;
+            if (!idSucursal) return;
+
+            try {
+                const res = await fetch('http://localhost:3000/fechas-no-validas', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ idSucursal })
+                });
+
+                const data = await res.json();
+                const { mes, año, diasNo } = data;
+                const mesStr = String(mes).padStart(2, '0');
+                fechaInput.min = `${año}-${mesStr}-01`;
+                fechaInput.max = `${año}-${mesStr}-31`;
+
+                // ✅ Validar fecha: no fin de semana ni día no laborable
+                fechaInput.addEventListener('input', () => {
+                    const valor = fechaInput.value;
+                    const fechaSeleccionada = new Date(valor);
+                    const diaSemana = fechaSeleccionada.getDay(); // 0 = domingo, 6 = sábado
+
+                    if (diaSemana === 0 || diaSemana === 6) {
+                        alert("❌ No se pueden agendar citas en sábado ni domingo.");
+                        fechaInput.value = '';
+                        return;
+                    }
+
+                    if (diasNo.includes(valor)) {
+                        alert("❌ Este día es no laborable. Por favor elige otro.");
+                        fechaInput.value = '';
+                    }
+                });
+
+            } catch (err) {
+                console.error("❌ Error al cargar fechas inválidas:", err);
+            }
+        });
     } catch (err) {
         console.error("❌ Error cargando sucursales", err);
     }
 
-    // Cargar servicios
-    console.log("🧠 Cargando servicios...");
+    // 🧠 Cargar servicios
     try {
         const serviciosRes = await fetch('http://localhost:3000/servicios');
         const servicios = await serviciosRes.json();
-        console.log("✅ Servicios recibidos:", servicios);
         servicios.forEach(serv => {
             const opt = document.createElement('option');
             opt.value = serv.ID_Servicio;
@@ -148,38 +186,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("❌ Error cargando servicios", err);
     }
 
-    // Cargar horarios cuando se seleccione una sucursal
-        sucursalSelect.addEventListener('change', cargarHorarios);
-document.getElementById('fecha').addEventListener('change', cargarHorarios);
+    // 🕒 Cargar horarios válidos
+    sucursalSelect.addEventListener('change', cargarHorarios);
+    fechaInput.addEventListener('change', cargarHorarios);
 
-async function cargarHorarios() {
-    const idSucursal = parseInt(sucursalSelect.value);
-    const fecha = document.getElementById('fecha').value;
-    if (!idSucursal || !fecha) return;
+    async function cargarHorarios() {
+        const idSucursal = parseInt(sucursalSelect.value);
+        const fecha = fechaInput.value;
+        if (!idSucursal || !fecha) return;
 
-    horaSelect.innerHTML = '<option disabled selected>Selecciona una hora</option>';
+        horaSelect.innerHTML = '<option disabled selected>Selecciona una hora</option>';
 
-    try {
-        const res = await fetch('http://localhost:3000/horarios', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ idSucursal, fecha })
-        });
-        const horas = await res.json();
-        console.log("🕒 Horarios disponibles:", horas);
+        try {
+            const res = await fetch('http://localhost:3000/horarios', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idSucursal, fecha })
+            });
 
-        horas.forEach(h => {
-            const opt = document.createElement('option');
-            opt.value = h.ID_Hora;
-            opt.textContent = h.Hora;
-            horaSelect.appendChild(opt);
-        });
-    } catch (err) {
-        console.error("❌ Error cargando horarios:", err);
+            const horas = await res.json();
+            horas.forEach(h => {
+                const opt = document.createElement('option');
+                opt.value = h.ID_Hora;
+                opt.textContent = h.Hora;
+                horaSelect.appendChild(opt);
+            });
+        } catch (err) {
+            console.error("❌ Error cargando horarios:", err);
+        }
     }
-}
 });
 
+// 📅 Agendar cita al hacer clic
 document.querySelector('.agendar').addEventListener('click', async () => {
     const telefono = localStorage.getItem('telefono');
     const fecha = document.getElementById('fecha').value;
@@ -193,12 +231,26 @@ document.querySelector('.agendar').addEventListener('click', async () => {
     }
 
     try {
+        const validRes = await fetch('http://localhost:3000/validar-fecha-sucursal', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idSucursal, fecha })
+        });
+        const validData = await validRes.json();
+
+        if (!validRes.ok) {
+            alert("❌ No se puede agendar: " + validData.error);
+            return;
+        }
+
         const res = await fetch('http://localhost:3000/agendar-cita', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ telefono, fecha, idHora, idServicio, idSucursal })
         });
+
         const data = await res.json();
+
         if (data.success) {
             alert("✅ Cita agendada correctamente");
             window.location.href = "Sigue.html";
@@ -206,12 +258,12 @@ document.querySelector('.agendar').addEventListener('click', async () => {
             alert("❌ No se pudo agendar: " + data.error);
         }
     } catch (err) {
-        console.error("Error al enviar cita", err);
+        console.error("Error:", err);
         alert("❌ Error al conectar con el servidor");
     }
 });
-
 </script>
+
 
 
 </body>
