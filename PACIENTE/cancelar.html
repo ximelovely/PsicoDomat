@@ -37,7 +37,7 @@
                                     <li><a class="dropdown-item" href="Agenda.html">Agenda tu cita</a></li>
                                     <li><a class="dropdown-item" href="Ubi.html">Ubicación de sucursales</a></li>
                                     <li><a class="dropdown-item" href="Conoce.html">Conoce a tu doctora</a></li>
-                                    <li><a class="dropdown-item" href="Sigue.html">Sigue tu cita</a></li>
+                                    <li><a class="dropdown-item" href="#" id="sigue-cita-link">Sigue tu cita</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -65,5 +65,31 @@
 
     <!-- Bootstrap JS NO BORRAR -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const telefono = localStorage.getItem('telefono');
+        const sigueLink = document.getElementById('sigue-cita-link');
+        
+        if (!telefono) {
+            window.location.href = "Sesion.html";
+            return;
+        }
+
+        if (sigueLink) {
+            try {
+                const response = await fetch('http://localhost:3000/tiene-cita', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telefono })
+                });
+                const data = await response.json();
+                sigueLink.href = data.tieneCita ? "Sigue.html" : "nocita.html";
+            } catch (error) {
+                sigueLink.href = "Sesion.html";
+            }
+        }
+    });
+</script>
+
 </body>
 </html>

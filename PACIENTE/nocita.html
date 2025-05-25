@@ -37,7 +37,7 @@
                                     <li><a class="dropdown-item" href="Agenda.html">Agenda tu cita</a></li>
                                     <li><a class="dropdown-item" href="Ubi.html">Ubicación de sucursales</a></li>
                                     <li><a class="dropdown-item" href="Conoce.html">Conoce a tu doctora</a></li>
-                                    <li><a class="dropdown-item" href="Sigue.html">Sigue tu cita</a></li>
+                                    <li><a class="dropdown-item" href="#" id="sigue-cita-link">Sigue tu cita</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -56,5 +56,30 @@
         <p>Puedes seleccionar un horario disponible que se ajuste a tus necesidades y comenzar/seguir tu proceso de bienestar emocional.</p>
     </div>
     <button type="submit" class="btn-modificar" onclick="location.href='Agenda.html'">Agenda tu cita</button>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const telefono = localStorage.getItem('telefono');
+        const sigueLink = document.getElementById('sigue-cita-link');
+        
+        if (!telefono) {
+            window.location.href = "Sesion.html";
+            return;
+        }
+
+        if (sigueLink) {
+            try {
+                const response = await fetch('http://localhost:3000/tiene-cita', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telefono })
+                });
+                const data = await response.json();
+                sigueLink.href = data.tieneCita ? "Sigue.html" : "nocita.html";
+            } catch (error) {
+                sigueLink.href = "Sesion.html";
+            }
+        }
+    });
+</script>
 </body>
 </html>

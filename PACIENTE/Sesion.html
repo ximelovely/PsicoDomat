@@ -29,25 +29,32 @@
             <div class="alert"></div>
         </div>
         <script>
-            function verificarLogin(event) {
+            async function verificarLogin(event) {
                 event.preventDefault();
-                const telefono = document.getElementById('telefono').value.trim();
-                const password = document.getElementById('password').value.trim();
+                const telefono = document.getElementById('telefono').value;
+                const password = document.getElementById('password').value;
                 const alertDiv = document.querySelector('.alert');
-                
-                // Ejemplo simple de validación (reemplaza con tu lógica real)
-                if (telefono === "8112394678" && password === "Xime2005") {
-                    alertDiv.textContent = "Inicio de sesión exitoso.";
-                    alertDiv.style.color = "green";
-                    // Redirigir a agenda.html después de un breve retraso
-                    setTimeout(() => {
-                        window.location.href = 'agenda.html';
-                    }, 1000);
-                } else {
-                    alertDiv.textContent = "Teléfono o contraseña incorrectos.";
-                    alertDiv.style.color = "red";
+                alertDiv.textContent = '';
+
+                try {
+                    const response = await fetch('http://localhost:3000/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ telefono, password })
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        localStorage.setItem('telefono', telefono);
+                        window.location.href = 'Agenda.html';
+                    } else {
+                        alertDiv.textContent = data.message;
+                        alertDiv.style.color = 'red';
+                    }
+                } catch (error) {
+                    alertDiv.textContent = 'Error de conexión con el servidor.';
+                    alertDiv.style.color = 'red';
                 }
-                return false;
             }
         </script>
     </body>

@@ -39,7 +39,7 @@
                                     <li><a class="dropdown-item" href="Agenda.html">Agenda tu cita</a></li>
                                     <li><a class="dropdown-item" href="Ubi.html">Ubicación de sucursales</a></li>
                                     <li><a class="dropdown-item" href="Conoce.html">Conoce a tu doctora</a></li>
-                                    <li><a class="dropdown-item" href="Sigue.html">Sigue tu cita</a></li>
+                                    <li><a class="dropdown-item" href="#" id="sigue-cita-link">Sigue tu cita</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -51,43 +51,80 @@
 
     <div class="doctor-info">
         <div class="doctor-image">
-            <img src="/IMÁGENES/marcela.png" alt="Lic. Marcela Ibarra">
-            <h3 class="doctor-name">Lic. Marcela Ibarra</h3>
-            <p class="doctor-cedula">No. de Cédula: <strong>3921767</strong></p>
+            <img src="/IMÁGENES/marcela.png" alt="Foto psicóloga" id="foto-psicologa">
+            <h3 class="doctor-name" id="nombre-psicologa">Nombre Psicóloga</h3>
+            <p class="doctor-cedula" id="cedula-psicologa">Cédula: <strong></strong></p>
         </div>
         <div class="doctor-details">
             <h3>Descripción:</h3>
-            <p>
-                Soy la Lic. Marcela Ibarra y cuento con más de 13 años de experiencia ofreciendo terapia psicológica con enfoque cognitivo conductual a adultos y parejas tanto en instituciones públicas como privadas.
-            </p>
-            <p>
-                Te invito a aprender a vivir con calidad desarrollando nuevas habilidades de uso personal, siendo tú mismo.
-            </p>
+            <p id="descripcion-psicologa"></p>
             <h3>Servicios proporcionados:</h3>
-            <ul class="services-list">
-                <li>
-                    <img src="/IMÁGENES/MaterialSymbolsPerson.png" alt="Psicoterapia individual">
-                    Psicoterapia individual
-                </li>
-                <li>
-                    <img src="/IMÁGENES/GameIconsLovers.png"Psicoterapia de pareja">
-                    Psicoterapia de pareja
-                </li>
-                <li>
-                    <img src="/IMÁGENES/IconParkSolidFamily.png" alt="Terapia familiar">
-                    Terapia familiar
-                </li>
+            <ul class="services-list" id="lista-servicios">
+                <!-- se cargará dinámicamente -->
             </ul>
         </div>
     </div>
-    
-    
-
-
 
 
 
     <!-- Bootstrap JS NO BORRAR -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const telefono = localStorage.getItem('telefono');
+        const sigueLink = document.getElementById('sigue-cita-link');
+        
+        if (!telefono) {
+            window.location.href = "Sesion.html";
+            return;
+        }
+
+        if (sigueLink) {
+            try {
+                const response = await fetch('http://localhost:3000/tiene-cita', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telefono })
+                });
+                const data = await response.json();
+                sigueLink.href = data.tieneCita ? "Sigue.html" : "nocita.html";
+            } catch (error) {
+                sigueLink.href = "Sesion.html";
+            }
+        }
+
+        // 🔁 Aquí metemos el código de la psicóloga dentro de una función async
+        cargarDatosPsicologa();
+    });
+
+    async function cargarDatosPsicologa() {
+        try {
+            const res = await fetch('http://localhost:3000/psicologa');
+            const psicologa = await res.json();
+            console.log("🧠 Psicóloga:", psicologa);
+
+            document.getElementById('nombre-psicologa').textContent = `Lic. ${psicologa.Nombre} ${psicologa.Apellido}`;
+            document.querySelector('#cedula-psicologa strong').textContent = psicologa.CedulaProfesional;
+            document.getElementById('descripcion-psicologa').textContent = psicologa.Descripcion;
+
+            const servicios = [
+                { icono: '/IMÁGENES/MaterialSymbolsPerson.png', texto: 'Psicoterapia individual' },
+                { icono: '/IMÁGENES/GameIconsLovers.png', texto: 'Psicoterapia de pareja' },
+                { icono: '/IMÁGENES/IconParkSolidFamily.png', texto: 'Terapia familiar' }
+            ];
+
+            const lista = document.getElementById('lista-servicios');
+            servicios.forEach(servicio => {
+                const li = document.createElement('li');
+                li.innerHTML = `<img src="${servicio.icono}" alt=""> ${servicio.texto}`;
+                lista.appendChild(li);
+            });
+        } catch (err) {
+            console.error("❌ Error al cargar datos de la psicóloga:", err);
+        }
+    }
+</script>
+
+
 </body>
 </html>

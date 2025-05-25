@@ -36,7 +36,7 @@
                                     <li><a class="dropdown-item" href="Agenda.html">Agenda tu cita</a></li>
                                     <li><a class="dropdown-item" href="Ubi.html">Ubicación de sucursales</a></li>
                                     <li><a class="dropdown-item" href="Conoce.html">Conoce a tu doctora</a></li>
-                                    <li><a class="dropdown-item" href="Sigue.html">Sigue tu cita</a></li>
+                                    <li><a class="dropdown-item" href="#" id="sigue-cita-link">Sigue tu cita</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -56,27 +56,79 @@
         
         <div class="appointment-details">
             <div class="appointment-info">
-                <p><strong>Dia de la cita:</strong> <span>28/10/2025</span></p>
-                <p><strong>Hora de la cita:</strong> <span>16:00</span></p>
-                <p><strong>Sucursal:</strong> <span>Houston, Tx.</span></p>
-                <p><strong>Motivo:</strong> <span>Psicoterapia individual</span></p>
+                <p><strong>Dia de la cita:</strong> <span id="dia-cita"></span></p>
+                <p><strong>Hora de la cita:</strong> <span id="hora-cita"></span></p>
+                <p><strong>Sucursal:</strong> <span id="sucursal-cita"></span></p>
+                <p><strong>Motivo:</strong> <span id="motivo-cita"></span></p>
             </div>
-    
+
             <div class="appointment-cost">
-                <p><strong>Costo:</strong> <span>$599MXN</span></p>
+                <p><strong>Costo:</strong> <span id="costo-cita"></span></p>
                 <img src="/IMÁGENES/snoopy.png" alt="Psicólogo Snoopy">
                 <p class="responsibility-message">Es tu responsabilidad la puntualidad, ¡no llegues tarde!</p>
             </div>
-        </div>
-    
-        <div class="appointment-buttons">
-            <a href="modifica.html" class="btn btn-primary modify-button">¿Quieres modificar tu cita?</a>
-            <a href="cancelar.html" class="btn btn-primary modify-button">¿Desea cancelar la cita?</a>
-        </div>
     </div>
 
 
     <!-- Bootstrap JS NO BORRAR -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const telefono = localStorage.getItem('telefono');
+            const sigueLink = document.getElementById('sigue-cita-link');
+
+            if (!telefono) {
+                window.location.href = "Sesion.html";
+                return;
+            }
+
+            if (sigueLink) {
+                fetch('http://localhost:3000/tiene-cita', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telefono })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    sigueLink.href = data.tieneCita ? "Sigue.html" : "nocita.html";
+                })
+                .catch(() => {
+                    sigueLink.href = "Sesion.html";
+                });
+            }
+
+            // Cargar próxima cita
+            cargarProximaCita(telefono);
+        });
+
+        async function cargarProximaCita(telefono) {
+            try {
+                const res = await fetch('http://localhost:3000/proxima-cita', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ telefono })
+                });
+
+                const cita = await res.json();
+                console.log("📅 Próxima cita:", cita);
+
+                document.getElementById('dia-cita').textContent = new Date(cita.Fecha).toLocaleDateString('es-MX', {
+                    day: '2-digit', month: '2-digit', year: 'numeric'
+                });
+
+                document.getElementById('hora-cita').textContent = cita.Hora;
+                document.getElementById('sucursal-cita').textContent = cita.Sucursal;
+                document.getElementById('motivo-cita').textContent = cita.Servicio;
+
+                const costo = cita.CostoMXN > 0 ? `$${cita.CostoMXN} MXN` : `$${cita.CostoUSD} USD`;
+                document.getElementById('costo-cita').textContent = costo;
+
+            } catch (err) {
+                console.error("❌ Error al cargar la próxima cita:", err);
+                alert("No se pudo cargar la cita actual. Intenta más tarde.");
+                window.location.href = "nocita.html";
+            }
+        }
+    </script>
 </body>
 </html>
