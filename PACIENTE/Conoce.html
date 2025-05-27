@@ -101,24 +101,24 @@
         try {
             const res = await fetch('http://localhost:3000/psicologa');
             const psicologa = await res.json();
-            console.log("🧠 Psicóloga:", psicologa);
 
             document.getElementById('nombre-psicologa').textContent = `Lic. ${psicologa.Nombre} ${psicologa.Apellido}`;
             document.querySelector('#cedula-psicologa strong').textContent = psicologa.CedulaProfesional;
             document.getElementById('descripcion-psicologa').textContent = psicologa.Descripcion;
 
-            const servicios = [
-                { icono: '/IMÁGENES/MaterialSymbolsPerson.png', texto: 'Psicoterapia individual' },
-                { icono: '/IMÁGENES/GameIconsLovers.png', texto: 'Psicoterapia de pareja' },
-                { icono: '/IMÁGENES/IconParkSolidFamily.png', texto: 'Terapia familiar' }
-            ];
+            // Cargar servicios reales desde la BD (sin íconos)
+            const serviciosRes = await fetch('http://localhost:3000/servicios');
+            const servicios = await serviciosRes.json();
 
             const lista = document.getElementById('lista-servicios');
+            lista.innerHTML = '';
+
             servicios.forEach(servicio => {
                 const li = document.createElement('li');
-                li.innerHTML = `<img src="${servicio.icono}" alt=""> ${servicio.texto}`;
+                li.textContent = servicio.Descripcion;
                 lista.appendChild(li);
             });
+
         } catch (err) {
             console.error("❌ Error al cargar datos de la psicóloga:", err);
         }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Editar ubicación - PsicoDomat</title>
+  <title>Editar ubicación</title>
   <link rel="stylesheet" href="editar_ubicacion.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -29,7 +29,7 @@
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
                                     <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
-                                    <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
+                                    <li><a class="dropdown-item" href="Agregar.html">Agregar cita</a></li>
                                     <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
                                     <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
                                     <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
@@ -89,69 +89,116 @@
     </div>
   </main>
 
-  <!-- Modal de edición -->
-  <div id="modalConfirmacion" class="modal hidden">
-    <div class="modal-content confirmacion">
-      <h4 class="exito-titulo">Ubicación modificada</h4>
-      <p>La ubicación ha sido modificada,<br>favor de verificar los cambios.</p>
-      <div class="botones">
-        <a href="calendario.html" class="btn btn-volver">Ir al calendario</a>
-        <a href="ubis.html" class="btn btn-volver">Editar ubicaciones y precios</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal de eliminación -->
-  <div id="modalEliminar" class="modal hidden">
-    <div class="modal-content confirmacion">
-      <h4 class="exito-titulo">Eliminar ubicación</h4>
-      <p>¿Quiere eliminar la ubicación?</p>
-      <div class="botones">
-        <button id = "btn-eliminar" class="btn btn-volver">Sí, eliminar</button>
-        <a href="ubis.html" class="btn btn-volver">No, ir a editar ubicaciones y precios</a>
-      </div>
-    </div>
-  </div>
-
-  <script src="editar_ubicacion.js"></script>
+  
   <script>
-    document.querySelector(".btn-editar").addEventListener("click", () => {
-      const nombreInput = document.getElementById("nombre");
-      const direccionInput = document.getElementById("direccion");
-      const costoInput = document.getElementById("costo");
-      const monedaSelect = document.getElementById("moneda");
-      const horaInicio = document.getElementById("horaInicio");
-      const horaFin = document.getElementById("horaFin");
-      const imagen = document.getElementById("imagenUbicacion");
-      const ubicacion = JSON.parse(localStorage.getItem("ubicacionEditando"));
+    document.addEventListener('DOMContentLoaded', async () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const idSucursal = urlParams.get('id');
 
-      const actualizada = {
-        ...ubicacion,
-        nombre: nombreInput.value.trim(),
-        direccion: direccionInput.value.trim(),
-        costo: `$${costoInput.value.trim()}${monedaSelect.value}`,
-        horaInicio: horaInicio.value,
-        horaFin: horaFin.value,
-        imagen: imagen.src
-      };
+      const nombreInput = document.getElementById('nombre');
+      const direccionInput = document.getElementById('direccion');
+      const costoInput = document.getElementById('costo');
+      const monedaSelect = document.getElementById('moneda');
+      const horaInicio = document.getElementById('horaInicio');
+      const horaFin = document.getElementById('horaFin');
 
-      localStorage.setItem("ubicacionActualizada", JSON.stringify(actualizada));
-      document.getElementById("modalConfirmacion").classList.remove("hidden");
-      document.getElementById("modalConfirmacion").style.display = "flex";
+      const countNombre = document.getElementById('count-nombre');
+      const countDireccion = document.getElementById('count-direccion');
+
+      const btnEditar = document.querySelector('.btn-editar');
+      const btnEliminar = document.querySelector('.btn-eliminar'); // ✅ lo movemos aquí
+
+      // 🟡 Cargar datos de la sucursal
+      try {
+        const res = await fetch(`http://localhost:3000/sucursal/${idSucursal}`);
+        const data = await res.json();
+
+        nombreInput.value = data.Nombre;
+        direccionInput.value = data.Direccion;
+        costoInput.value = data.CostoMXN > 0 ? data.CostoMXN : data.CostoUSD;
+        monedaSelect.value = data.CostoMXN > 0 ? 'MXN' : 'USD';
+        horaInicio.value = data.HoraInicio;
+        horaFin.value = data.HoraFin;
+
+        countNombre.textContent = `${data.Nombre.length}/50`;
+        countDireccion.textContent = `${data.Direccion.length}/100`;
+      } catch (err) {
+        alert("❌ Error al cargar la sucursal.");
+        console.error(err);
+      }
+
+      // 🟡 Contadores de caracteres
+      nombreInput.addEventListener('input', () => {
+        countNombre.textContent = `${nombreInput.value.length}/50`;
+      });
+      direccionInput.addEventListener('input', () => {
+        countDireccion.textContent = `${direccionInput.value.length}/100`;
+      });
+
+      // 🟢 Botón "Editar"
+      btnEditar.addEventListener('click', async () => {
+        const payload = {
+          idSucursal: parseInt(idSucursal),
+          nombre: nombreInput.value,
+          direccion: direccionInput.value,
+          costoMXN: monedaSelect.value === 'MXN' ? parseFloat(costoInput.value) : 0,
+          costoUSD: monedaSelect.value === 'USD' ? parseFloat(costoInput.value) : 0,
+          horaInicio: horaInicio.value,
+          horaFin: horaFin.value
+        };
+
+        try {
+          const res = await fetch('http://localhost:3000/editar-ubicacion', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          try {
+            const result = await res.json();
+            console.log("📨 Respuesta del servidor:", result);
+
+            if (result.success) {
+              window.location.href = "ubis.html";
+            } else {
+              alert("❌ Error: " + result.message);
+            }
+          } catch (errJson) {
+            console.error("❌ Error al interpretar la respuesta:", errJson);
+            alert("❌ Error inesperado al procesar la respuesta del servidor.");
+          }
+
+        } catch (err) {
+          alert("❌ Error al guardar los cambios.");
+          console.error(err);
+        }
+      });
+
+      // 🗑 Botón "Eliminar"
+      btnEliminar.addEventListener('click', async () => {
+        const confirmacion = confirm("¿Estás seguro de que deseas eliminar esta sucursal?");
+        if (!confirmacion) return;
+
+        try {
+          const res = await fetch(`http://localhost:3000/eliminar-sucursal/${idSucursal}`, {
+            method: 'DELETE'
+          });
+
+          const result = await res.json();
+          if (result.success) {
+            alert("✅ Sucursal eliminada correctamente.");
+            window.location.href = "ubis.html";
+          } else {
+            alert("❌ Error: " + result.message);
+          }
+        } catch (err) {
+          console.error("❌ Error al eliminar la sucursal:", err);
+          alert("❌ Error al conectar con el servidor.");
+        }
+      });
     });
-
-    document.querySelector(".btn-eliminar").addEventListener("click", () => {
-      document.getElementById("modalEliminar").classList.remove("hidden");
-      document.getElementById("modalEliminar").style.display = "flex";
-    });
-
-    function confirmarEliminacion() {
-      const ubicacion = JSON.parse(localStorage.getItem("ubicacionEditando"));
-      localStorage.setItem("ubicacionEliminada", ubicacion.id);
-      alert("Ubicación eliminada");
-      window.location.href = "ubis.html";
-    }
   </script>
+
 </body>
 </html>
 

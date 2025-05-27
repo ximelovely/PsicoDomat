@@ -1,98 +1,76 @@
-:root {
-  --bg-light:  #EAF2F2;
-  --accent:    #E98D6F;
-  --text-dark: #004A51;
-  --item-bg:   #FFEFE8;
-}
-
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  /* Fuente */
-  font-family: 'Louis George Café', sans-serif;
-  color: #004A51;
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
 }
 
 .header {
-  /* Imagen de fondo */
-  background-color: #EDF6F9;
-  background-image: url('/IMÁGENES/nofondo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /* Tamaño total de la zona */
-  height: 20vh;    /* 20% de la altura de la ventana */
-  width: 100vw;    /* 100% del ancho de la ventana */
-
-  /* Flex para centrar la “pill” horizontalmente y situarla en el centro vertical */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('../IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .fig {
-  font-family: 'Louis George Café', sans-serif;
-  color: #004A51;
-  background-color: #83C5BE;
-  text-align: center;
-
-  /* Tamaño de la “pill” */
-  height: 10vh;    /* 10% de la altura de la ventana */
-  width: 95vw;     /* 95% del ancho de la ventana */
-
-  /* Cápsula total */
-  border-radius: 1000px;
-
-  /* Centrar su contenido */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* Para posicionar o superponer el dropdown si hace falta */
-  position: relative;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
 }
 
 .Titu {
-  flex: 1;
-  font-size: 2vw;
-  color: #004A51;
-  font-weight: bold;
-  text-align: center;
-}
-/* Estilos del menú desplegable (igual a Calendario.css) */
-.navbar {
-  background-color: #EDF6F9;  /* mismo color del fondo claro */
-  border-radius: 500px;       /* totalmente redondeado */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
 
-.navbar-toggler {
-  border: none;               /* Quita el botón default que no usas */
-}
 
-.navbar-toggler:focus {
-  box-shadow: none;           /* Quita el outline al clic */
-}
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
 
-.navbar-nav .nav-link {
-  font-size: 18px;
-  color: #004A51;
-  padding: 10px 15px;
-  transition: background 0.3s ease-in-out;
-}
+    .navbar-toggler {
+        border: none; /* Quita el borde del botón */
+    }
 
-.navbar-nav .nav-link:hover {
-  background-color: #E98D6F;
-  color: #fff !important;
-  border-radius: 500px;
-}
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
 
-.menu-icon {
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
+
+    .menu-icon {
         width: 30px; /* Ajusta el tamaño según tu imagen */
         height: auto; /* Mantiene la proporción de la imagen */
         cursor: pointer; /* Cambia el cursor al pasar por encima */

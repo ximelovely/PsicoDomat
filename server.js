@@ -380,32 +380,288 @@ app.post('/login-psicologa', async (req, res) => {
   }
 });
 
+app.post('/actualizar-descripcion', async (req, res) => {
+  const { descripcion } = req.body;
+  try {
+    await sql.connect(config);
+    await sql.query`
+      UPDATE Usuarios SET Descripcion = ${descripcion}
+      WHERE ID_Rol = 1
+    `;
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al actualizar descripción:", err);
+    res.status(500).json({ success: false, message: 'Error al actualizar descripción' });
+  } finally {
+    await sql.close();
+  }
+});
 
-// Obtener citas de la psicóloga
-// 🔁 Ruta para obtener TODAS las citas activas
-app.get('/citas-psicologa', async (req, res) => {
+app.get('/pacientes', async (req, res) => {
   try {
     await sql.connect(config);
     const result = await sql.query`
-      SELECT 
-        Citas.ID_Cita,
-        Citas.Fecha,
-        CH.Hora,
-        U.Nombre + ' ' + U.Apellido AS NombrePaciente,
-        U.FechaNacimiento,
-        S.Nombre AS Sucursal,
-        SV.Descripcion AS Servicio
-      FROM Citas
-      INNER JOIN Usuarios U ON U.ID_Usuario = Citas.ID_UsuarioPaciente
-      INNER JOIN CatalogoHoras CH ON CH.ID_Hora = Citas.Hora
-      INNER JOIN Sucursales S ON S.ID_Sucursal = Citas.ID_Sucursal
-      INNER JOIN Servicios SV ON SV.ID_Servicio = Citas.ID_Servicio
-      WHERE Citas.EstadoCita = 1
+      SELECT ID_Usuario, Nombre, Apellido 
+      FROM Usuarios 
+      WHERE ID_Rol = 2
     `;
     res.json(result.recordset);
   } catch (err) {
-    console.error("❌ Error al obtener citas de la psicóloga:", err);
-    res.status(500).json({ error: 'Error al obtener citas' });
+    console.error('❌ Error al obtener pacientes:', err);
+    res.status(500).json({ error: 'Error al obtener pacientes' });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.post('/agregar-cita-manual', async (req, res) => {
+  const { idSucursal, fecha, idHora, idServicio, idPaciente } = req.body;
+  try {
+    await sql.connect(config);
+    await sql.query`
+      INSERT INTO Citas (Fecha, Hora, ID_Servicio, ID_UsuarioPaciente, ID_UsuarioPsicologo, ID_Sucursal, EstadoCita)
+      VALUES (${fecha}, ${idHora}, ${idServicio}, ${idPaciente}, 1, ${idSucursal}, 1)
+    `;
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al agregar cita:", err);
+    res.status(500).json({ success: false, message: 'Error al guardar en la base de datos' });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.get('/sucursal/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    await sql.connect(config);
+    const result = await sql.query`
+      SELECT ID_Sucursal, Nombre, Direccion, CostoMXN, CostoUSD,
+             CONVERT(VARCHAR(5), HoraInicio, 108) AS HoraInicio,
+             CONVERT(VARCHAR(5), HoraFin, 108) AS HoraFin
+      FROM Sucursales
+      WHERE ID_Sucursal = ${id}
+    `;
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ message: 'Sucursal no encontrada' });
+    }
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error("❌ Error al obtener sucursal:", err);
+    res.status(500).json({ error: 'Error al obtener sucursal' });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.put('/editar-ubicacion', async (req, res) => {
+  const { idSucursal, nombre, direccion, costoMXN, costoUSD, horaInicio, horaFin } = req.body;
+  try {
+    await sql.connect(config);
+
+    await sql.query`
+      UPDATE Sucursales
+      SET Nombre = ${nombre},
+          Direccion = ${direccion},
+          CostoMXN = ${costoMXN},
+          CostoUSD = ${costoUSD},
+          HoraInicio = ${horaInicio},
+          HoraFin = ${horaFin}
+      WHERE ID_Sucursal = ${idSucursal}
+    `;
+
+    console.log("✅ Ubicación actualizada");  // ← agrega esto si no lo tenías
+    res.json({ success: true });               // ← esto es clave
+  } catch (err) {
+    console.error("❌ Error al editar ubicación:", err);
+    res.status(500).json({ success: false, message: 'Error al editar ubicación' });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.post('/agregar-ubicacion', async (req, res) => {
+  const { nombre, direccion, costoMXN, costoUSD, horaInicio, horaFin } = req.body;
+  try {
+    await sql.connect(config);
+    await sql.query`
+      INSERT INTO Sucursales (Nombre, Direccion, CostoMXN, CostoUSD, HoraInicio, HoraFin)
+      VALUES (${nombre}, ${direccion}, ${costoMXN}, ${costoUSD}, ${horaInicio}, ${horaFin})
+    `;
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al agregar ubicación:", err);
+    res.status(500).json({ success: false, message: "Error al guardar en la base de datos" });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.get('/sucursal-existe', async (req, res) => {
+  const nombre = req.query.nombre;
+  try {
+    await sql.connect(config);
+    const result = await sql.query`
+      SELECT COUNT(*) AS total FROM Sucursales WHERE Nombre = ${nombre}
+    `;
+    res.json({ found: result.recordset[0].total > 0 });
+  } catch (err) {
+    console.error("❌ Error al validar sucursal:", err);
+    res.status(500).json({ found: false });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.post('/agregar-ubicacion', async (req, res) => {
+  const { nombre, direccion, costoMXN, costoUSD, horaInicio, horaFin } = req.body;
+  try {
+    await sql.connect(config);
+
+    // 1. Insertar sucursal
+    const insertSucursal = await sql.query`
+      INSERT INTO Sucursales (Nombre, Direccion, CostoMXN, CostoUSD, HoraInicio, HoraFin)
+      OUTPUT INSERTED.ID_Sucursal
+      VALUES (${nombre}, ${direccion}, ${costoMXN}, ${costoUSD}, ${horaInicio}, ${horaFin})
+    `;
+
+    const idSucursal = insertSucursal.recordset[0].ID_Sucursal;
+
+    // 2. Generar catálogo de horas (cada hora entre inicio y fin)
+    const start = parseInt(horaInicio.split(":")[0]);
+    const end = parseInt(horaFin.split(":")[0]);
+
+    for (let h = start; h < end; h++) {
+      const horaStr = `${h.toString().padStart(2, '0')}:00`;
+      await sql.query`
+        INSERT INTO CatalogoHoras (ID_Sucursal, Hora)
+        VALUES (${idSucursal}, ${horaStr})
+      `;
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al agregar sucursal:", err);
+    res.status(500).json({ success: false, message: 'Error al guardar en base de datos' });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.post('/fechas-no-validas', async (req, res) => {
+  const { idSucursal } = req.body;
+
+  try {
+    await sql.connect(config);
+
+    const hoy = new Date();
+    const mes = hoy.getMonth() + 1;
+    const año = hoy.getFullYear();
+
+    // ✅ Verifica si la sucursal está activa en este mes
+    const resSucursal = await sql.query`
+      SELECT * FROM SucursalMensual 
+      WHERE ID_Sucursal = ${idSucursal} AND Mes = ${mes} AND Año = ${año}
+    `;
+
+    if (resSucursal.recordset.length === 0) {
+      return res.status(404).json({ error: "Sucursal no activa este mes" });
+    }
+
+    // ✅ Traer días no laborables
+    const diasNo = await sql.query`
+      SELECT Fecha FROM DiasNoLaborables
+      WHERE Recurrente = 0 OR (Recurrente = 1 AND MONTH(Fecha) = ${mes})
+    `;
+
+    const diasFormateados = diasNo.recordset.map(d =>
+      new Date(d.Fecha).toISOString().split("T")[0]
+    );
+
+    res.json({ mes, año, diasNo: diasFormateados });
+  } catch (err) {
+    console.error("❌ Error en /fechas-no-validas:", err);
+    res.status(500).json({ error: "Error al obtener días no válidos" });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.delete('/eliminar-sucursal/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    await sql.connect(config);
+
+    // Eliminar primero las citas asociadas a esa sucursal para evitar errores por claves foráneas
+    await sql.query`DELETE FROM Citas WHERE ID_Sucursal = ${id}`;
+    await sql.query`DELETE FROM CatalogoHoras WHERE ID_Sucursal = ${id}`;
+    await sql.query`DELETE FROM SucursalMensual WHERE ID_Sucursal = ${id}`;
+
+    // Finalmente eliminar la sucursal
+    await sql.query`DELETE FROM Sucursales WHERE ID_Sucursal = ${id}`;
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al eliminar sucursal:", err);
+    res.status(500).json({ success: false, message: "Error al eliminar la sucursal" });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Obtener todos los servicios
+
+// Agregar nuevo servicio
+app.post('/servicios', async (req, res) => {
+  const { descripcion } = req.body;
+  try {
+    await sql.connect(config);
+    await sql.query`
+      INSERT INTO Servicios (Descripcion)
+      VALUES (${descripcion})
+    `;
+    res.json({ success: true });
+  } catch (err) {
+    console.error('❌ Error al agregar servicio:', err);
+    res.status(500).json({ success: false, message: 'Error al agregar servicio' });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Editar servicio existente
+app.put('/servicios/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  const { descripcion } = req.body;
+  try {
+    await sql.connect(config);
+    await sql.query`
+      UPDATE Servicios
+      SET Descripcion = ${descripcion}
+      WHERE ID_Servicio = ${id}
+    `;
+    res.json({ success: true });
+  } catch (err) {
+    console.error('❌ Error al editar servicio:', err);
+    res.status(500).json({ success: false, message: 'Error al editar servicio' });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Eliminar servicio
+app.delete('/servicios/:id', async (req, res) => {
+  const id = parseInt(req.params.id);
+  try {
+    await sql.connect(config);
+    await sql.query`
+      DELETE FROM Servicios
+      WHERE ID_Servicio = ${id}
+    `;
+    res.json({ success: true });
+  } catch (err) {
+    console.error('❌ Error al eliminar servicio:', err);
+    res.status(500).json({ success: false, message: 'Error al eliminar servicio' });
   } finally {
     await sql.close();
   }

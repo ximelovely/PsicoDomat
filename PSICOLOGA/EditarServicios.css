@@ -1,323 +1,166 @@
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* VARIABLES DE COLOR */
-:root {
-  --bg-light: #EAF2F2;
-  --primary: #77B2A6;
-  --accent: #E98D6F;
-  --text-dark: #004A51;
-  --item-bg: #FFEFE8;
-  --btn-text: #FFFFFF;
-}
-
-/* BODY */
 body {
-  font-family: 'Louis George Café', sans-serif;
-  background-color: var(--bg-light);
-  color: var(--text-dark);
-  min-height: 100vh;
-}
-
-/* ======== HEADER “PILL” ======== */
-
-body {
-  /* Fuente */
-  font-family: 'Louis George Café', sans-serif;
-  color: #004A51;
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
 }
 
 .header {
-  /* Imagen de fondo */
-  background-color: #EDF6F9;
-  background-image: url('/IMÁGENES/nofondo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /* Tamaño total de la zona */
-  height: 20vh;    /* 20% de la altura de la ventana */
-  width: 100vw;    /* 100% del ancho de la ventana */
-
-  /* Flex para centrar la “pill” horizontalmente y situarla en el centro vertical */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('../IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .fig {
-  font-family: 'Louis George Café', sans-serif;
-  color: #004A51;
-  background-color: #83C5BE;
-  text-align: center;
-
-  /* Tamaño de la “pill” */
-  height: 10vh;    /* 10% de la altura de la ventana */
-  width: 95vw;     /* 95% del ancho de la ventana */
-
-  /* Cápsula total */
-  border-radius: 1000px;
-
-  /* Centrar su contenido */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* Para posicionar o superponer el dropdown si hace falta */
-  position: relative;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
 }
 
 .Titu {
-  flex: 1;
-  font-size: 2vw;
-  color: #004A51;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* Estilos del menú desplegable (igual a Calendario.css) */
-.navbar {
-  background-color: #EDF6F9;  /* mismo color del fondo claro */
-  border-radius: 500px;       /* totalmente redondeado */
-}
-
-.navbar-toggler {
-  border: none;               /* Quita el botón default que no usas */
-}
-
-.navbar-toggler:focus {
-  box-shadow: none;           /* Quita el outline al clic */
-}
-
-.navbar-nav .nav-link {
-  font-size: 18px;
-  color: #004A51;
-  padding: 10px 15px;
-  transition: background 0.3s ease-in-out;
-}
-
-.navbar-nav .nav-link:hover {
-  background-color: #E98D6F;
-  color: #fff !important;
-  border-radius: 500px;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
 
 
-/* Icono de menú (bootstrap-icon) */
-.menu-icon {
-  font-size: 1.5rem;
-  color: #004A51;
-  cursor: pointer;
-}
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
 
-/* ALERTAS */
-#alertPlaceholder {
-  max-width: 960px;
-  margin: 1rem auto;
-  padding: 0 1rem;
-}
+    .navbar-toggler {
+        border: none; /* Quita el borde del botón */
+    }
 
-/* MAIN CONTENT */
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
+
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
+
+    .menu-icon {
+        width: 30px; /* Ajusta el tamaño según tu imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+    }
+/* Contenedor principal */
 .main-content {
-  max-width: 960px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 2rem;
 }
 
-/* LISTA DE SERVICIOS */
+/* Estilo de la lista */
 .serv-list {
   list-style: none;
   padding: 0;
-}
-.serv-item {
-  background-color: var(--item-bg);
-  border-radius: 40px;
-  padding: .75rem 1rem;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-}
-.serv-item .serv-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  margin-right: .75rem;
-  object-fit: cover;
-}
-.serv-item span {
-  flex: 1;
-  font-size: 1rem;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
 }
 
-/* BOTÓN EDITAR */
-.btn-edit-item {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.btn-edit-item i {
-  font-size: 1.2rem;
-  color: var(--text-dark);
-}
-.btn-edit-item:hover i {
-  color: var(--primary);
-}
-
-/* BOTÓN AGREGAR */
-.add-wrap {
-  text-align: center;
-  margin-top: 2rem;
-}
-.btn-add {
-  background-color: var(--accent);
-  color: var(--btn-text);
-  border: none;
-  border-radius: 40px;
-  padding: .75rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: opacity .2s;
-}
-.btn-add i {
-  margin-right: .5rem;
-}
-.btn-add:hover {
-  opacity: .85;
-}
-
-/* ------------------ */
-/* MODAL: AGREGAR y EDITAR */
-/* ------------------ */
-
-/* Contenedor general del modal */
-.modal-content {
-  background-color: var(--bg-light);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-/* Elimina la barra gris de header/footer */
-.modal-header,
-.modal-footer {
-  border: none;
-  padding: 0;
-}
-
-/* Cuerpo del modal: paddings uniformes */
-.modal-body {
-  padding: 24px 24px 16px;
-}
-
-/* Título interno (botón) */
-.btn-edit-header {
-  display: block;
-  margin: 0 auto 24px;
-  background-color: var(--accent);
-  color: var(--btn-text);
-  border: none;
-  border-radius: 40px;
-  padding: .5rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-/* Botón cerrar “×” personalizado */
-.btn-close-modal {
-  position: absolute;
-  top: .5rem;
-  right: .75rem;
-  background: none;
-  border: none;
+.serv-list li {
   font-size: 1.5rem;
-  color: var(--text-dark);
-  cursor: pointer;
-}
-
-/* FORMULARIO DENTRO DEL MODAL */
-.form-edit-serv .form-group {
-  margin-bottom: 1.25rem;
-  position: relative;
-}
-.form-edit-serv label {
-  display: block;
-  margin-bottom: .5rem;
-  font-size: 1rem;
-}
-.form-edit-serv input[type="text"] {
-  width: 100%;
-  padding: .75rem 1rem;
-  border: none;
-  border-radius: 40px;
-  background-color: var(--item-bg);
-  font-size: 1rem;
-}
-
-/* CONTADOR DE CARACTERES */
-.char-count {
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
-  font-size: .85rem;
-  color: var(--text-dark);
-}
-
-/* ÍCONO (imagen) */
-.icon-group .icon-upload {
+  background-color: #f9eae4;
+  border-radius: 50px;
+  padding: 15px 30px;
+  margin-bottom: 15px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-  background-color: var(--item-bg);
-  border-radius: 40px;
-  padding: .5rem 1rem;
-}
-.icon-upload img {
-  width: 32px;
-  height: 32px;
-  border-radius: 4px;
-  object-fit: cover;
-}
-.icon-upload input[type="file"] {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: .9rem;
 }
 
-/* ACCIONES DEL MODAL */
-.edit-modal-actions {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  padding: 0 24px 24px;
+/* Botón de agregar servicio */
+.btn-add {
+  background-color: #E98D6F;
+  color: #EDF6F9;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 100px;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
-/* BOTONES GUARDAR / ELIMINAR */
-.btn-save-edit {
-  background-color: var(--primary);
-  color: var(--btn-text);
+.btn-add:hover {
+  background-color: #83C5BE;
+}
+
+/* Botones dentro del modal */
+.btn-save, .btn-save-edit, .btn-delete, .btn-cancel {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
   border: none;
-  border-radius: 40px;
-  padding: .5rem 1.5rem;
-  cursor: pointer;
-  transition: opacity .2s;
+  margin: 5px;
 }
-.btn-save-edit:hover {
-  opacity: .85;
+
+.btn-save, .btn-save-edit {
+  background-color: #E98D6F;
+  color: #EDF6F9;
 }
+
 .btn-delete {
-  background: transparent;
-  border: 1px solid var(--primary);
-  color: var(--primary);
-  border-radius: 40px;
-  padding: .5rem 1.5rem;
-  cursor: pointer;
-  transition: opacity .2s;
+  background-color: #FFDDD2;
+  color: #004A51;
 }
+
+.btn-cancel {
+  background-color: transparent;
+  color: #004A51;
+}
+
+.btn-save:hover, .btn-save-edit:hover {
+  background-color: #83C5BE;
+}
+
 .btn-delete:hover {
-  opacity: .85;
+  background-color: #e57373;
+}
+
+/* Formularios dentro del modal */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  border-radius: 500px;
+  background-color: #f9eae4;
+  border: none;
+  padding: 10px 20px;
+  color: #004A51;
+  font-family: 'Louis George Cafe', sans-serif;
+}
+
+.char-count {
+  font-size: 0.85rem;
+  color: #004A51;
 }

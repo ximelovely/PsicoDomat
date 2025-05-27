@@ -78,6 +78,7 @@ body {
 
 /* Contenido principal */
 .perfil-container {
+  font-family: Louis George Cafe, sans-serif;
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -117,6 +118,7 @@ body {
 
 /* Formulario */
 .perfil-form {
+
   flex: 1;
   background-color: #FADCD9;
   padding: 20px;
@@ -149,4 +151,23 @@ textarea {
   text-align: right;
   font-size: 14px;
   color: #004A51;
+}
+
+.btn.btn-primary.mt-3 {
+  font-family: Louis George Cafe, sans-serif;
+  background-color: #E98D6F;
+  color: #EDF6F9;
+  padding: 7px 20px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  font-size: 1.5vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+  display: block;
+  margin-left: auto;
+  margin-right: auto; /* Centra el botón horizontalmente */
+  margin-top: 1px; /* Más arriba */
+}
+
+.btn.btn-primary.mt-3:hover {
+  background-color: #83C5BE;
 }

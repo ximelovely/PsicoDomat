@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agregar-editar cita</title>
-  <link rel="stylesheet" href="Agregar.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agregar Cita</title>
+  <link rel="stylesheet" href="Agregar.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
   <div class="header">
@@ -23,13 +23,13 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="/IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                    <img src="../IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
-                                    <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
+                                    <li><a class="dropdown-item" href="editarperfil.html">Editar perfil</a></li>
                                     <li><a class="dropdown-item" href="Agregar.html">Agregar cita</a></li>
-                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
+                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones</a></li>
                                     <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
                                     <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
                                     <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
@@ -43,195 +43,113 @@
         </div>
     </div>
 
-      <div id="calendar-container">
-      <div class="calendar-box">
-      <div class="calendar-header">
-        <button id="prevBtn">❮</button>
-        <h2 id="month-name"></h2>
-        <button id="nextBtn">❯</button>
-      </div>
-      <div id="calendar-body">
-        <div id="calendar-left">
-          <div class="calendar-days">
-          <div class="day">L</div><div class="day">M</div><div class="day">M</div><div class="day">J</div><div class="day">V</div>
-          </div>
-          <div id="calendar-dates" class="calendar-dates"></div>
-          <div id="info-box" class="info-box">Selecciona una fecha para ver detalles.</div>
-        </div>      
-        <div id="calendar-right">
-           <div id="calendar-details" class="justify-content-center align-self-center">
-           </div>
-        </div>   
-      </div>
-      <!-- Modal para Agregar Cita -->
-        <div class="modal fade" id="modalAgregarCita" tabindex="-1" aria-labelledby="modalAgregarCitaLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalAgregarCitaLabel">Agregar Cita</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body">
-                <form id="formModificarCita">
-                    <div class="mb-3">
-                        <label for="sucursalModificar" class="form-label">Sucursal elegida</label>
-                        <select class="form-control" id="sucursalModificar" required>
-                            <option value="">Selecciona una sucursal</option>
-                            <option value="Monterrey">Monterrey</option>
-                            <option value="Houston">Houston</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="fechaModificar" class="form-label">Fecha</label>
-                        <input type="date" class="form-control" id="fechaModificar" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="horaModificar" class="form-label">Hora</label>
-                        <input type="time" class="form-control" id="horaModificar" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="motivoModificar" class="form-label">Motivo de consulta</label>
-                        <select class="form-control" id="motivoModificar" required>
-                            <option value="">Selecciona un motivo</option>
-                            <option value="Terapia familiar">Terapia familiar</option>
-                            <option value="Terapia de pareja">Terapia de pareja</option>
-                            <option value="Terapia individual">Terapia individual</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="pacienteModificar" class="form-label">Paciente</label>
-                        <input type="text" class="form-control" id="pacienteModificar" required>
-                    </div>
-                    <button type="button" class="btn btn-success ms-2">Agregar cita</button>
-                </form>
-            </div>
-            </div>
+  <!-- 🧠 FORMULARIO -->
+  <div class="form-container">
+    <form class="formu" id="formAgregarCita">
+        <div class="input-group">
+        <label for="sucursal">Sucursal elegida:</label>
+        <select id="sucursal" name="sucursal" required>
+            <option disabled selected>Selecciona una sucursal</option>
+        </select>
         </div>
-        </div>
-        <div class="d-flex justify-content-center my-3">
-            <button class="btn"
-                style="background:#E98D6F;color:#effcfd;border-radius:30px;padding:8px 24px; height:36px;"
-                data-bs-toggle="modal" data-bs-target="#modalAgregarCita">
-                Agregar cita
-            </button>
-        </div>
-        </div>
-    </div>
-  </div>
 
-  
-        <!-- Bootstrap JS (asegúrate de tenerlo al final del body) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="input-group">
+        <label for="fecha">Fecha de la cita:</label>
+        <input type="date" id="fecha" name="fecha" required>
+        </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-    // Variables
-    let currentDate = new Date();
-    const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
-                       "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-    
-    // Elementos del DOM
-    const monthNameElement = document.getElementById('month-name');
-    const calendarDatesElement = document.getElementById('calendar-dates');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const infoBox = document.getElementById('info-box');
-    const calendarDetails = document.getElementById('calendar-details');
-    
-    // Inicializar calendario
-    renderCalendar();
-    
-    // Event listeners
-    prevBtn.addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
-        renderCalendar();
+        <div class="input-group">
+        <label for="hora">Hora de la cita:</label>
+        <select id="hora" name="hora" required>
+            <option disabled selected>Selecciona una hora</option>
+        </select>
+        </div>
+
+        <div class="input-group">
+        <label for="motivo">Motivo de consulta:</label>
+        <select id="motivo" name="motivo" required>
+            <option disabled selected>Selecciona un motivo</option>
+        </select>
+        </div>
+
+        <div class="input-group">
+        <label for="paciente">Paciente:</label>
+        <select id="paciente" name="paciente" required>
+            <option disabled selected>Selecciona un paciente</option>
+        </select>
+        </div>
+
+        <button type="submit" class="agendar">Agregar cita</button>
+    </form>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Script de funcionalidad -->
+ <script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const sucursal = document.getElementById('sucursal');
+  const fecha = document.getElementById('fecha');
+  const hora = document.getElementById('hora');
+  const motivo = document.getElementById('motivo');
+  const paciente = document.getElementById('paciente');
+
+  // Cargar sucursales
+  const sucRes = await fetch('http://localhost:3000/sucursales');
+  const sucursales = await sucRes.json();
+  sucursales.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = s.ID_Sucursal;
+    opt.textContent = s.Nombre;
+    sucursal.appendChild(opt);
+  });
+
+  // Cargar motivos
+  const motRes = await fetch('http://localhost:3000/servicios');
+  const motivos = await motRes.json();
+  motivos.forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m.ID_Servicio;
+    opt.textContent = m.Descripcion;
+    motivo.appendChild(opt);
+  });
+
+  // Cargar pacientes
+  const pacRes = await fetch('http://localhost:3000/pacientes');
+  const pacientes = await pacRes.json();
+  pacientes.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.ID_Usuario;
+    opt.textContent = `${p.Nombre} ${p.Apellido}`;
+    paciente.appendChild(opt);
+  });
+
+  // Cargar horas cuando cambie sucursal o fecha
+  async function cargarHoras() {
+    const idSucursal = sucursal.value;
+    const fechaVal = fecha.value;
+    if (!idSucursal || !fechaVal) return;
+
+    const res = await fetch('http://localhost:3000/horarios', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ idSucursal, fecha: fechaVal })
     });
-    
-    nextBtn.addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
-        renderCalendar();
+
+    const horas = await res.json();
+    hora.innerHTML = '<option disabled selected>Selecciona una hora</option>';
+    horas.forEach(h => {
+      const opt = document.createElement('option');
+      opt.value = h.ID_Hora;
+      opt.textContent = h.Hora;
+      hora.appendChild(opt);
     });
-    
-    // Función para renderizar el calendario
-    function renderCalendar() {
-        // Obtener año y mes actual
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
-        
-        // Actualizar el nombre del mes
-        monthNameElement.textContent = `${monthNames[month]} ${year}`;
-        
-        // Limpiar fechas anteriores
-        calendarDatesElement.innerHTML = '';
-        
-        // Obtener primer y último día del mes
-        const firstDay = new Date(year, month, 1);
-        const lastDay = new Date(year, month + 1, 0);
-        
-        // Obtener el día de la semana del primer día (0=Domingo, 1=Lunes, etc.)
-        let firstDayOfWeek = firstDay.getDay();
-        // Ajustar para que el lunes sea el primer día (1)
-        firstDayOfWeek = firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1;
-        
-        // Calcular total de días a mostrar (solo L-V)
-        let totalDays = 0;
-        for (let i = 1; i <= lastDay.getDate(); i++) {
-            const dayOfWeek = new Date(year, month, i).getDay();
-            if (dayOfWeek >= 1 && dayOfWeek <= 5) { // 1=Lunes, 5=Viernes
-                totalDays++;
-            }
-        }
-        
-        // Calcular espacios vacíos al inicio (solo para días laborables)
-        let emptyDays = 0;
-        if (firstDayOfWeek > 0) {
-            emptyDays = firstDayOfWeek > 5 ? 0 : firstDayOfWeek;
-        }
-        
-        // Crear días vacíos si es necesario (solo para alinear el primer día)
-        for (let i = 0; i < emptyDays; i++) {
-            const emptyDay = document.createElement('div');
-            emptyDay.classList.add('date', 'empty');
-            calendarDatesElement.appendChild(emptyDay);
-        }
-        
-        // Crear elementos de fecha para cada día del mes (solo L-V)
-        for (let i = 1; i <= lastDay.getDate(); i++) {
-            const dayOfWeek = new Date(year, month, i).getDay();
-            
-            // Solo agregar días de lunes a viernes (1-5)
-            if (dayOfWeek >= 1 && dayOfWeek <= 5) {
-                const dateElement = document.createElement('div');
-                dateElement.classList.add('date');
-                dateElement.textContent = i;
-                
-                // Resaltar el día actual
-                const today = new Date();
-                if (i === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-                    dateElement.classList.add('today');
-                }
-                
-                // Manejar clic en la fecha
-                dateElement.addEventListener('click', () => {
-                    // Quitar selección de otras fechas
-                    document.querySelectorAll('.date.selected').forEach(el => {
-                        el.classList.remove('selected');
-                    });
-                    
-                    // Seleccionar esta fecha
-                    dateElement.classList.add('selected');
-                    
-                    // Mostrar detalles de la fecha
-                    const selectedDate = new Date(year, month, i);
-                    showDateDetails(selectedDate);
-                });
-                
-                calendarDatesElement.appendChild(dateElement);
-            }
-        }
-    }
+  }
+
+  sucursal.addEventListener('change', cargarHoras);
+  fecha.addEventListener('change', cargarHoras);
 });
-  </script>
+</script>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 body {
     /* Fuente */
     font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
+    color: #004A51; /* Color específico */
 }
 
 .header {
@@ -35,11 +35,11 @@ body {
 }
 
 .Titu {
-  flex: 1;
-  font-size: 2vw;
-  color: #004A51;
-  font-weight: bold;
-  text-align: center;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
 
 
@@ -76,123 +76,67 @@ body {
         cursor: pointer; /* Cambia el cursor al pasar por encima */
     }
 
+
+/* Estilos para las tarjetas */
+
+    .card-body{
+      background-color: #f6d2d2; /* Color de fondo */
+      border-radius: 20px; /* Bordes redondeados */
+      padding: 20px; /* Espacio interno */
+      margin-bottom: 20px; /* Espacio entre tarjetas */
+    }
+
+    .card-text {
+      color: #004A51; /* Color de fuente cambiado a rojo */
+      font-size: 1.2rem; /* Tamaño de fuente */
+    }
+
+    .card-title {
+      color: #004A51; /* Color de fuente cambiado a rojo */
+      font-size: 1.5rem; /* Tamaño de fuente */
+      font-weight: bold; /* Negrita */
+    }
+
 .ubicaciones-container {
-  max-width: 800px;
-  margin: 40px auto;
-  background: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.ubicaciones-container h5 {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 20px;
   font-family: 'Louis George Cafe', sans-serif;
-  color: #004A51;
-  font-weight: bold;
 }
 
-.ubicaciones-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.ubicacion-card {
-  background-color: #FADCD9;
-  padding: 25px;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.ubicacion-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 15px;
-  object-fit: cover;
-  margin-right: 20px;
-}
-
-.ubicacion-text {
-  flex-grow: 1;
-}
-
-.ubicacion-text h5 {
-  margin: 0;
-  font-weight: bold;
-  font-family: 'Louis George Cafe', sans-serif;
-  color: #004A51;
-}
-
-.ubicacion-text p {
-  margin: 0;
-  font-size: 14px;
-  font-family: 'Louis George Cafe', sans-serif;
-  color: #004A51;
-}
-
-.edit-icon {
-  background-color: #004A51;
-  padding: 8px;
-  border-radius: 12px;
-  cursor: pointer;
-}
-
-.edit-icon svg {
-  fill: white;
-}
-
-.btn-agregar {
+#btnAgregarUbicacion {
   background-color: #E98D6F;
   color: white;
-  font-weight: bold;
-  padding: 12px 50px;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 100px;
-  margin-top: 20px;
-  font-family: 'Louis George Cafe', sans-serif;
-  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+  outline: none;
+  margin-top: 15px;
+  display: inline-block;
 }
 
-/* Modal */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal.hidden {
-  display: none;
-}
-
-.modal-content.wide {
-  background-color: #CCF3F7;
-  border: 3px solid #E98D6F;
-  border-radius: 25px;
-  padding: 30px;
-  width: 500px;
-  text-align: center;
+#btnAgregarUbicacion:hover {
+  background-color: #83C5BE;
   color: #004A51;
 }
 
-.modal-content.wide .form-group {
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-.modal-content.wide input {
-  width: 100%;
-  padding: 8px;
+.btn.btn-primary {
+  background-color: #83C5BE;
+  color: #004A51;
+  border-radius: 30px;
+  padding: 10px 30px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 12px;
-  background-color: #FADCD9;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+  outline: none;
+  display: block;
+  margin: 20px auto; /* Centra horizontalmente */
+}
+.btn.btn-primary:hover {
+  background-color: #ddfffc;
+  color: #004A51;
 }

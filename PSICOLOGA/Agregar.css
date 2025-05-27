@@ -1,13 +1,13 @@
 body {
     /* Fuente */
     font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
+    color: #004A51; /* Color específico */
 }
 
 .header {
     /* Imagen de fondo */
     background-color: #EDF6F9;
-    background-image: url('/IMÁGENES/nofondo.png');
+    background-image: url('../IMÁGENES/nofondo.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -35,11 +35,11 @@ body {
 }
 
 .Titu {
-  flex: 1;
-  font-size: 2vw;
-  color: #004A51;
-  font-weight: bold;
-  text-align: center;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
 
 
@@ -76,159 +76,56 @@ body {
         cursor: pointer; /* Cambia el cursor al pasar por encima */
     }
 
-/* Calendario */
-#calendar-details {
-  width: 70%;
-}
+/*Datos para agendar*/
+    .form-container {
+        font-family: Louis George Cafe, sans-serif;
+        color: #004A51;
+        font-size: 1.75vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+        height: 60vh; /* 30% de la altura de la pantalla */
+        display: flex;
+        flex-direction: column; /* Alinea los elementos en columna */
+        justify-content: center; /* Centra los elementos horizontalmente */
+        align-items: center; /* Alinea los elementos al centro */
+        padding-right: 20px; /* Añade un poco de espacio a la derecha */
+        padding-left: 20vh; /* Añade un poco de espacio a la izquierda */
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
 
+    .input-group {
+        margin-bottom: 15px;
+        margin-top: 20px; /* Mueve el texto hacia arriba */
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
 
-#calendar-body {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-}
+    input, select {
+        background: #f9eae4;
+        font-size: 16px;
+        align-items: center;
+        font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+        font-family: 'Louis George Cafe', sans-serif; /* Fuente específica */
+        color: #004A51; /* Color específico */
+        border-radius: 500px; /* Redondea todas las esquinas */
+        border: none; /* Quita el borde del input */
+        padding: 10px 20px; /* Añade espacio interno */
+    }
 
-
-#calendar-container {
-  font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 20px;
-}
-
-
-#calendar-left {
-  justify-content: center;
-  width: 50%;
-  margin-top: 20px;
-  background-color: #ffddd2;
-  border-radius: 25px;
-  padding: 10px;
-}
-
-
-#calendar-right {
-  display: flex;
-  justify-content: center;
-  width: 50%;
-  margin-top: 20px;
-}
-
-
-
-.calendar-box {
-  background-color: #ffeee8;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  width: 55%;
-  color: #004a51;
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  background-color: #FFDDD2;
-  border-radius: 50px;
-}
-
-.calendar-header button {
-  background: #E98D6F;
-  border: none;
-  font-size: 18px;
-  color: #004A51;
-  border-radius: 500px;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-}
-
-.calendar-days, .calendar-dates {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 5px;
-  margin: 10px;
-}
-
-.day {
-  font-weight: bold;
-  color: #004A51;
-}
-
-.date {
-  background-color: #ffeee8;
-  border: 1px solid #E98D6F;
-  padding: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.date:hover {
-  background-color: #ffe1d6;
-}
-
-.date.selected {
-  background-color: #c5e4d1;
-  border: 2px solid #004A51;
-}
-
-.date.star {
-  background-color: #ffdcc7;
-}
-
-.info-box {
-  margin-top: 15px;
-  font-size: 16px;
-  color: #004A51;
-}
-
-/* Estilo personalizado para los modales */
-.modal-content {
-    background-color: #ffeee8;
-    color: #004A51;
-    border-radius: 25px;
-    border: 2px solid #E98D6F;
+/*Botón de agendar*/
+.agendar{
     font-family: Louis George Cafe, sans-serif;
+    background-color: #E98D6F;
+    color: #EDF6F9;
+    padding: 7px 45px;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 2vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    display: block;
+    margin-left: auto;
+    margin-right: 250px; /* Alinea el botón a la derecha */
+    margin-top: 0px; /* Mueve el texto hacia arriba */
 }
 
-.modal-header {
-    background-color: #FFDDD2;
-    border-bottom: 2px solid #E98D6F;
-    border-radius: 25px 25px 0 0;
-}
-
-.modal-title {
-    color: #004A51;
-    font-weight: bold;
-}
-
-.btn-close {
-    filter: invert(50%) sepia(20%) saturate(500%) hue-rotate(140deg);
-}
-
-.modal-footer, .modal-body {
-    background-color: #ffeee8;
-    border-radius: 0 0 25px 25px;
-}
-
-.form-label {
-    color: #004A51;
-    font-weight: bold;
-}
-
-.form-control {
-    border-radius: 10px;
-    border: 1px solid #E98D6F;
-    background-color: #fff;
-    color: #004A51;
-}
-
-#modalAgregarCita .modal-body {
-    background-color: #ffeee8;
+.agendar :hover{
+    background-color: #83C5BE;
 }
