@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded",() => {
       reason: "Evaluación psicológica",
       dob: "03/03/1979",
       branch: "Monterrey",
-      date:"2025-09-23",
+      date:"2025-09-12",
       id: "3"
     }
   };
@@ -108,6 +108,11 @@ document.addEventListener("DOMContentLoaded",() => {
 
        document.getElementById("options-" + cita.id).addEventListener("click", function citaDetail(){
 
+
+        window.location.href = `CalendarioDetalle.html?date=${cita.date}&time=${cita.time}&nombre=${cita.name}&motivo=${cita.reason}&dob=${cita.dob}&sucursal=${cita.branch}&dateCita=${key}`;
+
+
+        /*
         document.getElementById("modal").classList.remove("hidden");
         document.getElementById("modal").style.display = "flex";
         document.getElementById("modalDate").textContent = key;  
@@ -175,8 +180,9 @@ document.addEventListener("DOMContentLoaded",() => {
            document.getElementById("nuevoDia").value = cita.date;
 
            document.getElementById("nuevaHora").value = cita.time;
-         });
 
+         });
+          */
        });
 
     } else {
