@@ -1,247 +1,196 @@
-:root {
-  --bg-light:  #EAF2F2;
-  --primary:   #7FCFD7;
-  --accent:    #E98D6F;
-  --text-dark: #004A51;
-  --item-bg:   #FFEFE8;
-}
-
 body {
-  /* Fuente */
-  font-family: 'Louis George Café', sans-serif;
-  color: #004A51;
+    /* Fuente */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
 }
 
 .header {
-  /* Imagen de fondo */
-  background-color: #EDF6F9;
-  background-image: url('/IMÁGENES/nofondo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  /* Tamaño total de la zona */
-  height: 20vh;    /* 20% de la altura de la ventana */
-  width: 100vw;    /* 100% del ancho de la ventana */
-
-  /* Flex para centrar la “pill” horizontalmente y situarla en el centro vertical */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    /* Imagen de fondo */
+    background-color: #EDF6F9;
+    background-image: url('../IMÁGENES/nofondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 20vh; /* 30% de la altura de la pantalla */
+    width: 100vw; /* 100% del ancho de la pantalla */
+    
+    /* Flexbox para centrar verticalmente */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
 }
 
 .fig {
-  font-family: 'Louis George Café', sans-serif;
-  color: #004A51;
-  background-color: #83C5BE;
-  text-align: center;
-
-  /* Tamaño de la “pill” */
-  height: 10vh;    /* 10% de la altura de la ventana */
-  width: 95vw;     /* 95% del ancho de la ventana */
-
-  /* Cápsula total */
-  border-radius: 1000px;
-
-  /* Centrar su contenido */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  /* Para posicionar o superponer el dropdown si hace falta */
-  position: relative;
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    text-align: center;
+    height: 10vh; /* 30% de la altura de la pantalla */
+    width: 95vw; /* 100% del ancho de la pantalla */
+    border-radius: 1000px; /* Redondea todas las esquinas */
+    display: flex; /* Flexbox para centrar verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    position: relative; /* Para posicionar la barra de navegación de manera absoluta */
 }
 
 .Titu {
-  flex: 1;
-  font-size: 2vw;
-  color: #004A51;
-  font-weight: bold;
-  text-align: center;
-}
-/* Estilos del menú desplegable (igual a Calendario.css) */
-.navbar {
-  background-color: #EDF6F9;  /* mismo color del fondo claro */
-  border-radius: 500px;       /* totalmente redondeado */
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51; /* Color específico */
+    text-align: center; /* Alinea el texto al centro */
+    font-size: 3vw; /* Ajusta el tamaño de la fuente de manera responsiva */
+    width: 100%; /* Ocupa todo el ancho de .fig */
 }
 
-.navbar-toggler {
-  border: none;               /* Quita el botón default que no usas */
-}
 
-.navbar-toggler:focus {
-  box-shadow: none;           /* Quita el outline al clic */
-}
+/*BARRA DE NAVEGACIÓN (preguntar al inge)*/
+    .navbar{
+        background-color: #EDF6F9; /* Color de fondo*/
+        border-radius: 500px; /* Redondea todas las esquinas */
+    }
 
-.navbar-nav .nav-link {
-  font-size: 18px;
-  color: #004A51;
-  padding: 10px 15px;
-  transition: background 0.3s ease-in-out;
-}
+    .navbar-toggler {
+        border: none; /* Quita el borde del botón */
+    }
 
-.navbar-nav .nav-link:hover {
-  background-color: #E98D6F;
-  color: #fff !important;
-  border-radius: 500px;
-}
+    .navbar-toggler:focus {
+        box-shadow: none; /* Quita el efecto de enfoque al hacer clic */
+    }
 
-/* Icono de menú (bootstrap-icon) */
-.menu-icon {
-  font-size: 1.5rem;
-  color: #004A51;
-  cursor: pointer;
-}
+    .navbar-nav .nav-link {
+        font-size: 18px; /* Ajusta el tamaño de la fuente */
+        color: #004A51; /* Color específico */
+        padding: 10px 15px; /* Añade espacio interno */
+        transition: background 0.3s ease-in-out; /* Agrega una transición suave al pasar por encima */
+    }
 
-/* ALERTAS */
-#alertPlaceholder {
-  max-width: 960px;
-  margin: 1rem auto;
-  padding: 0 1rem;
-}
+    .navbar-nav .nav-link:hover {
+        background-color: #E98D6F; /* Cambia el color de fondo al pasar por encima */
+        color: white !important; /* Cambia el color del texto al pasar por encima */
+        border-radius: 500px; /* Redondea las esquinas */
+    }
 
-/* MAIN CONTENT */
-.main-content {
-  max-width: 960px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
+    .menu-icon {
+        width: 30px; /* Ajusta el tamaño según tu imagen */
+        height: auto; /* Mantiene la proporción de la imagen */
+        cursor: pointer; /* Cambia el cursor al pasar por encima */
+    }
 
-/* ACCIONES PACIENTES */
-.patient-actions {
-  border-bottom: 1px solid var(--item-bg);
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
-}
+
+/* Botón de agregar paciente */
 .btn-add-patient {
-  background-color: var(--accent);
+  background-color: #E98D6F;
   color: #fff;
   border: none;
-  border-radius: 40px;
-  padding: .5rem 1.5rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: opacity .2s;
-}
-.btn-add-patient i {
-  margin-right: .5rem;
-}
-.btn-add-patient:hover {
-  opacity: .85;
+  border-radius: 50px;
+  padding: 8px 32px;
+  font-size: 1.2rem;
+  margin: 20px 0 20px 150px; /* Empuja el botón un poco a la derecha */
+  transition: background 0.3s;
 }
 
-/* BÚSQUEDA */
-.search-group {
-  flex-wrap: wrap;
+.btn-add-patient:hover {
+  background-color: #d9785a;
+  transition: background 0.3s;
 }
+
+/* Input + Botón búsqueda */
+.search-group {
+  margin-left: 310px; /* Ajusta este valor según lo que necesites */
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
 .search-input {
-  border: none;
-  border-radius: 40px;
-  padding: .5rem 1rem;
-  background-color: var(--item-bg);
+  border-radius: 30px;
+  padding: 5px 20px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
   width: 180px;
 }
+
 .btn-search {
-  background-color: var(--accent);
+  background-color: #004A51;
+  color: white;
   border: none;
-  border-radius: 40px;
-  padding: .5rem 1rem;
-  color: #fff;
-  cursor: pointer;
-  transition: opacity .2s;
-}
-.btn-search:hover {
-  opacity: .85;
+  border-radius: 30px;
+  padding: 6px 12px;
 }
 
-/* TABLA DE PACIENTES */
+/* Tabla de pacientes */
 .patients-table {
-  width: 100%;
-  border-collapse: collapse;
+  width: 80%;
+  margin: 0 auto 30px;
+  background-color: white;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 1rem;
 }
-.patients-table th,
-.patients-table td {
-  padding: .75rem 1rem;
-  border-bottom: 1px solid var(--item-bg);
-}
+
 .patients-table th {
-  background: none;
-  color: var(--text-dark);
-  text-align: left;
+  background-color: #DFF6F3;
+  color: #004A51;
+  font-weight: bold;
+  padding: 14px;
+  text-align: center;
+  border-bottom: 2px solid #AADBD2;
 }
-.patients-table tbody tr:hover {
-  background-color: rgba(233,141,111,0.1);
+
+.patients-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #eee;
+  text-align: center;
 }
-.patients-table th.text-center,
+
+/* Zebra striping */
+.patients-table tr:nth-child(even) {
+  background-color: #F9F9F9;
+}
+
+/* Centrar acciones */
 .patients-table td.text-center {
   text-align: center;
 }
 
-/* BOTONES DE ACCIÓN */
-.action-btn {
-  background: none;
+.btn-cancel{
+  background-color: #E98D6F;
+  color: #EDF6F9;
   border: none;
-  color: var(--text-dark);
-  font-size: 1.25rem;
-  cursor: pointer;
-  margin: 0 .25rem;
-}
-.action-btn:hover {
-  color: var(--primary);
+  border-radius: 50px;
+  padding: 8px 32px;
+  font-size: 1.2rem;
+  margin-left: 20px; /* Espacio entre los botones */
 }
 
-/* MODALES */
-.modal-content {
-  background-color: var(--bg-light);
-  border-radius: 16px;
-  overflow: hidden;
-}
-.modal-header,
-.modal-footer {
-  border: none;
-  padding: 0;
-}
-.modal-body {
-  padding: 24px;
+.btn-cancel:hover {
+  background-color: #83C5BE;
+  color: #EDF6F9;
+  transition: background 0.3s;
 }
 
-/* FORMULARIOS DE MODAL */
-.form-add-serv .form-group {
-  margin-bottom: 1rem;
-}
-.form-add-serv label {
-  display: block;
-  margin-bottom: .5rem;
-}
-.form-add-serv input,
-.form-add-serv select {
-  width: 100%;
-  padding: .75rem 1rem;
+#btnSavePatient{
+  background-color: #E98D6F;
+  color: #EDF6F9;
   border: none;
-  border-radius: 40px;
-  background-color: var(--item-bg);
-  font-size: 1rem;
-}
-.select-date {
-  flex: 1;
+  border-radius: 50px;
+  padding: 8px 32px;
+  font-size: 1.2rem;
+  margin-left: 20px; /* Espacio entre los botones */
+  transition: background 0.3s;
 }
 
-/* BOTONES MODAL */
-.btn-cancel {
-  background: none;
-  border: none;
-  color: var(--text-dark);
-  cursor: pointer;
+#btnSavePatient:hover {
+  background-color: #83C5BE;
+  color: #EDF6F9;
 }
-.btn-save {
-  background-color: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 40px;
-  padding: .5rem 1.5rem;
-  cursor: pointer;
-  transition: opacity .2s;
-}
-.btn-save:hover {
-  opacity: .85;
+
+.bi-person-plus-fill {
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.5em; /* Ajusta el tamaño del ícono si es necesario */
+  color: #004A51;   /* Cambia el color si lo deseas */
 }

@@ -16,14 +16,14 @@
   />
 
   <!-- Estilos personalizados -->
-  <link rel="stylesheet" href="DiasLaborales.css" />
+  <link rel="stylesheet" href="dias y mes.css" />
 </head>
 <body>
 
  <!-- HEADER -->
   <div class="header">
         <div class="fig">
-            <div class="Titu">Asignación de sucursales</div>
+            <div class="Titu">Definir días laborales</div>
             <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
                 <div class="container-fluid">
                     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -56,99 +56,66 @@
         </div>
     </div>
 
-  <main class="main-content">
-      <!-- Botones de acción -->
-      <div class="mt-4 d-flex justify-content-center gap-3">
-        <button id="btnSetOff" class="btn-action" onclick="window.location.href='dias.html'">
-          <i class="bi bi-calendar-x"></i> Definir días no laborables
-        </button>
-        <button id="btnAssignBranch" class="btn-action" onclick="window.location.href='mes.html'">
-          <i class="bi bi-geo-alt"></i> Asignar sucursal de trabajo
-        </button>
+  <!-- FORMULARIO PARA AGREGAR DÍA NO LABORABLE -->
+  <section class="form-section">
+    <form id="formOffDay">
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha no laborable</label>
+        <input type="date" class="form-control" id="fecha" required />
       </div>
-    </div>
 
-    <!-- TABLA DE ASIGNACIONES -->
-    <div class="assignments-wrap mt-5">
-      <h3>Asignaciones de sucursales</h3>
-      <div class="table-responsive">
-        <table id="assignTable" class="table assignments-table">
-          <thead>
-            <tr>
-              <th>Sucursal</th>
-              <th>Periodo</th>
-            </tr>
-          </thead>
-          <tbody><!-- Se llena con JS --></tbody>
-        </table>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="recurrente" />
+        <label class="form-check-label" for="recurrente">¿Es recurrente cada año?</label>
       </div>
-    </div>
 
-    <!-- TABLA DE DÍAS NO LABORABLES -->
-    <div class="assignments-wrap mt-5">
-      <h3>Días no laborables</h3>
-      <div class="table-responsive">
-        <table id="offdaysTable" class="table assignments-table">
-          <thead>
-            <tr>
-              <th>Fecha</th>
-              <th>Recurrente</th>
-            </tr>
-          </thead>
-          <tbody><!-- Se llena con JS --></tbody>
-        </table>
+      <div class="text-center">
+        <button type="submit" class="btn-save">
+          <i class="bi bi-save me-2"></i>Guardar día
+        </button>
       </div>
-    </div>
+    </form>
+
+    <div id="alerta" class="mt-3 text-center"></div>
+  </section>
   </main>
 
   <!-- Bootstrap + JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const offdaysTable = document.querySelector("#offdaysTable tbody");
-      const assignTable = document.querySelector("#assignTable tbody");
+    document.getElementById("formOffDay").addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-      async function cargarAsignaciones() {
-        try {
-          const res = await fetch("http://localhost:3000/asignaciones-sucursal");
-          const asignaciones = await res.json();
+      const fecha = document.getElementById("fecha").value;
+      const recurrente = document.getElementById("recurrente").checked;
 
-          assignTable.innerHTML = "";
-          asignaciones.forEach(asig => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-              <td>${asig.Nombre}</td>
-              <td>${asig.Periodo}</td>
-            `;
-            assignTable.appendChild(row);
-          });
-        } catch (err) {
-          console.error("❌ Error al cargar asignaciones:", err);
-        }
+      if (!fecha) {
+        return alert("⚠️ Por favor selecciona una fecha.");
       }
 
+      try {
+        const res = await fetch("http://localhost:3000/dias-no-laborables", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ fechas: [fecha], recurrente })
+        });
 
-      async function cargarDiasNoLaborables() {
-        try {
-          const res = await fetch("http://localhost:3000/dias-no-laborables");
-          const dias = await res.json();
+        const result = await res.json();
+        const alerta = document.getElementById("alerta");
 
-          offdaysTable.innerHTML = "";
-          dias.forEach(d => {
-            const row = document.createElement("tr");
-            const fecha = new Date(d.Fecha).toLocaleDateString("es-MX");
-            const rec = d.Recurrente ? "Sí" : "No";
-            row.innerHTML = `<td>${fecha}</td><td>${rec}</td>`;
-            offdaysTable.appendChild(row);
-          });
-        } catch (err) {
-          console.error("❌ Error al cargar días no laborables:", err);
+        if (result.success) {
+          alerta.textContent = "✅ Día no laborable guardado correctamente.";
+          alerta.style.color = "green";
+          document.getElementById("formOffDay").reset();
+        } else {
+          alerta.textContent = "❌ Error al guardar el día.";
+          alerta.style.color = "red";
         }
+      } catch (error) {
+        console.error("❌ Error:", error);
+        alert("❌ Ocurrió un error al guardar.");
       }
-
-      cargarAsignaciones();
-      cargarDiasNoLaborables();
     });
-    </script>
+  </script>
 </body>
 </html>

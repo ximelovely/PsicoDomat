@@ -401,7 +401,7 @@ app.get('/pacientes', async (req, res) => {
   try {
     await sql.connect(config);
     const result = await sql.query`
-      SELECT ID_Usuario, Nombre, Apellido 
+      SELECT ID_Usuario, Nombre, Apellido, Telefono, FechaNacimiento
       FROM Usuarios 
       WHERE ID_Rol = 2
     `;
@@ -666,6 +666,342 @@ app.delete('/servicios/:id', async (req, res) => {
     await sql.close();
   }
 });
+
+app.post('/pacientes', async (req, res) => {
+  const { nombre, apellido, telefono, fechaNacimiento, contrasena } = req.body;
+
+  // Validación de campos requeridos
+  if (!nombre || !apellido || !telefono || !fechaNacimiento || !contrasena) {
+    return res.status(400).json({ success: false, message: 'Todos los campos son obligatorios.' });
+  }
+
+  // Validación de formato de teléfono (solo dígitos, 10 dígitos típicos en México)
+  const telefonoValido = /^\d{10}$/.test(telefono);
+  if (!telefonoValido) {
+    return res.status(400).json({ success: false, message: 'El teléfono debe tener exactamente 10 dígitos.' });
+  }
+
+  try {
+    await sql.connect(config);
+
+    // Verificar si el teléfono ya existe
+    const check = await sql.query`
+      SELECT COUNT(*) AS total FROM Usuarios WHERE Telefono = ${telefono}
+    `;
+    if (check.recordset[0].total > 0) {
+      return res.status(400).json({ success: false, message: 'El número de teléfono ya está registrado.' });
+    }
+
+    // Insertar paciente
+    await sql.query`
+      INSERT INTO Usuarios (ID_Rol, Nombre, Apellido, Telefono, FechaNacimiento, Contraseña)
+      VALUES (2, ${nombre}, ${apellido}, ${telefono}, ${fechaNacimiento}, ${contrasena})
+    `;
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al registrar paciente:", err);
+    res.status(500).json({ success: false, message: "Error al guardar paciente" });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Agregar días no laborables
+app.post('/dias-no-laborables', async (req, res) => {
+  const { fechas, recurrente } = req.body;
+
+  try {
+    await sql.connect(config);
+
+    for (const fecha of fechas) {
+      // Validar si hay una cita activa en esa fecha
+      const conflictCheck = await sql.query`
+        SELECT COUNT(*) AS total
+        FROM Citas
+        WHERE Fecha = ${fecha} AND EstadoCita = 1
+      `;
+      const tieneCitas = conflictCheck.recordset[0].total > 0;
+
+      if (tieneCitas) {
+        return res.status(400).json({
+          success: false,
+          message: `⚠️ Ya existe al menos una cita activa el ${fecha}. Modifique las citas antes de marcar este día como no laborable.`
+        });
+      }
+
+      // Si no hay conflicto, registrar el día
+      await sql.query`
+        INSERT INTO DiasNoLaborables (Fecha, Recurrente)
+        VALUES (${fecha}, ${recurrente ? 1 : 0})
+      `;
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al guardar días no laborables:", err);
+    res.status(500).json({ success: false, message: "Error al guardar los días no laborables" });
+  } finally {
+    await sql.close();
+  }
+});
+
+
+// Obtener todos los días no laborables
+app.get('/dias-no-laborables', async (req, res) => {
+  try {
+    await sql.connect(config);
+    const result = await sql.query`
+      SELECT Fecha, Recurrente FROM DiasNoLaborables
+    `;
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("❌ Error al obtener días no laborables:", err);
+    res.status(500).json({ success: false });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Asignar sucursal por meses
+app.post('/asignar-sucursal', async (req, res) => {
+  const { idSucursal, año, meses } = req.body;
+  const añoNum = parseInt(año);
+  const sucursalNum = parseInt(idSucursal);
+
+  if (!sucursalNum || !añoNum || !Array.isArray(meses)) {
+    return res.status(400).json({ success: false, message: 'Datos incompletos' });
+  }
+
+  try {
+    await sql.connect(config);
+
+    for (const mes of meses) {
+      // 1. Verificar si ya existe asignación para ese mes/año
+      const existe = await sql.query`
+        SELECT ID_Sucursal
+        FROM SucursalMensual
+        WHERE Año = ${añoNum} AND Mes = ${mes}
+      `;
+
+      if (existe.recordset.length > 0) {
+        const idSucursalExistente = existe.recordset[0].ID_Sucursal;
+
+        // 2. Verificar si hay citas para ese mes
+        const citas = await sql.query`
+          SELECT COUNT(*) AS total
+          FROM Citas
+          WHERE MONTH(Fecha) = ${mes} AND YEAR(Fecha) = ${añoNum} AND EstadoCita = 1
+        `;
+
+        if (citas.recordset[0].total > 0) {
+          return res.status(400).json({
+            success: false,
+            message: `⚠️ Ya hay citas activas en ${mes}/${añoNum}. No se puede cambiar la sucursal.`
+          });
+        }
+
+        // 3. Si no hay citas, actualizar la sucursal existente
+        await sql.query`
+          UPDATE SucursalMensual
+          SET ID_Sucursal = ${sucursalNum}
+          WHERE Año = ${añoNum} AND Mes = ${mes}
+        `;
+      } else {
+        // 4. Si no existe asignación, crearla
+        await sql.query`
+          INSERT INTO SucursalMensual (ID_Sucursal, Año, Mes)
+          VALUES (${sucursalNum}, ${añoNum}, ${mes})
+        `;
+      }
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error("❌ Error al asignar/cambiar sucursal:", err);
+    res.status(500).json({ success: false, message: "Error en el servidor al asignar sucursal" });
+  } finally {
+    await sql.close();
+  }
+});
+
+
+
+// Obtener asignaciones existentes
+app.get('/asignaciones-sucursal', async (req, res) => {
+  try {
+    await sql.connect(config);
+
+    const result = await sql.query`
+      SELECT SM.ID_Sucursal, S.Nombre, SM.Año, SM.Mes
+      FROM SucursalMensual SM
+      JOIN Sucursales S ON S.ID_Sucursal = SM.ID_Sucursal
+      ORDER BY SM.Año DESC, SM.Mes DESC
+    `;
+
+    const asignaciones = result.recordset.map(row => {
+      const nombreMes = new Date(row.Año, row.Mes - 1)
+        .toLocaleString("es-MX", { month: "long" });
+      const mesCapitalizado = nombreMes.charAt(0).toUpperCase() + nombreMes.slice(1);
+
+      return {
+        Nombre: row.Nombre,
+        Periodo: `${mesCapitalizado} ${row.Año}`
+      };
+    });
+
+    res.json(asignaciones);
+  } catch (err) {
+    console.error("❌ Error al obtener asignaciones de sucursal:", err);
+    res.status(500).json({ success: false });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Reporte de pacientes por mes/año
+app.post('/reporte-pacientes', async (req, res) => {
+  const { mes, año } = req.body;
+
+  if (!mes || !año) {
+    return res.status(400).json({ success: false, message: 'Faltan parámetros' });
+  }
+
+  try {
+    await sql.connect(config);
+
+    // 1. Citas agendadas y realizadas
+    const status = await sql.query`
+      SELECT 
+        SUM(CASE WHEN EstadoCita = 1 THEN 1 ELSE 0 END) AS PorVer,
+        SUM(CASE WHEN EstadoCita = 0 THEN 1 ELSE 0 END) AS Vistos
+      FROM Citas
+      WHERE MONTH(Fecha) = ${mes} AND YEAR(Fecha) = ${año}
+    `;
+
+    // 2. Citas por motivo
+    const motivos = await sql.query`
+      SELECT 
+        S.Descripcion AS Motivo,
+        COUNT(*) AS Total
+      FROM Citas C
+      JOIN Servicios S ON C.ID_Servicio = S.ID_Servicio
+      WHERE MONTH(C.Fecha) = ${mes} AND YEAR(C.Fecha) = ${año}
+      GROUP BY S.Descripcion
+    `;
+
+    // 3. Citas por sucursal
+    const sucursales = await sql.query`
+      SELECT 
+        S.Nombre AS Sucursal,
+        COUNT(*) AS Total
+      FROM Citas C
+      JOIN Sucursales S ON C.ID_Sucursal = S.ID_Sucursal
+      WHERE MONTH(C.Fecha) = ${mes} AND YEAR(C.Fecha) = ${año}
+      GROUP BY S.Nombre
+    `;
+
+    res.json({
+      success: true,
+      status: status.recordset[0],
+      motivos: motivos.recordset,
+      sucursales: sucursales.recordset
+    });
+
+  } catch (err) {
+    console.error("❌ Error al generar reporte:", err);
+    res.status(500).json({ success: false, message: 'Error al generar reporte' });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Ruta para generar reporte de pacientes por mes y año
+app.get('/reporte-pacientes', async (req, res) => {
+  const mes = parseInt(req.query.mes);
+  const año = parseInt(req.query.año);
+
+  if (!mes || !año) {
+    return res.status(400).json({ error: "Mes y año requeridos" });
+  }
+
+  try {
+    await sql.connect(config);
+
+    const totalVistos = await sql.query`
+      SELECT COUNT(*) AS total
+      FROM Citas
+      WHERE MONTH(Fecha) = ${mes} AND YEAR(Fecha) = ${año} AND EstadoCita = 0
+    `;
+    const totalPendientes = await sql.query`
+      SELECT COUNT(*) AS total
+      FROM Citas
+      WHERE MONTH(Fecha) = ${mes} AND YEAR(Fecha) = ${año} AND EstadoCita = 1
+    `;
+    const porMotivo = await sql.query`
+      SELECT S.Descripcion, COUNT(*) AS Total
+      FROM Citas C
+      JOIN Servicios S ON S.ID_Servicio = C.ID_Servicio
+      WHERE MONTH(C.Fecha) = ${mes} AND YEAR(C.Fecha) = ${año}
+      GROUP BY S.Descripcion
+    `;
+    const porSucursal = await sql.query`
+      SELECT SU.Nombre, COUNT(*) AS Total
+      FROM Citas C
+      JOIN Sucursales SU ON SU.ID_Sucursal = C.ID_Sucursal
+      WHERE MONTH(C.Fecha) = ${mes} AND YEAR(C.Fecha) = ${año}
+      GROUP BY SU.Nombre
+    `;
+
+    res.json({
+      totalVistos: totalVistos.recordset[0].total,
+      totalPendientes: totalPendientes.recordset[0].total,
+      porMotivo: porMotivo.recordset,
+      porSucursal: porSucursal.recordset
+    });
+  } catch (err) {
+    console.error("❌ Error en /reporte-pacientes:", err);
+    res.status(500).json({ error: "Error al obtener el reporte" });
+  } finally {
+    await sql.close();
+  }
+});
+
+// Obtener citas por mes y año
+// 🔄 Obtener citas por mes para la psicóloga
+app.get('/citas-por-mes', async (req, res) => {
+  const { año, mes } = req.query;
+
+  try {
+    await sql.connect(config);
+    const result = await sql.query`
+      SELECT 
+        C.ID_Cita,
+        C.Fecha,
+        CH.Hora,
+        U.Nombre,
+        U.FechaNacimiento,
+        S.Nombre AS Sucursal,
+        SV.Descripcion AS Motivo,
+        C.EstadoCita
+
+      FROM Citas C
+      INNER JOIN Usuarios U ON C.ID_UsuarioPaciente = U.ID_Usuario
+      INNER JOIN CatalogoHoras CH ON CH.ID_Hora = C.Hora
+      INNER JOIN Sucursales S ON C.ID_Sucursal = S.ID_Sucursal
+      INNER JOIN Servicios SV ON SV.ID_Servicio = C.ID_Servicio
+      WHERE MONTH(C.Fecha) = ${mes} AND YEAR(C.Fecha) = ${año}
+    `;
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("❌ Error al obtener citas:", err);
+    res.status(500).json({ error: "Error en el servidor" });
+  } finally {
+    await sql.close();
+  }
+});
+
+
 
 
 

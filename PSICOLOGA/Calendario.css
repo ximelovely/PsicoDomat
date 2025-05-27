@@ -151,7 +151,7 @@ body {
 
 .calendar-days, .calendar-dates {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(7, 1fr);
   gap: 5px;
   margin: 10px;
 }
@@ -186,257 +186,31 @@ body {
   margin-top: 15px;
   font-size: 16px;
   color: #004A51;
-}
-
-/* Modales */
-.modal {
-  font-family: Louis George Cafe, sans-serif;
-    color: #004A51;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal.hidden {
-  display: none;
-}
-
-.modal-content {
-  background-color: #CCF3F7;
-  border: 3px solid #E98D6F;
-  border-radius: 25px !important;
-  padding: 20px 30px;
-  width: 25% !important;
-  text-align: center;
-  color: #004a51 !important;;
-  border-color: #E98D6F !important;
-  border-width: 5px !important;
-  padding-top: 50px;
-  padding-bottom: 30px;
-}
-
-.modal-content.wide {
-  width: 500px;
-}
-
-.close-btn {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  background: none;
-  border: none;
-  font-size: 22px;
-  color: whitesmoke;
-  cursor: pointer;
-  background-color: #E98D6F;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: 25px;
-}
-
-.modal-time {
-  background-color: #E98D6F;
-  color: white;
-  font-weight: bold;
-  padding: 8px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  width: 10%;
-  margin-top: 10px;
-}
-
-.modal-modificar {
-  background-color: #E98D6F;
-  color: white;
-  font-weight: bold;
-  padding: 4px;
-  border-radius: 30px;
-  margin-bottom: 10px;
-  width: 75%;
-}
-
-.modal-cancelar {
-  background-color: #E98D6F;
-  color: white;
-  font-weight: bold;
-  padding: 4px;
-  border-radius: 30px;
-  margin-bottom: 10px;
-  width: 50%;
-}
-
-
-
-.modal-date {
-  background-color: #C7EDE7;
-  color: #004A51;
-  padding: 6px;
-  border-radius: 20px;
-  margin-bottom: 15px;
-  width: 15%;
-}
-
-.modal-buttons button {
-  display: block;
-  width: 80%;
-  margin: 10px auto;
-  padding: 8px;
-  border: none;
-  border-radius: 1000px;
-  font-weight: bold;
-  font-size: 14px;
-  cursor: pointer;
-  font-family: 'Louis George Cafe', sans-serif;
-}
-
-.btn-modificar {
   background-color: #FADCD9;
-  color: #004a51;;
-  width: 10% !important;
 }
-
-.btn-modificar-submit {
+.cita-entry.mb-3.p-2.border.rounded {
   background-color: #FADCD9;
-  color: #004a51;;
-  width: 25% !important;
-  padding: 15px !important;
-}
-
-
-.btn-cancelar {
-  background-color: #FADCD9;
-  color: #004A51;
-  width: 10% !important;
-}
-
-
-#submitCancelar,#goCalendarCancelacion,#goCalendar {
-  background-color: #FADCD9;
-  color: #004A51;
-  width: 40% !important;
-}
-
-.titulo-form {
-  background-color: #E98D6F;
-  color: white;
-  padding: 10px;
-  border-radius: 25px;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 15px;
-  text-align: left;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  border: none;
-  border-radius: 25px;
-  background-color: #FADCD9;
-  font-family: 'Louis George Cafe', sans-serif;
-}
-
-.mensaje-snoopy {
-  display: flex;
-  align-items: center;
-  margin: 15px 0;
-  font-size: 14px;
-}
-
-.img-snoopy {
-  width: 50vh;
-  margin-right: 10px;
-}
-
-.confirmacion {
-  width: 400px;
-  text-align: center;
-}
-
-.exito-titulo {
-  background-color: #E98D6F;
-  color: white;
-  border-radius: 20px;
-  padding: 10px;
+  border: 1px solid #E98D6F;
+  border-radius: 10px;
   margin-bottom: 10px;
 }
 
-.btn-volver {
-  background-color: #FADCD9;
-  color: #004A51;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 20px;
-  display: inline-block;
-  margin-top: 10px;
-}
-
-.option-cita{
-  background-color: #004a51;
-  border-radius: 20px;
-  padding: 3px;
-}
-
-
-#header-modifica{
-  background-color:#E98D6F;
-  border-bottom-left-radius: 35px;
-  border-bottom-right-radius: 35px;
+.btn.btn-sm.btn-info {
+  background-color: #83C5BE;
   color: white;
-  padding: 20px;
-  padding-left: 50px;
-  padding-right: 50px;
+  border-radius: 500px;
+  padding: 5px 10px;
+  border-color: #83C5BE;
+  transition: 0.3s ease;
+}
+.btn.btn-sm.btn-info:hover {
+  background-color: #356f74;
+  color: white;
+  border-color: #356f74;
 }
 
-#text-snoopy{
-  width: 40%;
-  margin-left: 30%;
-  color: #004A51;
-}
-
-#modificar-left{
-  width: 70vh;
-  color: #004A51;
-}
-
-
-
-#nuevoDia{
-  background-color: #FADCD9;
-  border: none;
-  border-radius: 20px;
-  padding-left: 40px;
-  padding-right: 40px;
-  margin-left: 15px;
-}
-
-#nuevaHora{
-  background-color: #FADCD9;
-  border: none;
-  border-radius: 20px;
-  padding-left: 40px;
-  padding-right: 40px;
-  margin-left: 15px;
-}
-
-#modificar-right{
-  width: 100vh;
-}
-
-#labelHora{
-  margin-right: 13px;
+.bg-light.text-muted {
+  background-color: #f8f9fa !important;
+  color: #6c757d !important;
+  border: 1px solid #dee2e6;
 }

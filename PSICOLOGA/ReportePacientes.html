@@ -25,38 +25,39 @@
 
   <!-- HEADER -->
   <div class="header">
-    <div class="fig">
-      <div class="Titu">Reporte de pacientes</div>
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
-        <div class="container-fluid">
-          <button class="navbar-toggler border-0" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                  aria-controls="navbarNav" aria-expanded="false"
-                  aria-label="Toggle navigation"></button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-list menu-icon"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
-                  <li><a class="dropdown-item" href="editarperfil.html">Editar perfil</a></li>
-                  <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
-                  <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
-                  <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios</a></li>
-                  <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
-                  <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
-                  <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+        <div class="fig">
+            <div class="Titu">Reporte de pacientes</div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+            
+                    <!-- Menú desplegable alineado a la izquierda -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="../IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
+                                    <li><a class="dropdown-item" href="editarperfil.html">Editar perfil</a></li>
+                                    <li><a class="dropdown-item" href="Agregar.html">Agregar cita</a></li>
+                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones</a></li>
+                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
         </div>
-      </nav>            
     </div>
-  </div>
 
   <!-- ALERTAS -->
   <div id="alertPlaceholder" class="container mt-3"></div>
@@ -106,7 +107,84 @@
 
   <!-- Bootstrap Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Lógica JS -->
-  <script src="ReportePacientes.js"></script>
+  <!-- Agrega al final de tu archivo HTML antes del cierre de </body> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const yearSelect = document.getElementById("rep-year");
+      const monthSelect = document.getElementById("rep-month");
+      const statusCount = document.getElementById("status-count");
+      const btnViewReport = document.getElementById("btnViewReport");
+
+      const motiveCtx = document.getElementById("chart-motive").getContext("2d");
+      const branchCtx = document.getElementById("chart-branch").getContext("2d");
+
+      let motiveChart = null;
+      let branchChart = null;
+
+      const currentYear = new Date().getFullYear();
+      for (let y = currentYear; y >= 2022; y--) {
+        yearSelect.innerHTML += `<option value="${y}">${y}</option>`;
+      }
+
+      const meses = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+      ];
+      meses.forEach((mes, index) => {
+        monthSelect.innerHTML += `<option value="${index + 1}">${mes}</option>`;
+      });
+
+      btnViewReport.addEventListener("click", async () => {
+        const año = yearSelect.value;
+        const mes = monthSelect.value;
+        if (!año || !mes) return alert("Selecciona mes y año");
+
+        try {
+          const res = await fetch(`http://localhost:3000/reporte-pacientes?mes=${mes}&año=${año}`);
+          const data = await res.json();
+
+          // Mostrar total vistos / pendientes
+          statusCount.textContent = `${data.totalVistos} / ${data.totalPendientes}`;
+
+          // Gráfica por motivo
+          const motivos = data.porMotivo.map(m => m.Descripcion);
+          const motivoCounts = data.porMotivo.map(m => m.Total);
+          if (motiveChart) motiveChart.destroy();
+          motiveChart = new Chart(motiveCtx, {
+            type: 'pie',
+            data: {
+              labels: motivos,
+              datasets: [{ data: motivoCounts }]
+            }
+          });
+
+          // Gráfica por sucursal
+          const sucursales = data.porSucursal.map(s => s.Nombre);
+          const sucursalCounts = data.porSucursal.map(s => s.Total);
+          if (branchChart) branchChart.destroy();
+          branchChart = new Chart(branchCtx, {
+            type: 'bar',
+            data: {
+              labels: sucursales,
+              datasets: [{
+                label: 'Pacientes',
+                data: sucursalCounts,
+                backgroundColor: 'rgba(75, 192, 192, 0.5)'
+              }]
+            },
+            options: {
+              scales: {
+                y: { beginAtZero: true }
+              }
+            }
+          });
+
+        } catch (err) {
+          console.error("❌ Error al cargar reporte:", err);
+          alert("No se pudo cargar el reporte");
+        }
+      });
+    });
+  </script>
 </body>
 </html>

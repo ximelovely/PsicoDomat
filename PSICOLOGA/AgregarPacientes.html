@@ -19,41 +19,41 @@
   <link rel="stylesheet" href="AgregarPacientes.css"/>
 </head>
 <body>
-
   <!-- HEADER -->
   <div class="header">
-    <div class="fig">
-      <div class="Titu">Agregar pacientes</div>
-      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
-        <div class="container-fluid">
-          <button class="navbar-toggler border-0" type="button"
-                  data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                  aria-controls="navbarNav" aria-expanded="false"
-                  aria-label="Toggle navigation"></button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="bi bi-list menu-icon"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
-                  <li><a class="dropdown-item" href="editarperfil.html">Editar perfil</a></li>
-                  <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
-                  <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
-                  <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios</a></li>
-                  <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
-                  <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
-                  <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
+        <div class="fig">
+            <div class="Titu">Agregar pacientes</div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+            
+                    <!-- Menú desplegable alineado a la izquierda -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="../IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
+                                    <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
+                                    <li><a class="dropdown-item" href="Agregar.html">Agregar cita</a></li>
+                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
+                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
         </div>
-      </nav>            
     </div>
-  </div>
 
   <!-- ALERTAS -->
   <div id="alertPlaceholder" class="container mt-3"></div>
@@ -74,22 +74,22 @@
     </div>
 
     <!-- TABLA DE PACIENTES -->
-    <div class="table-responsive">
-      <table id="patientTable" class="patients-table table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Teléfono</th>
-            <th>Fecha de nacimiento</th>
-            <th class="text-center">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Se llena dinámicamente -->
-        </tbody>
-      </table>
-    </div>
+      <div class="table-responsive">
+        <table id="patientTable" class="patients-table table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Teléfono</th>
+              <th>Fecha de nacimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Se llena dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+
   </main>
 
   <!-- MODAL: REGISTRAR PACIENTE -->
@@ -134,60 +134,7 @@
 
         <div class="modal-footer border-0 justify-content-center">
           <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" id="btnSavePatient" class="btn-save">
-            <i class="bi bi-check-circle"></i> Regístrate
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL: EDITAR PACIENTE -->
-  <div class="modal fade" id="editPatientModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-
-        <div class="modal-header border-0">
-          <h5 class="modal-title">
-            <i class="bi bi-pencil-square"></i> Editar paciente
-          </h5>
-        </div>
-
-        <div class="modal-body">
-          <form id="formEditPatient" class="form-add-serv">
-            <input type="hidden" id="edit-pat-id">
-            <div class="form-group">
-              <label for="edit-pat-name">Nombre(s):</label>
-              <input type="text" id="edit-pat-name" class="form-control" required/>
-            </div>
-            <div class="form-group">
-              <label for="edit-pat-last">Apellido(s):</label>
-              <input type="text" id="edit-pat-last" class="form-control" required/>
-            </div>
-            <div class="form-group">
-              <label for="edit-pat-phone">Teléfono:</label>
-              <input type="tel" id="edit-pat-phone" class="form-control" required/>
-            </div>
-            <div class="form-group">
-              <label>Fecha de nacimiento:</label>
-              <div class="d-flex gap-2">
-                <select id="edit-birth-day" class="form-control select-date" required></select>
-                <select id="edit-birth-month" class="form-control select-date" required></select>
-                <select id="edit-birth-year" class="form-control select-date" required></select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="edit-pat-pass">Contraseña:</label>
-              <input type="password" id="edit-pat-pass" class="form-control" required/>
-            </div>
-          </form>
-        </div>
-
-        <div class="modal-footer border-0 justify-content-center">
-          <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" id="btnSaveEditPatient" class="btn-save">
-            <i class="bi bi-check-circle"></i> Guardar
+          <button type="button" id="btnSavePatient" class="btn-save"> Regístrate
           </button>
         </div>
 
@@ -197,6 +144,117 @@
 
   <!-- Bootstrap + JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="AgregarPacientes.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tableBody = document.querySelector("#patientTable tbody");
+      const btnOpenAddPatient = document.getElementById("btnOpenAddPatient");
+      const btnSavePatient = document.getElementById("btnSavePatient");
+      const searchInput = document.getElementById("search-phone");
+      const btnSearch = document.getElementById("btnSearch");
+
+      const addModal = new bootstrap.Modal(document.getElementById("addPatientModal"));
+
+      // Cargar pacientes
+      async function cargarPacientes(filtro = "") {
+        try {
+          const res = await fetch(`http://localhost:3000/pacientes`);
+          const pacientes = await res.json();
+
+          const filtrados = filtro
+            ? pacientes.filter(p => p.Telefono.includes(filtro))
+            : pacientes;
+
+          tableBody.innerHTML = "";
+          filtrados.forEach(p => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${p.Nombre}</td>
+              <td>${p.Apellido}</td>
+              <td>${p.Telefono}</td>
+              <td>${p.FechaNacimiento ? p.FechaNacimiento.split("T")[0] : "-"}</td>
+            `;
+
+            tableBody.appendChild(row);
+          });
+        } catch (err) {
+          console.error("❌ Error al cargar pacientes:", err);
+        }
+      }
+
+      // Mostrar modal para agregar paciente
+      btnOpenAddPatient.addEventListener("click", () => {
+        document.getElementById("formAddPatient").reset();
+        addModal.show();
+        poblarSelectsFecha("birth");
+      });
+
+      // Guardar nuevo paciente
+      btnSavePatient.addEventListener("click", async () => {
+        const nombre = document.getElementById("pat-name").value.trim();
+        const apellido = document.getElementById("pat-last").value.trim();
+        const telefono = document.getElementById("pat-phone").value.trim();
+        const dia = document.getElementById("birth-day").value;
+        const mes = document.getElementById("birth-month").value;
+        const anio = document.getElementById("birth-year").value;
+        const contrasena = document.getElementById("pat-pass").value.trim();
+
+        if (!nombre || !apellido || !telefono || !dia || !mes || !anio || !contrasena) {
+          alert("⚠️ Todos los campos son obligatorios");
+          return;
+        }
+
+        const fecha = `${anio}-${mes.padStart(2, "0")}-${dia.padStart(2, "0")}`;
+
+        try {
+          const res = await fetch("http://localhost:3000/pacientes", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, apellido, telefono, fechaNacimiento: fecha, contrasena })
+          });
+
+          const result = await res.json();
+          if (result.success) {
+            addModal.hide();
+            cargarPacientes();
+          } else {
+            alert("❌ Error: " + result.message);
+          }
+        } catch (err) {
+          console.error("❌ Error al registrar paciente:", err);
+        }
+      });
+
+      // Buscar paciente
+      btnSearch.addEventListener("click", () => {
+        const filtro = searchInput.value.trim();
+        cargarPacientes(filtro);
+      });
+
+      function poblarSelectsFecha(prefix) {
+        const dias = document.getElementById(`${prefix}-day`);
+        const meses = document.getElementById(`${prefix}-month`);
+        const anios = document.getElementById(`${prefix}-year`);
+        dias.innerHTML = "";
+        meses.innerHTML = "";
+        anios.innerHTML = "";
+
+        for (let i = 1; i <= 31; i++) {
+          dias.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+
+        for (let i = 1; i <= 12; i++) {
+          meses.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear - 5; i >= 1920; i--) {
+          anios.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+      }
+
+      cargarPacientes();
+    });
+    </script>
+
 </body>
 </html>

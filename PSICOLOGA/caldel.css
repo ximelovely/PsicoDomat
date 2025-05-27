@@ -1,7 +1,7 @@
 body {
     /* Fuente */
     font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
+    color: #004A51;
 }
 
 .header {
@@ -75,67 +75,3 @@ body {
         height: auto; /* Mantiene la proporción de la imagen */
         cursor: pointer; /* Cambia el cursor al pasar por encima */
     }
-/* Estilo general del main */
-.main-content {
-    padding: 2rem;
-    background-color: #F0FDFB;
-}
-
-/* Contenedor de filtros */
-.report-filters .form-label {
-    font-weight: bold;
-    color: #004A51;
-}
-
-.select-filter {
-    border-radius: 20px;
-    border: 1px solid #77B2A6;
-    padding: 0.4rem 1rem;
-}
-
-/* Botón de acción */
-.btn-action {
-    background-color: #83C5BE;
-    color: #004A51;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 30px;
-    transition: background 0.3s ease;
-}
-.btn-action:hover {
-    background-color: #E98D6F;
-    color: white;
-}
-
-/* Estado pacientes */
-.status-box {
-    background-color: #ffffff;
-    border-radius: 20px;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-.status-label {
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-.status-count {
-    font-size: 2rem;
-    color: #007B7F;
-}
-
-/* Gráficas */
-.chart-card {
-    background-color: #ffffff;
-    border: 1px solid #83C5BE;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-.chart-card .card-title {
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: #004A51;
-    text-align: center;
-}
-canvas {
-    max-height: 300px;
-}
