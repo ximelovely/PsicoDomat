@@ -12,6 +12,10 @@ const config = {
     }
 };
 
+
+// ==========================
+// 🔵 RUTAS PARA PACIENTES
+// ==========================
 async function testConnection() {
     try {
         await sql.connect(config);
@@ -351,6 +355,80 @@ app.post('/modificar-cita', async (req, res) => {
         await sql.close();
     }
 });
+
+
+// ==========================
+// 🟣 RUTAS PARA PSICÓLOGA
+// ==========================
+//Log-in de la psicóloga
+// Ruta de login para psicóloga
+app.post('/login-psicologa', async (req, res) => {
+  const { telefono, password } = req.body;
+  try {
+    await sql.connect(config);
+    const result = await sql.query`
+      SELECT * FROM Usuarios
+      WHERE Telefono = ${telefono}
+      AND Contraseña = ${password}
+      AND ID_Rol = 1
+    `;
+    res.json({ success: result.recordset.length > 0 });
+  } catch {
+    res.status(500).json({ success: false, message: 'Error en servidor' });
+  } finally {
+    await sql.close();
+  }
+});
+
+
+// Obtener citas de la psicóloga
+// 🔁 Ruta para obtener TODAS las citas activas
+app.get('/citas-psicologa', async (req, res) => {
+  try {
+    await sql.connect(config);
+    const result = await sql.query`
+      SELECT 
+        Citas.ID_Cita,
+        Citas.Fecha,
+        CH.Hora,
+        U.Nombre + ' ' + U.Apellido AS NombrePaciente,
+        U.FechaNacimiento,
+        S.Nombre AS Sucursal,
+        SV.Descripcion AS Servicio
+      FROM Citas
+      INNER JOIN Usuarios U ON U.ID_Usuario = Citas.ID_UsuarioPaciente
+      INNER JOIN CatalogoHoras CH ON CH.ID_Hora = Citas.Hora
+      INNER JOIN Sucursales S ON S.ID_Sucursal = Citas.ID_Sucursal
+      INNER JOIN Servicios SV ON SV.ID_Servicio = Citas.ID_Servicio
+      WHERE Citas.EstadoCita = 1
+    `;
+    res.json(result.recordset);
+  } catch (err) {
+    console.error("❌ Error al obtener citas de la psicóloga:", err);
+    res.status(500).json({ error: 'Error al obtener citas' });
+  } finally {
+    await sql.close();
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

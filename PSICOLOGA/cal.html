@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <style>
+        body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.header .fig {
+  background-color: #77B2A6;
+  padding: 15px;
+  text-align: center;
+  color: #fff;
+  font-size: 24px;
+}
+
+.calendar-container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 10px;
+  background: #fff;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FCD5CE;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.nav-btn {
+  background-color: #E98D6F;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.weekdays, .days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-top: 10px;
+}
+
+.weekdays div {
+  font-weight: bold;
+  color: #004A51;
+}
+
+.day {
+  padding: 10px;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  background: #F8F9FA;
+}
+
+.day:hover {
+  background-color: #DCF3F2;
+}
+
+.day.has-appointment {
+  background-color: #A7E1D5;
+  font-weight: bold;
+  color: #004A51;
+}
+
+.details {
+  margin-top: 15px;
+  background: #fff0f0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="fig">
+            <div class="Titu">Calendario</div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+            
+                    <!-- Menú desplegable alineado a la izquierda -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="../IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
+                                    <li><a class="dropdown-item" href="editarperfil.html">Editar perfil</a></li>
+                                    <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
+                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
+                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
+        </div>
+    </div>
+
+     <div class="calendar-container">
+    <div class="calendar-header">
+      <button id="prev-month" class="nav-btn">❮</button>
+      <h2 id="month-year"></h2>
+      <button id="next-month" class="nav-btn">❯</button>
+    </div>
+
+    <div class="calendar-body">
+      <div class="weekdays">
+        <div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div>
+      </div>
+      <div class="days" id="days"></div>
+    </div>
+
+    <div id="details" class="details hidden">
+      <h3>Detalles</h3>
+      <div id="details-content"></div>
+    </div>
+  </div>
+
+  
+   <script>
+    const monthYearEl = document.getElementById("month-year");
+    const daysEl = document.getElementById("days");
+    const detailsEl = document.getElementById("details");
+    const detailsContent = document.getElementById("details-content");
+
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+
+    async function cargarCitas() {
+      const res = await fetch("http://localhost:3000/citas-psicologa");
+      return await res.json();
+    }
+
+    async function renderCalendar() {
+      const citas = await cargarCitas();
+      const primerDia = new Date(currentYear, currentMonth, 1);
+      const ultimoDia = new Date(currentYear, currentMonth + 1, 0);
+      const diasMes = ultimoDia.getDate();
+
+      monthYearEl.textContent = primerDia.toLocaleDateString("es-MX", { month: "long", year: "numeric" });
+      daysEl.innerHTML = "";
+
+      const diaSemanaInicio = primerDia.getDay() || 7;
+      for (let i = 1; i < diaSemanaInicio; i++) {
+        const blank = document.createElement("div");
+        blank.classList.add("day", "blank");
+        daysEl.appendChild(blank);
+      }
+
+      for (let d = 1; d <= diasMes; d++) {
+        const fechaStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const div = document.createElement("div");
+        div.classList.add("day");
+        div.textContent = d;
+
+        const tieneCitas = citas.some(c => c.Fecha.split("T")[0] === fechaStr);
+        if (tieneCitas) {
+          div.classList.add("has-appointment");
+        }
+
+        div.addEventListener("click", () => {
+          const citasDelDia = citas.filter(c => c.Fecha.split("T")[0] === fechaStr);
+          if (citasDelDia.length === 0) {
+            detailsEl.classList.add("hidden");
+            return;
+          }
+
+          detailsContent.innerHTML = "";
+          citasDelDia.forEach(c => {
+            const p = document.createElement("p");
+            p.textContent = `${c.Fecha.split("T")[0]} - ${c.Hora} - ${c.Servicio} - ${c.NombrePaciente}`;
+            detailsContent.appendChild(p);
+          });
+          detailsEl.classList.remove("hidden");
+        });
+
+        daysEl.appendChild(div);
+      }
+    }
+
+    document.getElementById("prev-month").addEventListener("click", () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    });
+
+    document.getElementById("next-month").addEventListener("click", () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar();
+    });
+
+    renderCalendar();
+  </script>
+    
+</body>
+</html>

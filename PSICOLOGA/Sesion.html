@@ -1,46 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PsicoDomat</title>
-        <link rel="stylesheet" href="Sesion.css">
-    </head>
-    <body>
-        <div class="login-container">
-            <div class="fig"></div>
-            <div class="header">PsicoDomat</div>
-            <div class="form-container">
-                <form onsubmit="return verificarLogin(event)">
-                    <div class="input-group">
-                        <label for="telefono">Teléfono:</label>
-                        <input type="tel" id="telefono" name="telefono" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    
-                    <button type="submit" class="login-button">Iniciar sesión</button>
-                </form>
-            </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PsicoDomat - Iniciar sesión</title>
+  <link rel="stylesheet" href="Sesion.css">
+</head>
+<body>
+  <div class="login-container">
+    <div class="header">PsicoDomat</div>
+    <div class="form-container">
+      <form id="login-form">
+        <div class="input-group">
+          <label for="telefono">Teléfono:</label>
+          <input type="tel" id="telefono" required>
         </div>
 
-        <script>
-            function verificarLogin(event) {
-                event.preventDefault(); // Evita que el formulario se envíe automáticamente
-            
-                var telefono = document.getElementById("telefono").value;
-                var password = document.getElementById("password").value;
+        <div class="input-group">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" required>
+        </div>
 
-                // Simulación de credenciales correctas (puedes cambiar esto según necesites)
-                if (telefono === "8119762169" && password === "ximena") {
-                    window.location.href = "calendario.html"; // Redirigir a la página de Agenda
-                } else {
-                    alert("Teléfono o contraseña incorrectos. Inténtalo de nuevo.");
-                }
-            }
-        </script>
-    </body>
+        <button type="submit" class="login-button">Iniciar sesión</button>
+      </form>
+      <div class="alert" id="alerta"></div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const telefono = document.getElementById('telefono').value;
+      const password = document.getElementById('password').value;
+      const alerta = document.getElementById('alerta');
+      alerta.textContent = '';
+
+      const telefonoPsicologa = '8112394678';
+
+      const endpoint = telefono === telefonoPsicologa
+        ? 'http://localhost:3000/login-psicologa'
+        : 'http://localhost:3000/login';
+
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ telefono, password })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          localStorage.setItem('telefono', telefono);
+          const destino = telefono === telefonoPsicologa ? 'calendario.html' : 'Agenda.html';
+          window.location.href = destino;
+        } else {
+          alerta.textContent = data.message || 'Credenciales incorrectas';
+          alerta.style.color = 'red';
+        }
+
+      } catch (error) {
+        alerta.textContent = 'Error al conectar con el servidor.';
+        alerta.style.color = 'red';
+        console.error(error);
+      }
+    });
+  </script>
+</body>
 </html>
