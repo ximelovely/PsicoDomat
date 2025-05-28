@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modificar la cita</title>
+  <link rel="stylesheet" href="calmod.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="header">
+        <div class="fig">
+            <div class="Titu">Modificar cita</div>
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #77B2A6;">
+                <div class="container-fluid">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    </button>
+            
+                    <!-- Menú desplegable alineado a la izquierda -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="../IMÁGENES/menu-icon.png" alt="Menú" class="menu-icon">
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
+                                    <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
+                                    <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
+                                    <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
+                                    <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
+                                    <li><a class="dropdown-item" href="AgregarPacientes.html">Agregar pacientes</a></li>
+                                    <li><a class="dropdown-item" href="DiasLaborales.html">Días laborales</a></li>
+                                    <li><a class="dropdown-item" href="ReportePacientes.html">Reporte de pacientes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>            
+        </div>
+    </div>
+
+    
+  <!-- Formulario para modificar cita -->
+  <div class="container mt-4" style="max-width: 600px;">
+    <form id="formModificarCita">
+      <div class="mb-3">
+        <label for="fecha" class="form-label"><strong>Fecha:</strong></label>
+        <input type="date" class="form-control" id="fecha" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="hora" class="form-label"><strong>Hora:</strong></label>
+        <select id="hora" class="form-select" required></select>
+      </div>
+
+      <div class="mb-3">
+        <label for="sucursal" class="form-label"><strong>Sucursal:</strong></label>
+        <select id="sucursal" class="form-select" required></select>
+      </div>
+
+      <div class="mb-3">
+        <label for="motivo" class="form-label"><strong>Motivo:</strong></label>
+        <select id="motivo" class="form-select" required></select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const params = new URLSearchParams(window.location.search);
+      const idCita = params.get('id');
+      if (!idCita) return alert("No se proporcionó el ID de la cita.");
+
+      // Cargar datos actuales
+      try {
+        const res = await fetch(`http://localhost:3000/detalle-cita?id=${idCita}`);
+        const cita = await res.json();
+
+        // Prellenar campos
+        document.getElementById('fecha').value = cita.Fecha.split("T")[0];
+
+        await cargarSucursales(cita.Sucursal);
+        await cargarHoras(cita.Sucursal, cita.Hora);
+        await cargarMotivos(cita.Motivo);
+      } catch (err) {
+        console.error("❌ Error al cargar cita:", err);
+      }
+
+      // Evento submit
+      document.getElementById('formModificarCita').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const data = {
+          id: idCita,
+          fecha: document.getElementById('fecha').value,
+          hora: document.getElementById('hora').value,
+          sucursal: document.getElementById('sucursal').value,
+          motivo: document.getElementById('motivo').value
+        };
+
+        try {
+          const res = await fetch('http://localhost:3000/modificar-cita-id', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+            });
+
+
+          const result = await res.json();
+          if (result.success) {
+            alert("✅ Cita actualizada correctamente.");
+            window.location.href = "Calendario.html";
+          } else {
+            alert("❌ No se pudo actualizar la cita.");
+          }
+        } catch (err) {
+          console.error("❌ Error al guardar:", err);
+          alert("Error al conectar con el servidor.");
+        }
+      });
+    });
+
+    async function cargarSucursales(seleccionada) {
+      const res = await fetch('http://localhost:3000/sucursales');
+      const sucursales = await res.json();
+      const select = document.getElementById('sucursal');
+      sucursales.forEach(s => {
+        const option = document.createElement('option');
+        option.value = s.ID_Sucursal;
+        option.textContent = s.Nombre;
+        if (s.Nombre === seleccionada) option.selected = true;
+        select.appendChild(option);
+      });
+    }
+
+    async function cargarHoras(nombreSucursal, horaActual) {
+        // 1. Obtener lista de sucursales y encontrar la ID
+        const resSuc = await fetch('http://localhost:3000/sucursales');
+        const sucursales = await resSuc.json();
+        const sucursal = sucursales.find(s => s.Nombre === nombreSucursal);
+        if (!sucursal) return;
+
+        const fechaSeleccionada = document.getElementById('fecha').value;
+
+        const body = {
+            idSucursal: sucursal.ID_Sucursal,
+            fecha: fechaSeleccionada
+        };
+
+        const res = await fetch('http://localhost:3000/horarios', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+
+        const horas = await res.json();
+        const select = document.getElementById('hora');
+        select.innerHTML = ''; // limpiar
+
+        horas.forEach(h => {
+            const option = document.createElement('option');
+            option.value = h.ID_Hora;
+            option.textContent = h.Hora;
+            if (h.Hora === horaActual) option.selected = true;
+            select.appendChild(option);
+        });
+        }
+
+
+    async function cargarMotivos(motivoActual) {
+    const res = await fetch('http://localhost:3000/servicios');
+    const motivos = await res.json();
+    const select = document.getElementById('motivo');
+    select.innerHTML = ''; // limpiar
+
+    motivos.forEach(m => {
+        const option = document.createElement('option');
+        option.value = m.ID_Servicio;
+        option.textContent = m.Descripcion;
+        if (m.Descripcion === motivoActual) option.selected = true;
+        select.appendChild(option);
+    });
+    }
+  </script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

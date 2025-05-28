@@ -75,3 +75,99 @@ body {
         height: auto; /* Mantiene la proporción de la imagen */
         cursor: pointer; /* Cambia el cursor al pasar por encima */
     }
+
+
+/* Mantiene lo que ya tienes arriba intacto */
+
+/* Contenedor principal del detalle */
+#detalleCita {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    min-height: 60vh;
+}
+
+/* Encabezado de hora y fecha */
+#horaCita {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+#fechaCita {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+/* Tarjeta del detalle */
+.card {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #FFDDD2;
+    border: 3px solid #77B2A6;
+    border-radius: 25px;
+    color: #004A51;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+    font-size: 1.2rem;
+}
+
+.card.p-4.mx-auto {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+}
+
+/* Espaciado entre los datos */
+.card p {
+    margin: 10px 0;
+}
+
+.btn.btn-primary.me-2 {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    border-color: #83C5BE;
+    transition: 0.3s ease-in-out;
+}
+.btn.btn-primary.me-2:hover {
+    background-color: #E98D6F;
+    border-color: #E98D6F;
+    color: white;
+}
+
+.btn.btn-danger {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+    background-color: #83C5BE;
+    border-color: #83C5BE;
+    transition: 0.3s ease-in-out;
+}
+.btn.btn-danger:hover {
+    background-color: #E98D6F;
+    border-color: #E98D6F;
+    color: white;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    #horaCita {
+        font-size: 2rem;
+    }
+
+    #fechaCita {
+        font-size: 1.2rem;
+    }
+
+    .card {
+        font-size: 1rem;
+        padding: 20px;
+    }
+
+    .btn-modificar, .btn-cancelar {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

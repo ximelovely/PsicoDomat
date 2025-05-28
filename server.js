@@ -1001,6 +1001,67 @@ app.get('/citas-por-mes', async (req, res) => {
   }
 });
 
+// Obtener detalles de una cita por ID
+app.get('/detalle-cita', async (req, res) => {
+  const { id } = req.query;
+
+  try {
+    await sql.connect(config);
+    const result = await sql.query`
+      SELECT 
+        C.Fecha,
+        CH.Hora,
+        U.Nombre,
+        U.Apellido,
+        U.FechaNacimiento,
+        S.Nombre AS Sucursal,
+        SV.Descripcion AS Motivo,
+        C.EstadoCita
+      FROM Citas C
+      INNER JOIN Usuarios U ON C.ID_UsuarioPaciente = U.ID_Usuario
+      INNER JOIN CatalogoHoras CH ON CH.ID_Hora = C.Hora
+      INNER JOIN Sucursales S ON S.ID_Sucursal = C.ID_Sucursal
+      INNER JOIN Servicios SV ON SV.ID_Servicio = C.ID_Servicio
+      WHERE C.ID_Cita = ${id}
+    `;
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ error: 'Cita no encontrada' });
+    }
+
+    res.json(result.recordset[0]);
+  } catch (err) {
+    console.error("❌ Error al obtener detalles de la cita:", err);
+    res.status(500).json({ error: "Error interno del servidor" });
+  } finally {
+    await sql.close();
+  }
+});
+
+app.put('/modificar-cita-id', async (req, res) => {
+  const { id, fecha, hora, motivo, sucursal } = req.body;
+
+  try {
+    await sql.connect(config);
+
+    // Actualiza la cita con los nuevos datos
+    await sql.query`
+      UPDATE Citas
+      SET Fecha = ${fecha},
+          Hora = ${hora},
+          ID_Servicio = ${motivo},
+          ID_Sucursal = ${sucursal}
+      WHERE ID_Cita = ${id}
+    `;
+
+    res.json({ success: true, message: 'Cita modificada correctamente por ID.' });
+  } catch (err) {
+    console.error("❌ Error al modificar cita por ID:", err);
+    res.status(500).json({ success: false, message: 'Error al modificar cita por ID' });
+  } finally {
+    await sql.close();
+  }
+});
 
 
 

@@ -27,7 +27,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="Calendario.html">Calendario</a></li>
-                                    <li><a class="dropdown-item" href="Perfil.html">Editar perfil</a></li>
+                                    <li><a class="dropdown-item" href="editarperfil.html">Editar perfil</a></li>
                                     <li><a class="dropdown-item" href="Agregar.html">Agregar/editar cita</a></li>
                                     <li><a class="dropdown-item" href="ubis.html">Editar ubicaciones y precios</a></li>
                                     <li><a class="dropdown-item" href="EditarServicios.html">Editar servicios proporcionados</a></li>
@@ -75,18 +75,17 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded",() => {
-      const calendarContainer = document.getElementById("calendar-container");
-
-      let currentMonth = new Date().getMonth();
+    document.addEventListener("DOMContentLoaded", () => {
+      let currentMonth = new Date().getMonth(); // 0-11
       let currentYear = new Date().getFullYear();
-
-
       let citas = {};
+
       async function cargarCitasDelMes(año, mes) {
         try {
-          const res = await fetch(`http://localhost:3000/citas-por-mes?año=${año}&mes=${mes}`);
+          const res = await fetch(`http://localhost:3000/citas-por-mes?año=${año}&mes=${mes + 1}`); // ✅ mes + 1 para SQL
           const data = await res.json();
+
+          console.log("📥 Citas del servidor:", data); // 👀 revisa esto en consola
 
           citas = {};
           data.forEach(cita => {
@@ -100,22 +99,19 @@
               branch: cita.Sucursal,
               date: fechaKey,
               id: cita.ID_Cita,
-              estado: cita.EstadoCita  // ✅ AGREGA ESTO
+              estado: Number(cita.EstadoCita) // ✅ CORREGIDO AQUÍ
             });
           });
 
 
-          renderCalendar(año, mes); // ✅ ¡Ya no restes 1!
-
+          renderCalendar(año, mes); // ✅ aquí sí usamos el mes sin modificar (0-11)
         } catch (err) {
-          console.error("❌ Error al cargar citas del mes:", err);
+          console.error("❌ Error al cargar citas:", err);
         }
       }
 
-
       const monthName = document.getElementById("month-name");
       const datesContainer = document.getElementById("calendar-dates");
-      const infoBox = document.getElementById("info-box");
 
       const monthNames = [
         "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -125,15 +121,11 @@
       function renderCalendar(year, month) {
         datesContainer.innerHTML = "";
         monthName.textContent = `${monthNames[month]} ${year}`;
-        console.log(`📆 Renderizando: ${monthNames[month]} ${year}`);
 
         const firstDayDate = new Date(year, month, 1);
         const totalDays = new Date(year, month + 1, 0).getDate();
-        const firstWeekday = firstDayDate.getDay(); // 0 (Dom) - 6 (Sáb)
-
-        // Correcto si semana comienza en Domingo (0)
-        const offset = firstWeekday; // ✅ Porque ya tienes encabezado Domingo a Sábado
-        console.log(`📌 Primer día del mes (${year}-${month + 1}-01) es: ${firstDayDate.toLocaleString('es-MX', { weekday: 'long' })} [offset: ${offset}]`);
+        const firstWeekday = firstDayDate.getDay();
+        const offset = firstWeekday;
 
         for (let i = 0; i < offset; i++) {
           const empty = document.createElement("div");
@@ -143,89 +135,41 @@
         }
 
         for (let i = 1; i <= totalDays; i++) {
-  const date = new Date(year, month, i);
-  const jsDay = date.getDay();
+          const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
+          const div = document.createElement("div");
+          div.classList.add("date");
+          div.textContent = i;
 
-  const dateKey = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
-  const div = document.createElement("div");
-  div.classList.add("date");
-  div.textContent = i;
+          if (citas[dateKey] && citas[dateKey].length > 0) {
+            div.classList.add("star");
+          }
 
-  // ✅ Si hay citas en esa fecha, márcala con estrella
-  if (citas[dateKey] && citas[dateKey].length > 0) {
-    div.classList.add("star");
-  }
-
-  div.addEventListener("click", () => seleccionarFecha(dateKey, i, div));
-  datesContainer.appendChild(div);
-}
-
+          div.addEventListener("click", () => seleccionarFecha(dateKey, i, div));
+          datesContainer.appendChild(div);
+        }
       }
-
 
       function seleccionarFecha(key, dayNumber, el) {
         document.querySelectorAll(".date").forEach(d => d.classList.remove("selected"));
         el.classList.add("selected");
 
         const citasDia = citas[key];
+        const contenedor = document.getElementById("calendar-details");
 
         if (citasDia && citasDia.length > 0) {
-          document.getElementById("calendar-details").innerHTML = citasDia.map(cita => `
+          contenedor.innerHTML = citasDia.map(cita => `
             <div class="cita-entry mb-3 p-2 border rounded ${cita.estado === 0 ? 'bg-light text-muted' : ''}">
               <h5><strong>${cita.time}</strong></h5>
               <p><strong>Nombre:</strong> ${cita.name}</p>
               <p><strong>Motivo:</strong> ${cita.reason}</p>
-              <p><strong>Estado:</strong> ${cita.estado === 1 ? 'Activa' : 'Cancelada'}</p>
-               <a href="CalendarioDetalle.html?date=${encodeURIComponent(cita.date)}&time=${encodeURIComponent(cita.time)}&nombre=${encodeURIComponent(cita.name)}&motivo=${encodeURIComponent(cita.reason)}&dob=${encodeURIComponent(cita.dob)}&sucursal=${encodeURIComponent(cita.branch)}" class="btn btn-sm btn-info">
-                Ver detalles
-                </a>
+                <p><strong>Estado:</strong> ${cita.estado === 1 ? 'Activa' : cita.estado === 0 ? 'Cancelada' : ''}</p>
+              <a href="CalendarioDetalle.html?id=${cita.id}" class="btn btn-sm btn-info">Ver detalles</a>
             </div>
           `).join("");
         } else {
-          document.getElementById("calendar-details").innerHTML =
-            `<div class="p-3 text-center">Tu agenda está libre el ${dayNumber}. No hay citas agendadas.</div>`;
+          contenedor.innerHTML = `<div class="p-3 text-center">Tu agenda está libre el ${dayNumber}. No hay citas agendadas.</div>`;
         }
       }
-
-    
-
-      function generarFechasValidas() {
-        const fechaInput = document.getElementById("nuevoDia");
-        const hoy = new Date();
-        const fechasValidas = [];
-
-        for (let i = 0; i < 60; i++) {
-          const dia = new Date(hoy);
-          dia.setDate(hoy.getDate() + i);
-          const semana = dia.getDay();
-          if (semana >= 1 && semana <= 5) {
-            fechasValidas.push(dia.toISOString().split("T")[0]);
-          }
-        }
-
-        console.log("📅 Días válidos generados:", fechasValidas);
-
-        fechaInput.setAttribute("min", fechasValidas[0]);
-        fechaInput.setAttribute("max", fechasValidas[fechasValidas.length - 1]);
-
-        fechaInput.addEventListener("input", () => {
-          if (!fechasValidas.includes(fechaInput.value)) {
-            fechaInput.setCustomValidity("Elige un día hábil (L-V)");
-            fechaInput.reportValidity();
-            fechaInput.value = "";
-          } else {
-            fechaInput.setCustomValidity("");
-          }
-        });
-      }
-
-      function verDetalle(date, time, nombre, motivo, dob, sucursal) {
-        window.location.href = `CalendarioDetalle.html?date=${date}&time=${time}&nombre=${nombre}&motivo=${motivo}&dob=${dob}&sucursal=${sucursal}`;
-      }
-
-
-      // ✅ Primero carga las citas al inicio
-      cargarCitasDelMes(currentYear, currentMonth); // ✅ Usa directamente currentMonth
 
       document.getElementById("prevBtn").addEventListener("click", () => {
         if (currentMonth === 0) {
@@ -234,8 +178,7 @@
         } else {
           currentMonth--;
         }
-        console.log("⬅️ Mes anterior");
-        cargarCitasDelMes(currentYear, currentMonth + 1);
+        cargarCitasDelMes(currentYear, currentMonth); // ✅ correcto
       });
 
       document.getElementById("nextBtn").addEventListener("click", () => {
@@ -245,13 +188,12 @@
         } else {
           currentMonth++;
         }
-        console.log("➡️ Mes siguiente");
-        cargarCitasDelMes(currentYear, currentMonth + 1);
+        cargarCitasDelMes(currentYear, currentMonth); // ✅ correcto
       });
 
-
-
+      // 🔥 LLAMADA INICIAL — esta también debe estar con el mes correcto
+      cargarCitasDelMes(currentYear, currentMonth); // ✅ correcto
     });
-  </script>
+    </script>
 </body>
 </html>

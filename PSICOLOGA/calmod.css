@@ -1,7 +1,7 @@
 body {
     /* Fuente */
     font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
+    color: #004A51;
 }
 
 .header {
@@ -75,120 +75,63 @@ body {
         height: auto; /* Mantiene la proporción de la imagen */
         cursor: pointer; /* Cambia el cursor al pasar por encima */
     }
-/* Formulario general */
-.add-location-container {
-  font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
-  max-width: 750px;
-  margin: 50px auto;
-  background-color: white;
-  padding: 40px 50px;
-  border-radius: 25px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+/* Formulario */
+.container form {
+    font-family: Louis George Cafe, sans-serif;
+    color: #004A51;
+  background-color: #FFDDD2;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+  margin-bottom: 60px;
 }
 
-.form-add-serv {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-}
-
-.form-group label {
-  font-weight: bold;
+.form-label {
   color: #004A51;
-  margin-bottom: 8px;
-}
-
-input,
-select {
-  padding: 12px 18px;
-  border: none;
-  border-radius: 100px;
-  background-color: #FADCD9;
-  font-family: "Louis George Cafe", sans-serif;
-  color: #004A51;
-  font-size: 14px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.form-group.d-flex {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-}
-
-.form-group.d-flex > div {
-  flex-grow: 1;
-}
-
-/* Horario */
-.horario-group label {
-  margin-bottom: 5px;
-}
-
-.horario-group .d-flex {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.horario-group input[type="time"] {
-  min-width: 120px;
-}
-
-/* Botones */
-.btn-group-center {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 20px;
-}
-
-.btn-save,
-.btn-cancel {
-  font-family: Louis George Cafe, sans-serif;
-    color: #004A51; /* Color específico */
   font-weight: bold;
-  font-size: 16px;
-  padding: 12px 40px;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.btn-save {
-  background-color: #E98D6F;
-  color: white;
+.form-control,
+.form-select {
+  border-radius: 12px;
+  border: 2px solid #77B2A6;
+  background-color: #fff;
+  color: #004A51;
 }
 
-.btn-save:hover {
-  background-color: #d87b5c;
+.form-control:focus,
+.form-select:focus {
+  border-color: #006D77;
+  box-shadow: 0 0 5px #006D77;
 }
 
-.btn-cancel {
-  background-color: #004A51;
-  color: white;
+/* Botón */
+.container form button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    background-color: #006D77;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    color: white;
+    font-family: 'Louis George Cafe', sans-serif;
+    transition: background-color 0.3s ease;
 }
 
-.btn-cancel:hover {
-  background-color: #003840;
+button[type="submit"]:hover {
+  background-color: #83C5BE;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
-  .add-location-container {
-    padding: 30px 25px;
+@media (max-width: 576px) {
+  .Titu {
+    font-size: 6vw;
   }
 
-  .form-group.d-flex {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .btn-group-center {
-    flex-direction: column;
-    gap: 20px;
+  .container form {
+    padding: 20px;
   }
 }
